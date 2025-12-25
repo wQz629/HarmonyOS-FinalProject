@@ -1,0 +1,288 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "描述"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "商城"
+    },
+    {
+      "name": "selected",
+      "value": "精选"
+    },
+    {
+      "name": "mobile_phone",
+      "value": "手机"
+    },
+    {
+      "name": "clothes",
+      "value": "服饰"
+    },
+    {
+      "name": "wear",
+      "value": "穿搭"
+    },
+    {
+      "name": "home_furnishing",
+      "value": "家具"
+    },
+    {
+      "name": "goodsName",
+      "value": "【新到】长乐冰晶绿低脂新品上市"
+    },
+    {
+      "name": "another_goodsName",
+      "value": "【新到】奶茶天然新鲜贴近自然"
+    },
+    {
+      "name": "advertising_language",
+      "value": "重点推荐，MD新品试用！"
+    },
+    {
+      "name": "evaluate",
+      "value": "6662人评价 95%好评"
+    },
+    {
+      "name": "price_199",
+      "value": "¥199"
+    },
+    {
+      "name": "price_265",
+      "value": "¥265"
+    },
+    {
+      "name": "price_810",
+      "value": "¥810"
+    },
+    {
+      "name": "price_999",
+      "value": "¥999"
+    },
+    {
+      "name": "to_bottom",
+      "value": "-- 已到底部 --"
+    },
+    {
+      "name": "refresh_text",
+      "value": "刷新中"
+    },
+    {
+      "name": "shopping_mall",
+      "value": "商城"
+    },
+    {
+      "name": "category",
+      "value": "分类"
+    },
+    {
+      "name": "shopping_cart",
+      "value": "购物车"
+    },
+    {
+      "name": "personal",
+      "value": "我的"
+    },
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "pull_to_refresh",
+      "value": "下拉即可刷新"
+    },
+    {
+      "name": "refreshing",
+      "value": "刷新中..."
+    },
+    {
+      "name": "refresh_success",
+      "value": "刷新成功"
+    },
+    {
+      "name": "refresh_failed",
+      "value": "刷新失败"
+    },
+    {
+      "name": "loading",
+      "value": "加载中..."
+    },
+    {
+      "name": "no_more_data",
+      "value": "没有更多数据"
+    },
+    {
+      "name": "sub_all",
+      "value": "全部"
+    },
+    {
+      "name": "sub_hot",
+      "value": "热销"
+    },
+    {
+      "name": "sub_new",
+      "value": "新品"
+    },
+    {
+      "name": "sub_android",
+      "value": "安卓"
+    },
+    {
+      "name": "sub_ios",
+      "value": "苹果"
+    },
+    {
+      "name": "sub_mens",
+      "value": "男装"
+    },
+    {
+      "name": "sub_womens",
+      "value": "女装"
+    },
+    {
+      "name": "sub_casual",
+      "value": "休闲"
+    },
+    {
+      "name": "sub_formal",
+      "value": "正装"
+    },
+    {
+      "name": "sub_furniture",
+      "value": "家具"
+    },
+    {
+      "name": "sub_decor",
+      "value": "装饰品"
+    },
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "请输入商品名称"
+    },
+    {
+      "name": "search_history",
+      "value": "搜索历史"
+    },
+    {
+      "name": "clear_history",
+      "value": "清空"
+    },
+    {
+      "name": "no_search_history",
+      "value": "暂无搜索历史"
+    },
+    {
+      "name": "hot_search",
+      "value": "热门搜索"
+    },
+    {
+      "name": "search_result_prefix",
+      "value": "共找到 "
+    },
+    {
+      "name": "search_result_suffix",
+      "value": " 件商品"
+    },
+    {
+      "name": "goods_detail",
+      "value": "商品详情"
+    },
+    {
+      "name": "quantity",
+      "value": "数量"
+    },
+    {
+      "name": "goods_description",
+      "value": "商品描述"
+    },
+    {
+      "name": "favorite",
+      "value": "收藏"
+    },
+    {
+      "name": "add_to_cart",
+      "value": "加入购物车"
+    },
+    {
+      "name": "buy_now",
+      "value": "立即购买"
+    },
+    {
+      "name": "empty_cart",
+      "value": "购物车为空"
+    },
+    {
+      "name": "go_shopping",
+      "value": "去逛逛"
+    },
+    {
+      "name": "select_all",
+      "value": "全选"
+    },
+    {
+      "name": "total",
+      "value": "合计"
+    },
+    {
+      "name": "checkout",
+      "value": "结算"
+    },
+    {
+      "name": "my_orders",
+      "value": "我的订单"
+    },
+    {
+      "name": "browse_history",
+      "value": "浏览记录"
+    },
+    {
+      "name": "theme_settings",
+      "value": "主题设置"
+    },
+    {
+      "name": "goods_compare",
+      "value": "商品对比"
+    },
+    {
+      "name": "clear_cache",
+      "value": "清除缓存"
+    },
+    {
+      "name": "about_us",
+      "value": "关于我们"
+    },
+    {
+      "name": "edit_profile",
+      "value": "编辑资料"
+    },
+    {
+      "name": "pending_payment",
+      "value": "待付款"
+    },
+    {
+      "name": "pending_shipment",
+      "value": "待发货"
+    },
+    {
+      "name": "pending_receipt",
+      "value": "待收货"
+    },
+    {
+      "name": "completed",
+      "value": "已完成"
+    },
+    {
+      "name": "logout",
+      "value": "退出登录"
+    }
+  ]
+}

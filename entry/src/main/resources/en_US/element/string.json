@@ -1,0 +1,288 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Mall"
+    },
+    {
+      "name": "selected",
+      "value": "Choice"
+    },
+    {
+      "name": "mobile_phone",
+      "value": "Cellphone"
+    },
+    {
+      "name": "clothes",
+      "value": "Costume"
+    },
+    {
+      "name": "wear",
+      "value": "Wear"
+    },
+    {
+      "name": "home_furnishing",
+      "value": "Home"
+    },
+    {
+      "name": "goodsName",
+      "value": "【New Arrival】Changle ice crystal green low-fat new products"
+    },
+    {
+      "name": "another_goodsName",
+      "value": "【New Arrival】Milk tea is natural, fresh and close to nature"
+    },
+    {
+      "name": "advertising_language",
+      "value": "Heavy recommendation, MD new product trial!"
+    },
+    {
+      "name": "evaluate",
+      "value": "6,662 people rated it 95% positive"
+    },
+    {
+      "name": "price_199",
+      "value": "¥199"
+    },
+    {
+      "name": "price_265",
+      "value": "¥265"
+    },
+    {
+      "name": "price_810",
+      "value": "¥810"
+    },
+    {
+      "name": "price_999",
+      "value": "¥999"
+    },
+    {
+      "name": "to_bottom",
+      "value": "-- Have reached the end --"
+    },
+    {
+      "name": "refresh_text",
+      "value": "Refresh"
+    },
+    {
+      "name": "shopping_mall",
+      "value": "Shopping Mall"
+    },
+    {
+      "name": "category",
+      "value": "Category"
+    },
+    {
+      "name": "shopping_cart",
+      "value": "Shopping Cart"
+    },
+    {
+      "name": "personal",
+      "value": "Personal"
+    },
+    {
+      "name": "home",
+      "value": "Home"
+    },
+    {
+      "name": "pull_to_refresh",
+      "value": "Pull down to refresh"
+    },
+    {
+      "name": "refreshing",
+      "value": "Refreshing..."
+    },
+    {
+      "name": "refresh_success",
+      "value": "Refresh successful"
+    },
+    {
+      "name": "refresh_failed",
+      "value": "Refresh failed"
+    },
+    {
+      "name": "loading",
+      "value": "Loading..."
+    },
+    {
+      "name": "no_more_data",
+      "value": "No more data"
+    },
+    {
+      "name": "sub_all",
+      "value": "All"
+    },
+    {
+      "name": "sub_hot",
+      "value": "Hot"
+    },
+    {
+      "name": "sub_new",
+      "value": "New"
+    },
+    {
+      "name": "sub_android",
+      "value": "Android"
+    },
+    {
+      "name": "sub_ios",
+      "value": "iOS"
+    },
+    {
+      "name": "sub_mens",
+      "value": "Mens"
+    },
+    {
+      "name": "sub_womens",
+      "value": "Womens"
+    },
+    {
+      "name": "sub_casual",
+      "value": "Casual"
+    },
+    {
+      "name": "sub_formal",
+      "value": "Formal"
+    },
+    {
+      "name": "sub_furniture",
+      "value": "Furniture"
+    },
+    {
+      "name": "sub_decor",
+      "value": "Decor"
+    },
+    {
+      "name": "search",
+      "value": "Search"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "Enter product name"
+    },
+    {
+      "name": "search_history",
+      "value": "Search History"
+    },
+    {
+      "name": "clear_history",
+      "value": "Clear"
+    },
+    {
+      "name": "no_search_history",
+      "value": "No search history"
+    },
+    {
+      "name": "hot_search",
+      "value": "Hot Search"
+    },
+    {
+      "name": "search_result_prefix",
+      "value": "Found "
+    },
+    {
+      "name": "search_result_suffix",
+      "value": " items"
+    },
+    {
+      "name": "goods_detail",
+      "value": "Goods Detail"
+    },
+    {
+      "name": "quantity",
+      "value": "Quantity"
+    },
+    {
+      "name": "goods_description",
+      "value": "Description"
+    },
+    {
+      "name": "favorite",
+      "value": "Favorite"
+    },
+    {
+      "name": "add_to_cart",
+      "value": "Add to Cart"
+    },
+    {
+      "name": "buy_now",
+      "value": "Buy Now"
+    },
+    {
+      "name": "empty_cart",
+      "value": "Cart is empty"
+    },
+    {
+      "name": "go_shopping",
+      "value": "Go Shopping"
+    },
+    {
+      "name": "select_all",
+      "value": "Select All"
+    },
+    {
+      "name": "total",
+      "value": "Total"
+    },
+    {
+      "name": "checkout",
+      "value": "Checkout"
+    },
+    {
+      "name": "my_orders",
+      "value": "My Orders"
+    },
+    {
+      "name": "browse_history",
+      "value": "Browse History"
+    },
+    {
+      "name": "theme_settings",
+      "value": "Theme Settings"
+    },
+    {
+      "name": "goods_compare",
+      "value": "Compare"
+    },
+    {
+      "name": "clear_cache",
+      "value": "Clear Cache"
+    },
+    {
+      "name": "about_us",
+      "value": "About Us"
+    },
+    {
+      "name": "edit_profile",
+      "value": "Edit Profile"
+    },
+    {
+      "name": "pending_payment",
+      "value": "Pending"
+    },
+    {
+      "name": "pending_shipment",
+      "value": "Shipping"
+    },
+    {
+      "name": "pending_receipt",
+      "value": "Delivered"
+    },
+    {
+      "name": "completed",
+      "value": "Completed"
+    },
+    {
+      "name": "logout",
+      "value": "Logout"
+    }
+  ]
+}
