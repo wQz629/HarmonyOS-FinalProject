@@ -3106,3 +3106,1939 @@ Require stack:
 [2025-12-24T20:01:26.503] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2025-12-24T20:01:26.503] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2025-12-24T20:01:26.510] [DEBUG] debug-file - worker[14] exits with exit code 1.
+[2025-12-25T16:15:42.823] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-12-25T16:15:43.067] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: false,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-25T16:15:43.892] [DEBUG] debug-file - hvigorfile, require result:  { appTasks: [Getter] }
+[2025-12-25T16:15:44.000] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-25T16:15:44.001] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-25T16:15:44.007] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-25T16:15:44.032] [DEBUG] debug-file - Project task initialization takes 2 ms 
+[2025-12-25T16:15:42.824] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.5',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-12-25T16:15:44.059] [DEBUG] debug-file - hvigor build process will be closed with an error.
+[2025-12-25T16:15:44.045] [DEBUG] debug-file - project has submodules:entry
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-25T16:15:43.067] [DEBUG] debug-file - Since current hvigor version 5.19.7 differs from last hvigor version 
+      6.0.5, delete file-cache.json and task-cache.json.
+[2025-12-25T16:15:44.066] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-12-25T16:15:43.892] [DEBUG] debug-file - hvigorfile, binding system plugins { appTasks: [Getter] }
+[2025-12-25T16:15:44.000] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-25T16:15:44.003] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-25T16:15:44.029] [DEBUG] debug-file - Sdk init in 26 ms 
+[2025-12-25T16:15:44.032] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T16:15:42.825] [DEBUG] debug-file - env: daemon=false
+[2025-12-25T16:15:44.060] [WARN] debug-file - [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+[2025-12-25T16:15:44.046] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T16:15:43.068] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2025-12-25T16:15:44.067] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-12-25T16:15:44.000] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-25T16:15:44.003] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-12-25T16:15:44.032] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T16:15:42.826] [DEBUG] debug-file - no-daemon, use the parent process.execArgv --max-old-space-size=8192,--max-semi-space-size=16,--expose-gc
+[2025-12-25T16:15:44.060] [DEBUG] debug-file - ERROR: stacktrace = AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async startHvigorBuild (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/cli/main/cli.js:1:7579)
+[2025-12-25T16:15:44.049] [DEBUG] debug-file - load to the disk finished
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T16:15:43.069] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Current worker pool is stopped or closed.
+[2025-12-25T16:15:44.000] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-25T16:15:44.006] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-12-25T16:15:44.035] [DEBUG] debug-file - hvigorfile, require result:  { hapTasks: [Getter] }
+[2025-12-25T16:15:44.060] [ERROR] debug-file - AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async startHvigorBuild (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/cli/main/cli.js:1:7579)
+[2025-12-25T16:15:44.049] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Clear worker 0.
+[2025-12-25T16:15:44.035] [DEBUG] debug-file - hvigorfile, binding system plugins { hapTasks: [Getter] }
+[2025-12-25T16:15:44.061] [WARN] debug-file - BUILD FAILED in 997 ms 
+[2025-12-25T16:15:44.050] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-25T16:15:44.035] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/cli/main/cli.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/bin/hvigor.js
+[2025-12-25T16:15:44.065] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-12-25T16:15:44.050] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Worker 0 has been cleared.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Current busy worker size: 0.
+[2025-12-25T16:15:44.066] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Clear worker 1.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T16:15:44.068] [DEBUG] debug-file - Worker 1 has been cleared.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T16:15:44.069] [DEBUG] debug-file - Current idle worker size: 0.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T16:15:44.069] [DEBUG] debug-file - Current busy worker size: 0.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T16:15:44.069] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T16:15:44.073] [DEBUG] debug-file - worker[0] exits with exit code 0.
+[2025-12-25T16:15:44.042] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T16:15:44.073] [DEBUG] debug-file - worker[1] exits with exit code 0.
+[2025-12-25T16:15:44.045] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2025-12-25T16:15:44.073] [DEBUG] debug-file - Current worker pool is terminated.
+[2025-12-25T16:15:44.045] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T16:16:30.990] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2025-12-25T16:16:30.997] [DEBUG] debug-file - java daemon started at port 45050 pid 97746
+[2025-12-25T16:16:30.740] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-12-25T16:16:30.758] [DEBUG] debug-file - env: daemon=true
+[2025-12-25T16:16:30.742] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.5',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-12-25T16:16:31.046] [DEBUG] debug-file - session manager: set active socket. socketId=0aZYL7FTND4zk-6IAAAB
+[2025-12-25T16:16:31.277] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T16:16:31.282] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-25T16:16:31.284] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2025-12-25T16:16:31.285] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T16:16:31.939] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T16:16:31.940] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T16:16:32.048] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-25T16:16:32.048] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-25T16:16:32.049] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-25T16:16:32.049] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-25T16:16:32.049] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-25T16:16:32.050] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-25T16:16:32.052] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-12-25T16:16:32.053] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-12-25T16:16:32.054] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-25T16:16:32.075] [DEBUG] debug-file - Sdk init in 24 ms 
+[2025-12-25T16:16:32.077] [DEBUG] debug-file - Project task initialization takes 2 ms 
+[2025-12-25T16:16:32.077] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T16:16:32.077] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T16:16:32.080] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T16:16:32.080] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T16:16:32.080] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2025-12-25T16:16:32.086] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-25T16:16:32.086] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T16:16:32.086] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T16:16:32.086] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T16:16:32.086] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T16:16:32.086] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T16:16:32.087] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T16:16:32.089] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2025-12-25T16:16:32.089] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T16:16:32.134] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 45 ms 
+[2025-12-25T16:16:32.134] [DEBUG] debug-file - project has submodules:entry
+[2025-12-25T16:16:32.135] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-25T16:16:32.137] [DEBUG] debug-file - load to the disk finished
+[2025-12-25T16:16:32.137] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T16:16:32.138] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-25T16:16:32.138] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-25T16:16:32.148] [DEBUG] debug-file - hvigor build process will be closed with an error.
+[2025-12-25T16:16:32.148] [WARN] debug-file - [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+[2025-12-25T16:16:32.148] [DEBUG] debug-file - ERROR: stacktrace = AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async Worker.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js:1:3481)
+[2025-12-25T16:16:32.148] [ERROR] debug-file - AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async Worker.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js:1:3481)
+[2025-12-25T16:16:32.149] [WARN] debug-file - BUILD FAILED in 870 ms 
+[2025-12-25T16:16:32.151] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-12-25T16:16:32.152] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-12-25T16:16:32.152] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-12-25T16:16:32.153] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Cleanup worker 0.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Cleanup worker 1.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Current idle worker size: 0.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-25T16:16:32.154] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-25T16:16:32.235] [DEBUG] debug-file - worker[0] exits with exit code 0.
+[2025-12-25T16:16:32.235] [DEBUG] debug-file - worker[1] exits with exit code 0.
+[2025-12-25T16:16:32.247] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T16:16:32.247] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T16:16:32.247] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T16:16:32.247] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T20:55:41.974] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2025-12-25T20:55:41.981] [DEBUG] debug-file - java daemon started at port 45050 pid 57487
+[2025-12-25T20:55:41.672] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-12-25T20:55:41.691] [DEBUG] debug-file - env: daemon=true
+[2025-12-25T20:55:41.674] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.5',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-12-25T20:55:42.083] [DEBUG] debug-file - session manager: set active socket. socketId=VJ_CDJbtZSKA7lLYAAAB
+[2025-12-25T20:55:42.368] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T20:55:42.374] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-25T20:55:42.375] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2025-12-25T20:55:42.377] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T20:55:43.372] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T20:55:43.373] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T20:55:43.506] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-25T20:55:43.506] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-25T20:55:43.506] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-25T20:55:43.506] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-25T20:55:43.507] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-25T20:55:43.508] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-25T20:55:43.509] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-12-25T20:55:43.512] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-12-25T20:55:43.514] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-25T20:55:43.539] [DEBUG] debug-file - Sdk init in 31 ms 
+[2025-12-25T20:55:43.542] [DEBUG] debug-file - Project task initialization takes 2 ms 
+[2025-12-25T20:55:43.542] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T20:55:43.543] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T20:55:43.546] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T20:55:43.546] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T20:55:43.546] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T20:55:43.554] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T20:55:43.555] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T20:55:43.555] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T20:55:43.555] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T20:55:43.555] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T20:55:43.555] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T20:55:43.558] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2025-12-25T20:55:43.558] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T20:55:43.613] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 56 ms 
+[2025-12-25T20:55:43.614] [DEBUG] debug-file - project has submodules:entry
+[2025-12-25T20:55:43.614] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-25T20:55:43.617] [DEBUG] debug-file - load to the disk finished
+[2025-12-25T20:55:43.617] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T20:55:43.618] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-25T20:55:43.618] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-25T20:55:43.629] [DEBUG] debug-file - hvigor build process will be closed with an error.
+[2025-12-25T20:55:43.629] [WARN] debug-file - [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+[2025-12-25T20:55:43.629] [DEBUG] debug-file - ERROR: stacktrace = AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async Worker.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js:1:3481)
+[2025-12-25T20:55:43.629] [ERROR] debug-file - AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async Worker.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js:1:3481)
+[2025-12-25T20:55:43.630] [WARN] debug-file - BUILD FAILED in 1 s 260 ms 
+[2025-12-25T20:55:43.633] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-12-25T20:55:43.633] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-12-25T20:55:43.634] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-12-25T20:55:43.635] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-12-25T20:55:43.636] [DEBUG] debug-file - Cleanup worker 0.
+[2025-12-25T20:55:43.636] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - Cleanup worker 1.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - Current idle worker size: 0.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-25T20:55:43.637] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-25T20:55:43.732] [DEBUG] debug-file - worker[0] exits with exit code 0.
+[2025-12-25T20:55:43.732] [DEBUG] debug-file - worker[1] exits with exit code 0.
+[2025-12-25T20:55:43.748] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T20:55:43.749] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T20:55:43.749] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T20:55:43.749] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T20:55:48.188] [DEBUG] debug-file - session manager: set active socket. socketId=A001F-ixuC1cml1EAAAD
+[2025-12-25T20:55:48.191] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T20:55:48.193] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-25T20:55:48.193] [DEBUG] debug-file - Cache service initialization finished in 1 ms 
+[2025-12-25T20:55:48.193] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T20:55:48.196] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T20:55:48.196] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T20:55:48.198] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-25T20:55:48.198] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-25T20:55:48.198] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-25T20:55:48.198] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-25T20:55:48.198] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-25T20:55:48.199] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-25T20:55:48.200] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-25T20:55:48.218] [DEBUG] debug-file - Sdk init in 19 ms 
+[2025-12-25T20:55:48.219] [DEBUG] debug-file - Project task initialization takes 1 ms 
+[2025-12-25T20:55:48.219] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T20:55:48.219] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T20:55:48.223] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T20:55:48.223] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T20:55:48.223] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2025-12-25T20:55:48.224] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T20:55:48.225] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T20:55:48.226] [DEBUG] debug-file - Module entry task initialization takes 1 ms 
+[2025-12-25T20:55:48.226] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T20:55:48.281] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 55 ms 
+[2025-12-25T20:55:48.281] [DEBUG] debug-file - project has submodules:entry
+[2025-12-25T20:55:48.281] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-25T20:55:48.283] [DEBUG] debug-file - load to the disk finished
+[2025-12-25T20:55:48.283] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T20:55:48.283] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-25T20:55:48.283] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-25T20:55:48.285] [DEBUG] debug-file - hvigor build process will be closed with an error.
+[2025-12-25T20:55:48.285] [WARN] debug-file - [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+[2025-12-25T20:55:48.285] [DEBUG] debug-file - ERROR: stacktrace = AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async Worker.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js:1:3481)
+[2025-12-25T20:55:48.285] [ERROR] debug-file - AdaptorError: [31m00303082 Configuration Error
+Error Message: Unable to find the targetSdkVersion 6.0.0(20) in SDK Manager. At file: /Users/changchen/working_place/cybermall/build-profile.json5
+
+* Try the following:
+  > Since NEXT Developer Beta1, DevEco Studio offers an out-of-the-box development experience by packaging the SDK, Node.js, Hvigor, ohpm, and other toolchains together, simplifying the installation and configuration process of DevEco Studio. It also provides integrated capabilities for migrating historical projects, helping you quickly complete project conversion.
+  > To download the integrated IDE, visit https://developer.huawei.com/consumer/cn/download/
+  > More info: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-integrated-project-migration
+[39m
+    at OhosLogger.printErrorExit (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/log/hvigor-log.js:1:5062)
+    at OneSdkValidator.versionCompatibilityCheck (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:3321)
+    at OneSdkValidator.apiInspection (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/utils/one-sdk-validator.js:1:1801)
+    at HvigorLifecycleHook.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js:1:4752)
+    at HvigorLifecycleHook.runFn (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/hook/hvigor-lifecycle-hook.js:1:1743)
+    at configuration (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js:1:2806)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async start (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:2593)
+    at async boot (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js:1:1812)
+    at async Worker.<anonymous> (/Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js:1:3481)
+[2025-12-25T20:55:48.285] [WARN] debug-file - BUILD FAILED in 94 ms 
+[2025-12-25T20:55:48.287] [DEBUG] debug-file - There's no busy workers and idle workers need cleanup.
+[2025-12-25T20:55:48.287] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-25T20:55:48.314] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T20:55:48.314] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T20:55:48.314] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T20:55:48.314] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:02:34.057] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-12-25T21:02:34.074] [DEBUG] debug-file - env: daemon=true
+[2025-12-25T21:02:34.058] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.5',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-12-25T21:02:34.377] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2025-12-25T21:02:34.383] [DEBUG] debug-file - java daemon started at port 45050 pid 60995
+[2025-12-25T21:02:34.404] [DEBUG] debug-file - session manager: set active socket. socketId=5J6DN_ItFAM7vb9FAAAB
+[2025-12-25T21:02:34.732] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:02:34.737] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-25T21:02:34.737] [DEBUG] debug-file - Since current hvigor version 6.0.6 differs from last hvigor version 
+      5.19.7, delete file-cache.json and task-cache.json.
+[2025-12-25T21:02:34.738] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2025-12-25T21:02:34.740] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T21:02:35.654] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T21:02:35.654] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T21:02:35.776] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-25T21:02:35.776] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-25T21:02:35.776] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-25T21:02:35.776] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-25T21:02:35.778] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-25T21:02:35.779] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-25T21:02:35.780] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-12-25T21:02:35.781] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-12-25T21:02:35.783] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-25T21:02:35.809] [DEBUG] debug-file - Sdk init in 30 ms 
+[2025-12-25T21:02:35.812] [DEBUG] debug-file - Project task initialization takes 3 ms 
+[2025-12-25T21:02:35.812] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T21:02:35.812] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T21:02:35.816] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T21:02:35.816] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T21:02:35.816] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2025-12-25T21:02:35.824] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-25T21:02:35.824] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T21:02:35.825] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T21:02:35.829] [DEBUG] debug-file - Module entry task initialization takes 4 ms 
+[2025-12-25T21:02:35.829] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T21:02:35.887] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 58 ms 
+[2025-12-25T21:02:35.887] [DEBUG] debug-file - project has submodules:entry
+[2025-12-25T21:02:35.888] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-25T21:02:35.891] [DEBUG] debug-file - load to the disk finished
+[2025-12-25T21:02:35.891] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T21:02:35.892] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-25T21:02:35.892] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-25T21:02:35.893] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T21:02:35.894] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-25T21:02:35.894] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-25T21:02:35.896] [DEBUG] debug-file - Configuration phase cost:1 s 158 ms 
+[2025-12-25T21:02:35.898] [DEBUG] debug-file - Configuration task cost before running: 1 s 164 ms 
+[2025-12-25T21:02:35.898] [DEBUG] debug-file - Executing task :entry:clean
+[2025-12-25T21:02:35.898] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2025-12-25T21:02:35.921] [DEBUG] debug-file - entry : clean cost memory 0.7455520629882812
+[2025-12-25T21:02:35.921] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 187 ms 
+[2025-12-25T21:02:35.921] [INFO] debug-file - Finished :entry:clean... after 23 ms 
+[2025-12-25T21:02:35.921] [DEBUG] debug-file - Executing task ::clean
+[2025-12-25T21:02:35.921] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - cybermall : clean cost memory 0.02691650390625
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 188 ms 
+[2025-12-25T21:02:35.922] [INFO] debug-file - Finished ::clean... after 1 ms 
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - Executing task :entry:init
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - entry : init cost memory 0.01647186279296875
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 188 ms 
+[2025-12-25T21:02:35.922] [INFO] debug-file - Finished :entry:init... after 1 ms 
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - Executing task ::init
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - cybermall : init cost memory 0.01531982421875
+[2025-12-25T21:02:35.922] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 189 ms 
+[2025-12-25T21:02:35.922] [INFO] debug-file - Finished ::init... after 1 ms 
+[2025-12-25T21:02:35.923] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T21:02:35.925] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-12-25T21:02:35.925] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-12-25T21:02:35.926] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-12-25T21:02:35.927] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-12-25T21:02:35.928] [DEBUG] debug-file - Cleanup worker 0.
+[2025-12-25T21:02:35.928] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2025-12-25T21:02:35.928] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-25T21:02:35.928] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-25T21:02:35.929] [DEBUG] debug-file - Cleanup worker 1.
+[2025-12-25T21:02:35.929] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2025-12-25T21:02:35.929] [DEBUG] debug-file - Current idle worker size: 0.
+[2025-12-25T21:02:35.929] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-25T21:02:35.929] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-25T21:02:36.042] [DEBUG] debug-file - worker[0] exits with exit code 0.
+[2025-12-25T21:02:36.042] [DEBUG] debug-file - worker[1] exits with exit code 0.
+[2025-12-25T21:02:36.060] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T21:02:36.060] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T21:02:36.061] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:02:36.061] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:15:01.612] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-12-25T21:15:01.628] [DEBUG] debug-file - env: daemon=true
+[2025-12-25T21:15:01.613] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.5',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-12-25T21:15:01.922] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2025-12-25T21:15:01.933] [DEBUG] debug-file - java daemon started at port 45050 pid 67053
+[2025-12-25T21:15:01.953] [DEBUG] debug-file - session manager: set active socket. socketId=0rob6fBvkKIvX9xSAAAB
+[2025-12-25T21:15:02.282] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:15:02.286] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-25T21:15:02.287] [DEBUG] debug-file - Since current hvigor version 6.20.2 differs from last hvigor version 
+      6.0.6, delete file-cache.json and task-cache.json.
+[2025-12-25T21:15:02.287] [DEBUG] debug-file - Cache service initialization finished in 1 ms 
+[2025-12-25T21:15:02.289] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T21:15:03.254] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T21:15:03.254] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T21:15:03.381] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-25T21:15:03.381] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-25T21:15:03.381] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-25T21:15:03.381] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-25T21:15:03.382] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-25T21:15:03.383] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-25T21:15:03.385] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-12-25T21:15:03.386] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-12-25T21:15:03.387] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-25T21:15:03.414] [DEBUG] debug-file - Sdk init in 30 ms 
+[2025-12-25T21:15:03.417] [DEBUG] debug-file - Project task initialization takes 3 ms 
+[2025-12-25T21:15:03.417] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-25T21:15:03.418] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T21:15:03.422] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-25T21:15:03.422] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-25T21:15:03.423] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2025-12-25T21:15:03.430] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-25T21:15:03.431] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-25T21:15:03.432] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-25T21:15:03.436] [DEBUG] debug-file - Module entry task initialization takes 4 ms 
+[2025-12-25T21:15:03.436] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-25T21:15:03.495] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 60 ms 
+[2025-12-25T21:15:03.496] [DEBUG] debug-file - project has submodules:entry
+[2025-12-25T21:15:03.497] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-25T21:15:03.500] [DEBUG] debug-file - load to the disk finished
+[2025-12-25T21:15:03.500] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T21:15:03.502] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-25T21:15:03.502] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-25T21:15:03.503] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-25T21:15:03.505] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-25T21:15:03.505] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-25T21:15:03.507] [DEBUG] debug-file - Configuration phase cost:1 s 220 ms 
+[2025-12-25T21:15:03.509] [DEBUG] debug-file - Configuration task cost before running: 1 s 226 ms 
+[2025-12-25T21:15:03.509] [DEBUG] debug-file - Executing task :entry:clean
+[2025-12-25T21:15:03.509] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2025-12-25T21:15:03.511] [DEBUG] debug-file - entry : clean cost memory 0.09178924560546875
+[2025-12-25T21:15:03.511] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 228 ms 
+[2025-12-25T21:15:03.511] [INFO] debug-file - Finished :entry:clean... after 2 ms 
+[2025-12-25T21:15:03.514] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-12-25T21:15:03.514] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.598] [DEBUG] debug-file - current product is not Atomic service.
+[2025-12-25T21:15:03.598] [DEBUG] debug-file - Use tool [darwin: JAVA_HOME, CLASSPATH]
+ [
+  {
+    JAVA_HOME: '/Applications/DevEco-Studio.app/Contents/jbr/Contents/Home'
+  },
+  { CLASSPATH: undefined }
+]
+[2025-12-25T21:15:03.599] [DEBUG] debug-file - Use tool [darwin: NODE_HOME]
+ [
+  {
+    NODE_HOME: '/Applications/DevEco-Studio.app/Contents/tools/node/bin'
+  }
+]
+[2025-12-25T21:15:03.599] [DEBUG] debug-file - entry : default@PreBuild cost memory 12.888267517089844
+[2025-12-25T21:15:03.599] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 316 ms 
+[2025-12-25T21:15:03.599] [INFO] debug-file - Finished :entry:default@PreBuild... after 86 ms 
+[2025-12-25T21:15:03.600] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-12-25T21:15:03.600] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.601] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.04088592529296875
+[2025-12-25T21:15:03.601] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 318 ms 
+[2025-12-25T21:15:03.601] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2025-12-25T21:15:03.601] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-12-25T21:15:03.602] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.603] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.31056976318359375
+[2025-12-25T21:15:03.603] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 320 ms 
+[2025-12-25T21:15:03.603] [INFO] debug-file - Finished :entry:default@GenerateMetadata... after 2 ms 
+[2025-12-25T21:15:03.604] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-12-25T21:15:03.604] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.22048187255859375
+[2025-12-25T21:15:03.604] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 321 ms 
+[2025-12-25T21:15:03.604] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-12-25T21:15:03.605] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-12-25T21:15:03.605] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.605] [DEBUG] debug-file - Change app api release type with 'Release'
+[2025-12-25T21:15:03.606] [DEBUG] debug-file - Change app compile API version with '6.0.0.47'
+[2025-12-25T21:15:03.606] [DEBUG] debug-file - Change app target API version with '60000020'
+[2025-12-25T21:15:03.606] [DEBUG] debug-file - Change app minimum API version with '50005017'
+[2025-12-25T21:15:03.606] [DEBUG] debug-file - Use cli appEnvironment
+[2025-12-25T21:15:03.607] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.15167999267578125
+[2025-12-25T21:15:03.607] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 324 ms 
+[2025-12-25T21:15:03.607] [INFO] debug-file - Finished :entry:default@MergeProfile... after 2 ms 
+[2025-12-25T21:15:03.607] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-12-25T21:15:03.608] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.608] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.0643157958984375
+[2025-12-25T21:15:03.608] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 325 ms 
+[2025-12-25T21:15:03.609] [INFO] debug-file - Finished :entry:default@CreateBuildProfile... after 2 ms 
+[2025-12-25T21:15:03.609] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-12-25T21:15:03.609] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.01639556884765625
+[2025-12-25T21:15:03.609] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 326 ms 
+[2025-12-25T21:15:03.609] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-12-25T21:15:03.610] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-12-25T21:15:03.615] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.615] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.2017669677734375
+[2025-12-25T21:15:03.615] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 332 ms 
+[2025-12-25T21:15:03.615] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 5 ms 
+[2025-12-25T21:15:03.617] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-12-25T21:15:03.617] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.031707763671875
+[2025-12-25T21:15:03.617] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 334 ms 
+[2025-12-25T21:15:03.617] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 1 ms 
+[2025-12-25T21:15:03.617] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-12-25T21:15:03.618] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.01772308349609375
+[2025-12-25T21:15:03.618] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 335 ms 
+[2025-12-25T21:15:03.618] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-12-25T21:15:03.618] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-12-25T21:15:03.619] [DEBUG] debug-file - Module Pack Info:  {
+  summary: {
+    app: { bundleName: 'c***y', bundleType: 'app', version: [Object] },
+    modules: [ [Object] ]
+  },
+  packages: [
+    {
+      deviceType: [Array],
+      moduleType: 'entry',
+      deliveryWithInstall: true,
+      name: 'entry-default'
+    }
+  ]
+}
+[2025-12-25T21:15:03.619] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.0962371826171875
+[2025-12-25T21:15:03.619] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 336 ms 
+[2025-12-25T21:15:03.620] [INFO] debug-file - Finished :entry:default@MakePackInfo... after 2 ms 
+[2025-12-25T21:15:03.620] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-12-25T21:15:03.620] [DEBUG] debug-file - File: '/Users/changchen/working_place/cybermall/entry/src/main/syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-12-25T21:15:03.620] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.620] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.05551910400390625
+[2025-12-25T21:15:03.621] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 338 ms 
+[2025-12-25T21:15:03.621] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 1 ms 
+[2025-12-25T21:15:03.621] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-12-25T21:15:03.622] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:03.623] [DEBUG] debug-file - [
+  '/Applications/DevEco-Studio.app/Contents/tools/node/bin/node',
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/bin/ark/ts2abc.js',
+  '--target-api-version',
+  '17'
+]
+[2025-12-25T21:15:04.278] [DEBUG] debug-file - 12.0.6.0
+[2025-12-25T21:15:04.279] [DEBUG] debug-file - No need to add fake ui ability because of not in preview process.
+[2025-12-25T21:15:04.279] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.24643707275390625
+[2025-12-25T21:15:04.279] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 996 ms 
+[2025-12-25T21:15:04.279] [INFO] debug-file - Finished :entry:default@ProcessProfile... after 658 ms 
+[2025-12-25T21:15:04.280] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-12-25T21:15:04.281] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.06620025634765625
+[2025-12-25T21:15:04.281] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 998 ms 
+[2025-12-25T21:15:04.281] [INFO] debug-file - Finished :entry:default@ProcessRouterMap... after 2 ms 
+[2025-12-25T21:15:04.282] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2025-12-25T21:15:04.282] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.0572967529296875
+[2025-12-25T21:15:04.282] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 999 ms 
+[2025-12-25T21:15:04.282] [INFO] debug-file - Finished :entry:default@ProcessShareConfig... after 1 ms 
+[2025-12-25T21:15:04.283] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-12-25T21:15:04.283] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:04.283] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.06060791015625
+[2025-12-25T21:15:04.283] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 1000 ms 
+[2025-12-25T21:15:04.283] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 1 ms 
+[2025-12-25T21:15:04.284] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-12-25T21:15:04.284] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.02663421630859375
+[2025-12-25T21:15:04.284] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 
+[2025-12-25T21:15:04.284] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2025-12-25T21:15:04.285] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-12-25T21:15:04.286] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-12-25T21:15:04.286] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:04.287] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.101165771484375
+[2025-12-25T21:15:04.290] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 5 ms 
+[2025-12-25T21:15:04.290] [INFO] debug-file - Finished :entry:default@ProcessResource... after 2 ms 
+[2025-12-25T21:15:04.291] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-12-25T21:15:04.292] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:04.294] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.31313323974609375
+[2025-12-25T21:15:04.294] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 12 ms 
+[2025-12-25T21:15:04.295] [INFO] debug-file - Finished :entry:default@GenerateLoaderJson... after 4 ms 
+[2025-12-25T21:15:04.296] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-12-25T21:15:04.299] [DEBUG] debug-file - Worker dispatch failed, running processLibs on main thread.
+[2025-12-25T21:15:04.299] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.7482452392578125
+[2025-12-25T21:15:04.299] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 16 ms 
+[2025-12-25T21:15:04.299] [INFO] debug-file - Finished :entry:default@ProcessLibs... after 4 ms 
+[2025-12-25T21:15:04.300] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-12-25T21:15:04.300] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-12-25T21:15:04.410] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool]
+ [
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/restool',
+  '-l',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resConfig.json'
+]
+[2025-12-25T21:15:04.410] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 236093440,
+  heapTotal: 178012160,
+  heapUsed: 156152144,
+  external: 3355400,
+  arrayBuffers: 1441056
+} os memoryUsage :15.789566040039062
+[2025-12-25T21:15:05.085] [DEBUG] debug-file - Info: Pack: normal pack mode
+
+[2025-12-25T21:15:05.613] [DEBUG] debug-file - Info: hardware concurrency count is : 8
+Info: thread count is : 8
+
+[2025-12-25T21:15:05.613] [DEBUG] debug-file - Info: thread pool is started
+
+[2025-12-25T21:15:05.614] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2025-12-25T21:15:05.618] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2025-12-25T21:15:05.663] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2025-12-25T21:15:05.666] [DEBUG] debug-file - 12-25 21:15:05.665 67086 13444516 E C01400/ImageTranscoderUtils: DecodeToRGBA IN
+12-25 21:15:05.666 67086 13444516 E C01400/ImageTranscoderUtils: ImageFilter IN /Users/changchen/working_place/cybermall/AppScope/resources/base/media/app_icon.png
+
+[2025-12-25T21:15:05.666] [DEBUG] debug-file - 12-25 21:15:05.666 67086 13444516 E C01400/ImageTranscoder: TranscodeSLR Only zoom-out is supported.
+
+[2025-12-25T21:15:05.666] [DEBUG] debug-file - Warning: ScaleImage failed, error message: INVALID_PARAMETERS, file path = /Users/changchen/working_place/cybermall/AppScope/resources/base/media/app_icon.png
+
+[2025-12-25T21:15:05.667] [DEBUG] debug-file - 12-25 21:15:05.667 67086 13444516 E C01400/ImageTranscoderUtils: DecodeToRGBA IN
+12-25 21:15:05.667 67086 13444516 E C01400/ImageTranscoderUtils: ImageFilter IN /Users/changchen/working_place/cybermall/entry/src/main/resources/base/media/icon.png
+
+[2025-12-25T21:15:05.667] [DEBUG] debug-file - 12-25 21:15:05.667 67086 13444516 E C01400/ImageTranscoder: TranscodeSLR Only zoom-out is supported.
+Warning: ScaleImage failed, error message: INVALID_PARAMETERS, file path = /Users/changchen/working_place/cybermall/entry/src/main/resources/base/media/icon.png
+
+[2025-12-25T21:15:05.667] [DEBUG] debug-file - Warning: The width or height of the png file referenced by the icon exceeds the limit (41 pixels)
+at /Users/changchen/working_place/cybermall/AppScope/resources/base/media/app_icon.png
+
+[2025-12-25T21:15:05.668] [DEBUG] debug-file - Warning: The width or height of the png file referenced by the icon exceeds the limit (41 pixels)
+at /Users/changchen/working_place/cybermall/entry/src/main/resources/base/media/icon.png
+
+[2025-12-25T21:15:05.668] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2025-12-25T21:15:05.669] [DEBUG] debug-file - Info: thread pool is stopped
+
+[2025-12-25T21:15:05.672] [DEBUG] debug-file - entry : default@CompileResource cost memory -23.291046142578125
+[2025-12-25T21:15:05.672] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 389 ms 
+[2025-12-25T21:15:05.673] [INFO] debug-file - Finished :entry:default@CompileResource... after 1 s 373 ms 
+[2025-12-25T21:15:05.673] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-12-25T21:15:05.673] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:05.674] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.04703521728515625
+[2025-12-25T21:15:05.674] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 391 ms 
+[2025-12-25T21:15:05.674] [INFO] debug-file - Finished :entry:default@DoNativeStrip... after 1 ms 
+[2025-12-25T21:15:05.675] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-12-25T21:15:05.675] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-12-25T21:15:05.681] [DEBUG] debug-file - build config:
+[2025-12-25T21:15:05.681] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: '/Users/changchen/working_place/cybermall/local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/base/profile',
+  etsLoaderPath: '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader',
+  modulePath: '/Users/changchen/working_place/cybermall/entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: '/Users/changchen/working_place/cybermall',
+  compileSdkVersion: 20,
+  compatibleSdkVersion: 17,
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***y',
+  etsLoaderVersion: '6.0.0.47',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: '/Users/changchen/working_place/cybermall/entry/modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: 'b391a1993a55c2ab6ea33154bf6ac226',
+  externalApiPaths: [ '/Applications/DevEco-Studio.app/Contents/sdk/default/hms/ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: '/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 20,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: '/Users/changchen/working_place/cybermall/entry/build',
+  deviceTypes: [ 'phone' ],
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: undefined, definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [ '/Users/changchen/working_place/cybermall' ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    ignoreCrossplatformCheck: false,
+    isPreloadSoEnabled: false
+  },
+  skipOhModulesLint: false,
+  executionMode: 'memory',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  ignoreCrossplatformCheck: false,
+  isPreloadSoEnabled: false,
+  arkCompileCachePath: '/Users/changchen/working_place/cybermall/entry/build/default/cache/default/default@CompileArkTS/esmodule',
+  aceModuleJsonPath: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ark_module.json',
+  appResource: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ResourceTable.txt',
+  rawFileResource: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/rawfile',
+  resourceTableHash: '215444b884c791962d1fdde5f89e3820',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:20:6.0.0.47:Release',
+  aceModuleRoot: '/Users/changchen/working_place/cybermall/entry/src/main/ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: '/Users/changchen/working_place/cybermall/entry/src/main/supervisual',
+  aceBuildJson: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default/loader.json',
+  cachePath: '/Users/changchen/working_place/cybermall/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug',
+  aceModuleBuild: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: '/Users/changchen/working_place/cybermall/entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    '/Users/changchen/working_place/cybermall/entry/src/main': {
+      moduleName: 'entry',
+      modulePkgPath: '/Users/changchen/working_place/cybermall/entry',
+      belongProjectPath: '/Users/changchen/working_place/cybermall'
+    },
+    '/Users/changchen/working_place/cybermall/entry': {
+      moduleName: 'entry',
+      modulePkgPath: '/Users/changchen/working_place/cybermall/entry',
+      belongProjectPath: '/Users/changchen/working_place/cybermall'
+    },
+    '/Users/changchen/working_place/cybermall': {
+      moduleName: 'cybermall',
+      modulePkgPath: '/Users/changchen/working_place/cybermall',
+      belongProjectPath: '/Users/changchen/working_place/cybermall'
+    }
+  },
+  pkgJsonFileHash: '73952b0c20fc6d4c363e85190646ec08',
+  allModulePaths: [ '/Users/changchen/working_place/cybermall/entry' ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: '/Applications/DevEco-Studio.app/Contents/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/preload/default/preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [ '../*', '../../../build/default/generated/profile/default/*' ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-12-25T21:15:05.681] [DEBUG] debug-file - Compile arkts with external api path: /Applications/DevEco-Studio.app/Contents/sdk/default/hms/ets
+[2025-12-25T21:15:05.682] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-12-25T21:15:05.682] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-12-25T21:15:05.682] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-12-25T21:15:05.684] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-12-25T21:15:05.685] [DEBUG] debug-file - default@CompileArkTS work[0] is submitted.
+[2025-12-25T21:15:05.685] [DEBUG] debug-file - default@CompileArkTS work[0] is pushed to ready queue.
+[2025-12-25T21:15:05.685] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-25T21:15:05.685] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-25T21:15:05.685] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - Create  resident worker with id: 4.
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - default@CompileArkTS work[0] has been dispatched to worker[4].
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - default@CompileArkTS work[0] is dispatched.
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - CopyResources startTime: 1814028909559208
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - default@CompileArkTS work[1] is submitted.
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - default@CompileArkTS work[1] is pushed to ready queue.
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-25T21:15:05.686] [DEBUG] debug-file - Create  resident worker with id: 6.
+[2025-12-25T21:15:05.687] [DEBUG] debug-file - default@CompileArkTS work[1] has been dispatched to worker[6].
+[2025-12-25T21:15:05.687] [DEBUG] debug-file - default@CompileArkTS work[1] is dispatched.
+[2025-12-25T21:15:05.687] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 1.4729843139648438
+[2025-12-25T21:15:05.688] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-12-25T21:15:05.689] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.09546661376953125
+[2025-12-25T21:15:05.689] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 406 ms 
+[2025-12-25T21:15:05.689] [INFO] debug-file - Finished :entry:default@BuildJS... after 2 ms 
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - default@CacheNativeLibs work[2] is submitted.
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - default@CacheNativeLibs work[2] is pushed to ready queue.
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - A work dispatched to worker[6] failed because of worker busy.
+[2025-12-25T21:15:05.690] [DEBUG] debug-file - Create  resident worker with id: 5.
+[2025-12-25T21:15:05.691] [DEBUG] debug-file - default@CacheNativeLibs work[2] has been dispatched to worker[5].
+[2025-12-25T21:15:05.691] [DEBUG] debug-file - default@CacheNativeLibs work[2] is dispatched.
+[2025-12-25T21:15:05.691] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.38228607177734375
+[2025-12-25T21:15:06.140] [DEBUG] debug-file - worker[6] has one work done.
+[2025-12-25T21:15:06.140] [DEBUG] debug-file - CopyResources is end, endTime: 1814029363273458
+[2025-12-25T21:15:06.140] [DEBUG] debug-file - default@CompileArkTS work[1] done.
+[2025-12-25T21:15:06.153] [DEBUG] debug-file - worker[5] has one work done.
+[2025-12-25T21:15:06.153] [DEBUG] debug-file - default@CacheNativeLibs work[2] done.
+[2025-12-25T21:15:06.153] [INFO] debug-file - Finished :entry:default@CacheNativeLibs... after 4 ms 
+[2025-12-25T21:15:06.240] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-25T21:15:06.254] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-25T21:15:11.402] [DEBUG] debug-file - Ark compile task finished.finished time is 1814034624648416
+[2025-12-25T21:15:11.403] [DEBUG] debug-file - worker[4] has one work done.
+[2025-12-25T21:15:11.405] [DEBUG] debug-file - default@CompileArkTS work[0] done.
+[2025-12-25T21:15:11.405] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-12-25T21:15:11.407] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 4 s 738 ms 
+[2025-12-25T21:15:11.408] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-12-25T21:15:11.408] [DEBUG] debug-file - File: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/preload/default/preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-25T21:15:11.408] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:11.409] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.0634307861328125
+[2025-12-25T21:15:11.409] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 126 ms 
+[2025-12-25T21:15:11.409] [INFO] debug-file - Finished :entry:default@GeneratePkgModuleJson... after 2 ms 
+[2025-12-25T21:15:11.410] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2025-12-25T21:15:11.410] [DEBUG] debug-file - File: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/preload/default/preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-25T21:15:11.410] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2025-12-25T21:15:11.410] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.06142425537109375
+[2025-12-25T21:15:11.410] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 127 ms 
+[2025-12-25T21:15:11.410] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 1 ms 
+[2025-12-25T21:15:11.412] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-12-25T21:15:11.415] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/lib/app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=utf-8',
+  '-jar',
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/lib/app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/stripped_native_libs/default',
+  '--json-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/package/default/module.json',
+  '--resources-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources',
+  '--index-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources.index',
+  '--pack-info-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/pack.info',
+  '--out-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap',
+  '--ets-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets'
+]
+[2025-12-25T21:15:11.775] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-12-25T21:15:11.776] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.39405059814453125
+[2025-12-25T21:15:11.776] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 493 ms 
+[2025-12-25T21:15:11.778] [INFO] debug-file - Finished :entry:default@PackageHap... after 365 ms 
+[2025-12-25T21:15:11.779] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2025-12-25T21:15:11.783] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.6554183959960938
+[2025-12-25T21:15:11.783] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 500 ms 
+[2025-12-25T21:15:11.783] [INFO] debug-file - Finished :entry:default@PackingCheck... after 5 ms 
+[2025-12-25T21:15:11.785] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-12-25T21:15:11.785] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in /Users/changchen/working_place/cybermall/build-profile.json5.
+[2025-12-25T21:15:11.785] [DEBUG] debug-file - entry : default@SignHap cost memory 0.0695953369140625
+[2025-12-25T21:15:11.785] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 502 ms 
+[2025-12-25T21:15:11.785] [INFO] debug-file - Finished :entry:default@SignHap... after 1 ms 
+[2025-12-25T21:15:11.786] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-12-25T21:15:11.786] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.08966827392578125
+[2025-12-25T21:15:11.786] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 503 ms 
+[2025-12-25T21:15:11.786] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 1 ms 
+[2025-12-25T21:15:11.786] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-12-25T21:15:11.787] [DEBUG] debug-file - entry : assembleHap cost memory 0.0172576904296875
+[2025-12-25T21:15:11.787] [DEBUG] debug-file - runTaskFromQueue task cost before running: 9 s 504 ms 
+[2025-12-25T21:15:11.787] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-12-25T21:15:11.788] [INFO] debug-file - BUILD SUCCESSFUL in 9 s 505 ms 
+[2025-12-25T21:15:11.788] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/AppScope/app.json5 cache by regenerate.
+[2025-12-25T21:15:11.789] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/entry/src/main/module.json5 cache by regenerate.
+[2025-12-25T21:15:11.789] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.789] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/entry/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.789] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/entry/src/main/resources/base/profile/main_pages.json cache by regenerate.
+[2025-12-25T21:15:11.789] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/hvigor/hvigor-config.json5 cache by regenerate.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/entry/oh-package.json5 cache by regenerate.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@PreBuild input file:/Users/changchen/working_place/cybermall/oh-package.json5 cache by regenerate.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Incremental task entry:default@PreBuild post-execution cost:2 ms .
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/ModuleInfo.ts cache.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@GenerateMetadata input file:/Users/changchen/working_place/cybermall/entry/src/main/module.json5 cache by regenerate.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@GenerateMetadata output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/hap_metadata/default/output_metadata.json cache.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata post-execution cost:1 ms .
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:/Users/changchen/working_place/cybermall/AppScope/app.json5 cache by regenerate.
+[2025-12-25T21:15:11.790] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:/Users/changchen/working_place/cybermall/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:/Users/changchen/working_place/cybermall/entry/src/main/module.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@MergeProfile output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/merge_profile/default/module.json cache.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Incremental task entry:default@MergeProfile post-execution cost:1 ms .
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile input file:/Users/changchen/working_place/cybermall/AppScope/app.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile input file:/Users/changchen/working_place/cybermall/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile output file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/BuildProfile.ets cache.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile post-execution cost:1 ms .
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default/pkgContextInfo.json cache.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:/Users/changchen/working_place/cybermall/build/cache/default/integrated_hsp/integratedHspCache.json cache.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:/Users/changchen/working_place/cybermall/AppScope/app.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:/Users/changchen/working_place/cybermall/entry/src/main/module.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:/Users/changchen/working_place/cybermall/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.791] [DEBUG] debug-file - Update task entry:default@MakePackInfo output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/pack.info cache.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo post-execution cost:1 ms .
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/syscap_tool cache by regenerate.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/device-define cache by regenerate.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/syscap/default/rpcid.sc cache.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:1 ms .
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@ProcessProfile input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/merge_profile/default/module.json cache by regenerate.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@ProcessProfile output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/process_profile/default/module.json cache.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile post-execution cost:1 ms .
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:/Users/changchen/working_place/cybermall/entry/oh-package.json5 cache by regenerate.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:/Users/changchen/working_place/cybermall/oh-package.json5 cache by regenerate.
+[2025-12-25T21:15:11.792] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:/Users/changchen/working_place/cybermall/entry/src/main/module.json5 cache by regenerate.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/router_map/default/temp-router-map.json cache.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/router_map/default/loader-router-map.json cache.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap post-execution cost:1 ms .
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig input file:/Users/changchen/working_place/cybermall/entry/oh-package.json5 cache by regenerate.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig input file:/Users/changchen/working_place/cybermall/oh-package.json5 cache by regenerate.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig input file:/Users/changchen/working_place/cybermall/entry/src/main/module.json5 cache by regenerate.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/share_config/default/temp-share-config.json cache.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig post-execution cost:1 ms .
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/startup/default/startup_config.json cache.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessResource output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resConfig.json cache.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Update task entry:default@ProcessResource output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/opt-compression.json cache.
+[2025-12-25T21:15:11.793] [DEBUG] debug-file - Incremental task entry:default@ProcessResource post-execution cost:1 ms .
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/router_map/default/temp-router-map.json cache by regenerate.
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default/loader.json cache.
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson post-execution cost:1 ms .
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Update task entry:default@ProcessLibs input file:/Users/changchen/working_place/cybermall/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Update task entry:default@ProcessLibs input file:/Users/changchen/working_place/cybermall/entry/build-profile.json5 cache by regenerate.
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Update task entry:default@ProcessLibs output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/libs/default cache.
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs post-execution cost:1 ms .
+[2025-12-25T21:15:11.794] [DEBUG] debug-file - Update task entry:default@CompileResource input file:/Users/changchen/working_place/cybermall/entry/src/main/resources cache by regenerate.
+[2025-12-25T21:15:11.796] [DEBUG] debug-file - Update task entry:default@CompileResource input file:/Users/changchen/working_place/cybermall/AppScope/resources cache by regenerate.
+[2025-12-25T21:15:11.796] [DEBUG] debug-file - Update task entry:default@CompileResource input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/process_profile/default/module.json cache by regenerate.
+[2025-12-25T21:15:11.796] [DEBUG] debug-file - Update task entry:default@CompileResource input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resConfig.json cache by regenerate.
+[2025-12-25T21:15:11.796] [DEBUG] debug-file - Update task entry:default@CompileResource output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default cache.
+[2025-12-25T21:15:11.797] [DEBUG] debug-file - Update task entry:default@CompileResource output file:/Users/changchen/working_place/cybermall/entry/build/default/generated/r/default/ResourceTable.h cache.
+[2025-12-25T21:15:11.797] [DEBUG] debug-file - Update task entry:default@CompileResource output file:/Users/changchen/working_place/cybermall/entry/build/default/generated/r/default cache.
+[2025-12-25T21:15:11.797] [DEBUG] debug-file - Incremental task entry:default@CompileResource post-execution cost:4 ms .
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Update task entry:default@DoNativeStrip input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/libs/default cache by regenerate.
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Update task entry:default@DoNativeStrip output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/stripped_native_libs/default cache.
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip post-execution cost:1 ms .
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default cache by regenerate.
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ark_module.json cache by regenerate.
+[2025-12-25T21:15:11.798] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2025-12-25T21:15:11.799] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/src/main/ets cache by regenerate.
+[2025-12-25T21:15:11.799] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2025-12-25T21:15:11.799] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets cache.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:2 ms .
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default cache by regenerate.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ark_module.json cache by regenerate.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@BuildJS output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/js cache.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:1 ms .
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/stripped_native_libs/default cache by regenerate.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/libs/default cache by regenerate.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/patch/default/base_native_libs.json cache.
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs post-execution cost:1 ms .
+[2025-12-25T21:15:11.800] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2025-12-25T21:15:11.801] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/package/default/module.json cache.
+[2025-12-25T21:15:11.801] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson post-execution cost:1 ms .
+[2025-12-25T21:15:11.801] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2025-12-25T21:15:11.801] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/stripped_native_libs/default cache by regenerate.
+[2025-12-25T21:15:11.801] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2025-12-25T21:15:11.801] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources cache by regenerate.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources.index cache by regenerate.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/pack.info cache by regenerate.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets cache by regenerate.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets/sourceMaps.map cache by regenerate.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap cache.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/source_map/default/sourceMaps.map cache.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/mapping/sourceMaps.map cache.
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:2 ms .
+[2025-12-25T21:15:11.802] [DEBUG] debug-file - Update task entry:default@SignHap input file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap cache by regenerate.
+[2025-12-25T21:15:11.803] [DEBUG] debug-file - Update task entry:default@SignHap output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-signed.hap cache.
+[2025-12-25T21:15:11.803] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-12-25T21:15:11.803] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets/sourceMaps.map cache by regenerate.
+[2025-12-25T21:15:11.803] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/libs/default cache by regenerate.
+[2025-12-25T21:15:11.804] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/symbol cache.
+[2025-12-25T21:15:11.804] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:2 ms .
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Cleanup worker 0.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current idle worker size: 4.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Cleanup worker 1.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current idle worker size: 3.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Cleanup worker 6.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Worker 6 has been cleaned up.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current idle worker size: 2.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Cleanup worker 5.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Worker 5 has been cleaned up.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-25T21:15:11.815] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-12-25T21:15:11.818] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T21:15:11.818] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-25T21:15:11.819] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-25T21:15:11.820] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:15:11.820] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-25T21:15:11.823] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-12-25T21:15:11.823] [DEBUG] debug-file - worker[1] exits with exit code 1.
+[2025-12-25T21:15:11.823] [DEBUG] debug-file - worker[0] exits with exit code 1.
+[2025-12-25T21:15:11.825] [DEBUG] debug-file - worker[5] exits with exit code 1.
+[2025-12-25T21:15:11.825] [DEBUG] debug-file - worker[6] exits with exit code 1.
+[2025-12-26T15:17:56.701] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2025-12-26T15:17:56.706] [DEBUG] debug-file - java daemon started at port 45050 pid 89539
+[2025-12-26T15:17:56.435] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-12-26T15:17:56.450] [DEBUG] debug-file - env: daemon=true
+[2025-12-26T15:17:56.436] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.5',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-12-26T15:17:56.733] [DEBUG] debug-file - session manager: set active socket. socketId=UXl7VKepcjdbKZRzAAAB
+[2025-12-26T15:17:56.989] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-26T15:17:56.993] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-26T15:17:56.996] [DEBUG] debug-file - Cache service initialization finished in 3 ms 
+[2025-12-26T15:17:56.997] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-26T15:17:57.833] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-26T15:17:57.833] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-26T15:17:57.929] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-26T15:17:57.929] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-26T15:17:57.930] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-26T15:17:57.930] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-26T15:17:57.931] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-26T15:17:57.932] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-26T15:17:57.933] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-12-26T15:17:57.936] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-12-26T15:17:57.938] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-26T15:17:57.961] [DEBUG] debug-file - Sdk init in 28 ms 
+[2025-12-26T15:17:57.963] [DEBUG] debug-file - Project task initialization takes 2 ms 
+[2025-12-26T15:17:57.963] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/hvigorfile.ts
+[2025-12-26T15:17:57.964] [DEBUG] debug-file - hvigorfile, resolving /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-26T15:17:57.967] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-26T15:17:57.967] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-26T15:17:57.967] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/src/plugin/factory/plugin-factory.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor-ohos-plugin/index.js
+- /Users/changchen/working_place/cybermall/hvigorfile.ts
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/internal/lifecycle/configuration.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/boot/index.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/cluster/worker-process-lifecycle.js
+- /Applications/DevEco-Studio.app/Contents/tools/hvigor/hvigor/src/base/daemon/process/daemon-process-boot-script.js
+[2025-12-26T15:17:57.973] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-26T15:17:57.974] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-26T15:17:57.977] [DEBUG] debug-file - Module entry task initialization takes 3 ms 
+[2025-12-26T15:17:57.977] [DEBUG] debug-file - hvigorfile, resolve finished /Users/changchen/working_place/cybermall/entry/hvigorfile.ts
+[2025-12-26T15:17:58.025] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 48 ms 
+[2025-12-26T15:17:58.026] [DEBUG] debug-file - project has submodules:entry
+[2025-12-26T15:17:58.027] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-26T15:17:58.030] [DEBUG] debug-file - load to the disk finished
+[2025-12-26T15:17:58.030] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-26T15:17:58.031] [DEBUG] debug-file - Module cybermall Collected Dependency: 
+[2025-12-26T15:17:58.031] [DEBUG] debug-file - Module cybermall's total dependency: 0
+[2025-12-26T15:17:58.032] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-26T15:17:58.032] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-26T15:17:58.032] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-26T15:17:58.034] [DEBUG] debug-file - Configuration phase cost:1 s 38 ms 
+[2025-12-26T15:17:58.035] [DEBUG] debug-file - Configuration task cost before running: 1 s 44 ms 
+[2025-12-26T15:17:58.037] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-12-26T15:17:58.038] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.040] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 2 ms .
+[2025-12-26T15:17:58.040] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.41143798828125
+[2025-12-26T15:17:58.041] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-12-26T15:17:58.041] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-12-26T15:17:58.041] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.041] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.04087066650390625
+[2025-12-26T15:17:58.041] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 51 ms 
+[2025-12-26T15:17:58.042] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2025-12-26T15:17:58.042] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-12-26T15:17:58.042] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.043] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.043] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.08452606201171875
+[2025-12-26T15:17:58.043] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-12-26T15:17:58.043] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-12-26T15:17:58.043] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.0161590576171875
+[2025-12-26T15:17:58.043] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 52 ms 
+[2025-12-26T15:17:58.043] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-12-26T15:17:58.043] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-12-26T15:17:58.044] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.044] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.044] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.11998748779296875
+[2025-12-26T15:17:58.044] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-12-26T15:17:58.045] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-12-26T15:17:58.045] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.045] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.045] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.0894012451171875
+[2025-12-26T15:17:58.045] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-12-26T15:17:58.046] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-12-26T15:17:58.046] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.01639556884765625
+[2025-12-26T15:17:58.046] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 55 ms 
+[2025-12-26T15:17:58.046] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-12-26T15:17:58.046] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-12-26T15:17:58.050] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.050] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.3070526123046875
+[2025-12-26T15:17:58.050] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 59 ms 
+[2025-12-26T15:17:58.050] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 4 ms 
+[2025-12-26T15:17:58.051] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-12-26T15:17:58.051] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file '/Users/changchen/working_place/cybermall/build/cache/default/integrated_hsp/integratedHspCache.json' does not exist.
+[2025-12-26T15:17:58.051] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.051] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.06188201904296875
+[2025-12-26T15:17:58.051] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 61 ms 
+[2025-12-26T15:17:58.051] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 1 ms 
+[2025-12-26T15:17:58.052] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-12-26T15:17:58.052] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.01758575439453125
+[2025-12-26T15:17:58.052] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 61 ms 
+[2025-12-26T15:17:58.052] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-12-26T15:17:58.052] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-12-26T15:17:58.053] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.053] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.09378814697265625
+[2025-12-26T15:17:58.053] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-12-26T15:17:58.053] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-12-26T15:17:58.053] [DEBUG] debug-file - File: '/Users/changchen/working_place/cybermall/entry/src/main/syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-12-26T15:17:58.053] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.061] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/syscap/default/rpcid.sc' does not exist.
+[2025-12-26T15:17:58.061] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 8 ms .
+[2025-12-26T15:17:58.061] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.1619873046875
+[2025-12-26T15:17:58.061] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 71 ms 
+[2025-12-26T15:17:58.061] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 9 ms 
+[2025-12-26T15:17:58.062] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-12-26T15:17:58.063] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.063] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.063] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.1208038330078125
+[2025-12-26T15:17:58.063] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-12-26T15:17:58.064] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-12-26T15:17:58.064] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.064] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.35382080078125
+[2025-12-26T15:17:58.064] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-12-26T15:17:58.065] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2025-12-26T15:17:58.065] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.065] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.09525299072265625
+[2025-12-26T15:17:58.065] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessShareConfig...  
+[2025-12-26T15:17:58.065] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-12-26T15:17:58.065] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/startup/default/startup_config.json' does not exist.
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.093719482421875
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 75 ms 
+[2025-12-26T15:17:58.066] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 1 ms 
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.022552490234375
+[2025-12-26T15:17:58.066] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 76 ms 
+[2025-12-26T15:17:58.067] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2025-12-26T15:17:58.067] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-12-26T15:17:58.068] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-12-26T15:17:58.068] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.069] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.069] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.117706298828125
+[2025-12-26T15:17:58.069] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-12-26T15:17:58.070] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-12-26T15:17:58.070] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.072] [DEBUG] debug-file - entry:default@GenerateLoaderJson is not up-to-date, since the task snapshots are different.
+[2025-12-26T15:17:58.072] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.076] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.48253631591796875
+[2025-12-26T15:17:58.076] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 85 ms 
+[2025-12-26T15:17:58.077] [INFO] debug-file - Finished :entry:default@GenerateLoaderJson... after 6 ms 
+[2025-12-26T15:17:58.077] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-12-26T15:17:58.078] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.078] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.0858154296875
+[2025-12-26T15:17:58.078] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-12-26T15:17:58.078] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-12-26T15:17:58.078] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-12-26T15:17:58.085] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 6 ms .
+[2025-12-26T15:17:58.085] [DEBUG] debug-file - entry : default@CompileResource cost memory -6.654685974121094
+[2025-12-26T15:17:58.085] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-12-26T15:17:58.085] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-12-26T15:17:58.085] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.086] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.086] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.071563720703125
+[2025-12-26T15:17:58.086] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-12-26T15:17:58.086] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-12-26T15:17:58.086] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-12-26T15:17:58.088] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default' has been changed.
+[2025-12-26T15:17:58.088] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.096] [DEBUG] debug-file - build config:
+[2025-12-26T15:17:58.097] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: '/Users/changchen/working_place/cybermall/local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/base/profile',
+  etsLoaderPath: '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader',
+  modulePath: '/Users/changchen/working_place/cybermall/entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: '/Users/changchen/working_place/cybermall',
+  compileSdkVersion: 20,
+  compatibleSdkVersion: 17,
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***y',
+  etsLoaderVersion: '6.0.0.47',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: '/Users/changchen/working_place/cybermall/entry/modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: 'b391a1993a55c2ab6ea33154bf6ac226',
+  externalApiPaths: [ '/Applications/DevEco-Studio.app/Contents/sdk/default/hms/ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: '/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 20,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: '/Users/changchen/working_place/cybermall/entry/build',
+  deviceTypes: [ 'phone' ],
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: undefined, definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [ '/Users/changchen/working_place/cybermall' ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    ignoreCrossplatformCheck: false,
+    isPreloadSoEnabled: false
+  },
+  skipOhModulesLint: false,
+  executionMode: 'memory',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  ignoreCrossplatformCheck: false,
+  isPreloadSoEnabled: false,
+  arkCompileCachePath: '/Users/changchen/working_place/cybermall/entry/build/default/cache/default/default@CompileArkTS/esmodule',
+  aceModuleJsonPath: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ark_module.json',
+  appResource: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ResourceTable.txt',
+  rawFileResource: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/rawfile',
+  resourceTableHash: '215444b884c791962d1fdde5f89e3820',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:20:6.0.0.47:Release',
+  aceModuleRoot: '/Users/changchen/working_place/cybermall/entry/src/main/ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: '/Users/changchen/working_place/cybermall/entry/src/main/supervisual',
+  aceBuildJson: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default/loader.json',
+  cachePath: '/Users/changchen/working_place/cybermall/entry/build/default/cache/default/default@CompileArkTS/esmodule/debug',
+  aceModuleBuild: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: '/Users/changchen/working_place/cybermall/entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    '/Users/changchen/working_place/cybermall/entry/src/main': {
+      moduleName: 'entry',
+      modulePkgPath: '/Users/changchen/working_place/cybermall/entry',
+      belongProjectPath: '/Users/changchen/working_place/cybermall'
+    },
+    '/Users/changchen/working_place/cybermall/entry': {
+      moduleName: 'entry',
+      modulePkgPath: '/Users/changchen/working_place/cybermall/entry',
+      belongProjectPath: '/Users/changchen/working_place/cybermall'
+    },
+    '/Users/changchen/working_place/cybermall': {
+      moduleName: 'cybermall',
+      modulePkgPath: '/Users/changchen/working_place/cybermall',
+      belongProjectPath: '/Users/changchen/working_place/cybermall'
+    }
+  },
+  pkgJsonFileHash: '73952b0c20fc6d4c363e85190646ec08',
+  allModulePaths: [ '/Users/changchen/working_place/cybermall/entry' ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: '/Applications/DevEco-Studio.app/Contents/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/preload/default/preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [ '../*', '../../../build/default/generated/profile/default/*' ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-12-26T15:17:58.097] [DEBUG] debug-file - Compile arkts with external api path: /Applications/DevEco-Studio.app/Contents/sdk/default/hms/ets
+[2025-12-26T15:17:58.097] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-12-26T15:17:58.097] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-12-26T15:17:58.098] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-12-26T15:17:58.099] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-12-26T15:17:58.100] [DEBUG] debug-file - default@CompileArkTS work[0] is submitted.
+[2025-12-26T15:17:58.100] [DEBUG] debug-file - default@CompileArkTS work[0] is pushed to ready queue.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - Create  resident worker with id: 4.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - default@CompileArkTS work[0] has been dispatched to worker[4].
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - default@CompileArkTS work[0] is dispatched.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - CopyResources startTime: 1879001497930250
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - default@CompileArkTS work[1] is submitted.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - default@CompileArkTS work[1] is pushed to ready queue.
+[2025-12-26T15:17:58.101] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-26T15:17:58.102] [DEBUG] debug-file - Create  resident worker with id: 6.
+[2025-12-26T15:17:58.102] [DEBUG] debug-file - default@CompileArkTS work[1] has been dispatched to worker[6].
+[2025-12-26T15:17:58.102] [DEBUG] debug-file - default@CompileArkTS work[1] is dispatched.
+[2025-12-26T15:17:58.102] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 1.8278350830078125
+[2025-12-26T15:17:58.105] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-12-26T15:17:58.106] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.09752655029296875
+[2025-12-26T15:17:58.106] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 115 ms 
+[2025-12-26T15:17:58.106] [INFO] debug-file - Finished :entry:default@BuildJS... after 2 ms 
+[2025-12-26T15:17:58.108] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-12-26T15:17:58.108] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:17:58.108] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 1 ms .
+[2025-12-26T15:17:58.108] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.08057403564453125
+[2025-12-26T15:17:58.108] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-12-26T15:17:58.501] [DEBUG] debug-file - worker[6] has one work done.
+[2025-12-26T15:17:58.501] [DEBUG] debug-file - CopyResources is end, endTime: 1879001897922833
+[2025-12-26T15:17:58.501] [DEBUG] debug-file - default@CompileArkTS work[1] done.
+[2025-12-26T15:17:58.502] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-26T15:18:01.824] [WARN] debug-file - [33mWARN: [33m[33mArkTS:WARN File: /Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets:25:16
+ 'SetOrCreate' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: /Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets:26:16
+ 'SetOrCreate' has been deprecated.
+[39m[39m
+
+[2025-12-26T15:18:01.825] [DEBUG] debug-file - Ark compile task finished.finished time is 1879005221071875
+[2025-12-26T15:18:01.825] [DEBUG] debug-file - worker[4] has one work done.
+[2025-12-26T15:18:01.826] [DEBUG] debug-file - default@CompileArkTS work[0] done.
+[2025-12-26T15:18:01.826] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-12-26T15:18:01.827] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 2 s 907 ms 
+[2025-12-26T15:18:01.828] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-12-26T15:18:01.828] [DEBUG] debug-file - File: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/preload/default/preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-26T15:18:01.828] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:18:01.828] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2025-12-26T15:18:01.828] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.080169677734375
+[2025-12-26T15:18:01.828] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-12-26T15:18:01.828] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2025-12-26T15:18:01.829] [DEBUG] debug-file - File: '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/preload/default/preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-26T15:18:01.829] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2025-12-26T15:18:01.829] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.06165313720703125
+[2025-12-26T15:18:01.829] [DEBUG] debug-file - runTaskFromQueue task cost before running: 4 s 838 ms 
+[2025-12-26T15:18:01.829] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 1 ms 
+[2025-12-26T15:18:01.830] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-12-26T15:18:01.831] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets' has been changed.
+[2025-12-26T15:18:01.831] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 2 ms .
+[2025-12-26T15:18:01.832] [DEBUG] debug-file - Use tool [/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/lib/app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=utf-8',
+  '-jar',
+  '/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/lib/app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/stripped_native_libs/default',
+  '--json-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/package/default/module.json',
+  '--resources-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources',
+  '--index-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources.index',
+  '--pack-info-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/pack.info',
+  '--out-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap',
+  '--ets-path',
+  '/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets'
+]
+[2025-12-26T15:18:02.160] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-12-26T15:18:02.161] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.7910842895507812
+[2025-12-26T15:18:02.161] [DEBUG] debug-file - runTaskFromQueue task cost before running: 5 s 171 ms 
+[2025-12-26T15:18:02.162] [INFO] debug-file - Finished :entry:default@PackageHap... after 332 ms 
+[2025-12-26T15:18:02.162] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2025-12-26T15:18:02.166] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.37337493896484375
+[2025-12-26T15:18:02.167] [DEBUG] debug-file - runTaskFromQueue task cost before running: 5 s 176 ms 
+[2025-12-26T15:18:02.167] [INFO] debug-file - Finished :entry:default@PackingCheck... after 5 ms 
+[2025-12-26T15:18:02.168] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-12-26T15:18:02.168] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in /Users/changchen/working_place/cybermall/build-profile.json5.
+[2025-12-26T15:18:02.168] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file '/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap' has been changed.
+[2025-12-26T15:18:02.168] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 1 ms .
+[2025-12-26T15:18:02.169] [DEBUG] debug-file - entry : default@SignHap cost memory 0.08568572998046875
+[2025-12-26T15:18:02.169] [DEBUG] debug-file - runTaskFromQueue task cost before running: 5 s 179 ms 
+[2025-12-26T15:18:02.169] [INFO] debug-file - Finished :entry:default@SignHap... after 2 ms 
+[2025-12-26T15:18:02.170] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-12-26T15:18:02.171] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.08563232421875
+[2025-12-26T15:18:02.171] [DEBUG] debug-file - runTaskFromQueue task cost before running: 5 s 180 ms 
+[2025-12-26T15:18:02.171] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 1 ms 
+[2025-12-26T15:18:02.171] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-12-26T15:18:02.172] [DEBUG] debug-file - entry : assembleHap cost memory 0.014404296875
+[2025-12-26T15:18:02.172] [DEBUG] debug-file - runTaskFromQueue task cost before running: 5 s 181 ms 
+[2025-12-26T15:18:02.172] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-12-26T15:18:02.173] [INFO] debug-file - BUILD SUCCESSFUL in 5 s 182 ms 
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/ModuleInfo.ts cache.
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-12-26T15:18:02.173] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default/pkgContextInfo.json cache.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:/Users/changchen/working_place/cybermall/build/cache/default/integrated_hsp/integratedHspCache.json cache.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/toolchains/syscap_tool cache by regenerate.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/device-define cache by regenerate.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/syscap/default/rpcid.sc cache.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:1 ms .
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2025-12-26T15:18:02.174] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/startup/default/startup_config.json cache.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/router_map/default/temp-router-map.json cache by regenerate.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default/loader.json cache.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson post-execution cost:1 ms .
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default cache from map.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ark_module.json cache by regenerate.
+[2025-12-26T15:18:02.175] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2025-12-26T15:18:02.176] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/src/main/ets cache by regenerate.
+[2025-12-26T15:18:02.176] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2025-12-26T15:18:02.176] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets cache.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:2 ms .
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader/default cache by regenerate.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ResourceTable.txt cache by regenerate.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/ark_module.json cache by regenerate.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@BuildJS input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources/base/profile cache by regenerate.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@BuildJS output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/js cache.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:1 ms .
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/stripped_native_libs/default cache by regenerate.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/module.json cache by regenerate.
+[2025-12-26T15:18:02.177] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources cache by regenerate.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/res/default/resources.index cache by regenerate.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/pack.info cache by regenerate.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets cache from map.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets/sourceMaps.map cache by regenerate.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap input file:/Users/changchen/working_place/cybermall/entry/build/default/generated/profile/default/BuildProfile.ets cache by regenerate.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap cache.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/source_map/default/sourceMaps.map cache.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@PackageHap output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/mapping/sourceMaps.map cache.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:2 ms .
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@SignHap input file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-unsigned.hap cache from map.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Update task entry:default@SignHap output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/entry-default-signed.hap cache.
+[2025-12-26T15:18:02.178] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-12-26T15:18:02.179] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/loader_out/default/ets/sourceMaps.map cache by regenerate.
+[2025-12-26T15:18:02.179] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:/Users/changchen/working_place/cybermall/entry/build/default/intermediates/libs/default cache by regenerate.
+[2025-12-26T15:18:02.179] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:/Users/changchen/working_place/cybermall/entry/build/default/outputs/default/symbol cache.
+[2025-12-26T15:18:02.179] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:1 ms .
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Cleanup worker 0.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Current idle worker size: 3.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Current resident worker size: 4.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Cleanup worker 1.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Current idle worker size: 2.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Current resident worker size: 4.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Cleanup worker 6.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Worker 6 has been cleaned up.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-26T15:18:02.186] [DEBUG] debug-file - Current resident worker size: 4.
+[2025-12-26T15:18:02.187] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-26T15:18:02.189] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-26T15:18:02.189] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-26T15:18:02.188] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-12-26T15:18:02.189] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-26T15:18:02.189] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-26T15:18:02.191] [DEBUG] debug-file - worker[0] exits with exit code 1.
+[2025-12-26T15:18:02.191] [DEBUG] debug-file - worker[1] exits with exit code 1.
+[2025-12-26T15:18:02.192] [DEBUG] debug-file - worker[6] exits with exit code 1.
