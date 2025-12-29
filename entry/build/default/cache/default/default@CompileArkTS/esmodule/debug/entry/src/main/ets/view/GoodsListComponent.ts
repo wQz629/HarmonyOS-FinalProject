@@ -74,6 +74,10 @@ export default class GoodsList extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             List.create({ space: commonConst.LIST_ITEM_SPACE });
             List.width(commonConst.GOODS_LIST_WIDTH);
+            List.divider({
+                strokeWidth: 1,
+                color: this.currentThemeColors.dividerColor, // 使用主题定义的分割线颜色
+            });
         }, List);
         {
             const __lazyForEachItemGenFunction = _item => {
@@ -130,11 +134,12 @@ export default class GoodsList extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(item?.goodsName);
                             Text.fontSize(commonConst.NORMAL_FONT_SIZE);
+                            Text.fontColor(this.currentThemeColors.primaryTextColor);
                         }, Text);
                         Text.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(item?.advertisingLanguage);
-                            Text.fontColor({ "id": -1, "type": -1, params: [this.currentThemeColors.secondaryTextColor], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Text.fontColor(this.currentThemeColors.primaryTextColor);
                             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                             Text.margin({ right: commonConst.MARGIN_RIGHT });
                         }, Text);
@@ -147,7 +152,7 @@ export default class GoodsList extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(item?.evaluate);
                             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                            Text.fontColor({ "id": -1, "type": -1, params: [this.currentThemeColors.tabUnselectedColor], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            Text.fontColor(this.currentThemeColors.accentColor);
                             Text.width(commonConst.EVALUATE_WIDTH);
                         }, Text);
                         Text.pop();

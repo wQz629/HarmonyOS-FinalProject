@@ -61,6 +61,7 @@ class ListIndex extends ViewPU {
             Row.width(LAYOUT_WIDTH_OR_HEIGHT);
             Row.height(NAV_BAR_HEIGHT);
             Row.justifyContent(FlexAlign.Center);
+            Row.backgroundColor(this.currentThemeColors.cardBackgroundColor);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.getPageTitle());
@@ -101,7 +102,7 @@ class ListIndex extends ViewPU {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 67, col: 9 });
+                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 68, col: 9 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -124,7 +125,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 分类页面
-                                CategoryPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 73, col: 7 });
+                                CategoryPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 74, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -145,7 +146,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 购物车页面
-                                ShoppingCartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 76, col: 7 });
+                                ShoppingCartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 77, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -166,7 +167,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 个人中心页面
-                                PersonalPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 79, col: 7 });
+                                PersonalPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 80, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -192,7 +193,7 @@ class ListIndex extends ViewPU {
             Column.create();
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.height(LAYOUT_WIDTH_OR_HEIGHT);
-            Column.backgroundColor(this.currentThemeColors.cardBackgroundColor);
+            Column.backgroundColor(this.currentThemeColors.backgroundColor);
         }, Column);
         // 顶部导航栏
         this.NavigationTitle.bind(this)();
@@ -212,7 +213,7 @@ class ListIndex extends ViewPU {
                 if (isInitialRender) {
                     let componentCall = new 
                     // 底部 Tab Bar
-                    BottomTabBar(this, { currentIndex: this.__currentTabIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 96, col: 7 });
+                    BottomTabBar(this, { currentIndex: this.__currentTabIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 97, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {

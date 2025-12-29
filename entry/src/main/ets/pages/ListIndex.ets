@@ -42,6 +42,7 @@ struct ListIndex {
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(NAV_BAR_HEIGHT)
     .justifyContent(FlexAlign.Center)
+    .backgroundColor(this.currentThemeColors.cardBackgroundColor)
   }
 
   getPageTitle(): Resource {
@@ -97,6 +98,6 @@ struct ListIndex {
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(LAYOUT_WIDTH_OR_HEIGHT)
-    .backgroundColor(this.currentThemeColors.cardBackgroundColor) //$r('app.color.primaryBgColor')
+    .backgroundColor(this.currentThemeColors.backgroundColor) //$r('app.color.primaryBgColor')
   }
 }
