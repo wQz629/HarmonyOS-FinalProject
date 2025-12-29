@@ -23,6 +23,8 @@ import {
   BUTTON_HEIGHT,
   BUTTON_BORDER_RADIUS
 } from '../common/CommonConstants';
+import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
+
 
 @Component
 export default struct GoodsDetailPage {
@@ -32,6 +34,8 @@ export default struct GoodsDetailPage {
   @State salesCount: string = '6662人已购买';
   @State rating: string = '95%好评';
   @State selectedQuantity: number = 1;
+  @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;//使用 @StorageLink 确保当 PersonalPage 改变主题时，这里会自动刷新
+
 
   @Builder
   TopNavigationBar() {
@@ -45,7 +49,7 @@ export default struct GoodsDetailPage {
       // 返回按钮
       Text('←')
         .fontSize(24)
-        .fontColor('#333333')
+        .fontColor(this.currentThemeColors.primaryTextColor)   //'#333333'
         .onClick(() => {
           // 返回上一页
         })
@@ -53,7 +57,7 @@ export default struct GoodsDetailPage {
       Text($r('app.string.goods_detail'))
         .fontSize(NORMAL_FONT_SIZE)
         .fontWeight(FontWeight.Bold)
-        .fontColor('#333333')
+        .fontColor(this.currentThemeColors.primaryTextColor)
         .layoutWeight(1)
         .textAlign(TextAlign.Center)
 
@@ -63,12 +67,12 @@ export default struct GoodsDetailPage {
       // 分享按钮
       Text('⋯')
         .fontSize(24)
-        .fontColor('#333333')
+        .fontColor(this.currentThemeColors.primaryTextColor)
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(NAV_BAR_HEIGHT)
     .padding({ left: 16, right: 16 })
-    .backgroundColor('#FFFFFF')
+    .backgroundColor(this.currentThemeColors.backgroundColor)
     .justifyContent(FlexAlign.SpaceBetween)
   }
 

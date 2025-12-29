@@ -16,9 +16,11 @@
 import * as commonConst from '../common/CommonConstants';
 import { GoodsListItemType } from '../viewmodel/InitialData';
 import { ListDataSource } from '../viewmodel/ListDataSource';
+import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
 
 @Component
 export default struct GoodsList {
+  @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
   @Provide goodsListData: ListDataSource = new ListDataSource();
   private startTouchOffsetY: number = 0;
   private endTouchOffsetY: number = 0;
@@ -43,16 +45,16 @@ export default struct GoodsList {
                   .fontSize(commonConst.NORMAL_FONT_SIZE)
 
                 Text(item?.advertisingLanguage)
-                  .fontColor($r('app.color.gray'))
+                  .fontColor($r(this.currentThemeColors.secondaryTextColor))
                   .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
                   .margin({ right: commonConst.MARGIN_RIGHT })
 
                 Row() {
                   Text(item?.evaluate)
                     .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                    .fontColor($r('app.color.deepGray'))
+                    .fontColor($r(this.currentThemeColors.tabUnselectedColor))
                     .width(commonConst.EVALUATE_WIDTH)
-                  Text(item?.price).fontSize(commonConst.NORMAL_FONT_SIZE).fontColor($r('app.color.freshRed'))
+                  Text(item?.price).fontSize(commonConst.NORMAL_FONT_SIZE).fontColor(this.currentThemeColors.accentColor)
                 }
                 .justifyContent(FlexAlign.SpaceAround)
                 .width(commonConst.GOODS_LIST_WIDTH)

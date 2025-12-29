@@ -146,7 +146,7 @@ export default class CategoryPage extends ViewPU {
             Column.create();
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.height(LAYOUT_WIDTH_OR_HEIGHT);
-            Column.backgroundColor('#F5F5F5');
+            Column.backgroundColor(this.currentThemeColors.backgroundColor);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 一级分类 Tab（横向）
@@ -186,7 +186,7 @@ export default class CategoryPage extends ViewPU {
             // 切换左侧栏显示/隐藏按钮
             Text.fontSize(16);
             // 切换左侧栏显示/隐藏按钮
-            Text.fontColor('#666666');
+            Text.fontColor(this.currentThemeColors.secondaryTextColor);
             // 切换左侧栏显示/隐藏按钮
             Text.width(40);
             // 切换左侧栏显示/隐藏按钮
@@ -194,7 +194,7 @@ export default class CategoryPage extends ViewPU {
             // 切换左侧栏显示/隐藏按钮
             Text.textAlign(TextAlign.Center);
             // 切换左侧栏显示/隐藏按钮
-            Text.backgroundColor('#FFFFFF');
+            Text.backgroundColor(this.currentThemeColors.cardBackgroundColor);
             // 切换左侧栏显示/隐藏按钮
             Text.onClick(() => {
                 this.showSubCategory = !this.showSubCategory;
