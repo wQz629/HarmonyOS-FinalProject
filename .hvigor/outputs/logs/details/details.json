@@ -2,7 +2,7 @@
   "HVIGOR_OHOS_PLUGIN": {
     "MODULES": [
       {
-        "MODULE_NAME": "1043bfc77febe75fafec0c4309faccf1",
+        "MODULE_NAME": "923fe53966c6cd9343e11af776cd4b05be315ea4b200b02e4d5dfb0f929b73bf",
         "API_TYPE": "stageMode",
         "INCREMENTAL_TASKS": {
           "COMPILE_ARKTS": true
@@ -18,24 +18,24 @@
     "IS_PARALLEL": true,
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
-      "1043bfc77febe75fafec0c4309faccf1": {
-        "CreateModuleInfo": 148375,
-        "ConfigureCmake": 85875,
-        "PreCheckSyscap": 79042,
-        "GeneratePkgContextInfo": 511542,
-        "ProcessIntegratedHsp": 152750,
-        "BuildNativeWithCmake": 111000,
-        "SyscapTransform": 432500,
-        "ProcessStartupConfig": 257125,
-        "BuildNativeWithNinja": 475041,
-        "BuildJS": 641375,
-        "CompileArkTS": 502224125,
-        "ProcessCompiledResources": 201334,
-        "PackageHap": 52017458,
-        "PackingCheck": 2122250,
-        "SignHap": 310667,
-        "CollectDebugSymbol": 181667,
-        "assembleHap": 69875
+      "923fe53966c6cd9343e11af776cd4b05be315ea4b200b02e4d5dfb0f929b73bf": {
+        "CreateModuleInfo": 1010100,
+        "ConfigureCmake": 573700,
+        "PreCheckSyscap": 784800,
+        "GeneratePkgContextInfo": 6057300,
+        "ProcessIntegratedHsp": 1345700,
+        "BuildNativeWithCmake": 533300,
+        "SyscapTransform": 7287200,
+        "ProcessStartupConfig": 2207300,
+        "BuildNativeWithNinja": 1221800,
+        "BuildJS": 5254800,
+        "CompileArkTS": 1566661000,
+        "ProcessCompiledResources": 1596000,
+        "PackageHap": 60851900,
+        "PackingCheck": 6092300,
+        "SignHap": 2158700,
+        "CollectDebugSymbol": 1219500,
+        "assembleHap": 1195200
       }
     },
     "APIS": [
@@ -60,7 +60,7 @@
       "getStartParams"
     ],
     "CONFIG_PROPERTIES": {},
-    "TOTAL_TIME": 666001292,
-    "BUILD_ID": "202512291744475210"
+    "TOTAL_TIME": 2030223200,
+    "BUILD_ID": "202512300018386020"
   }
 }
