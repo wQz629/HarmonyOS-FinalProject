@@ -16,9 +16,11 @@
 import * as commonConst from '../common/CommonConstants';
 import { GoodsListItemType } from '../viewmodel/InitialData';
 import { ListDataSource } from '../viewmodel/ListDataSource';
+import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
 
 @Component
 export default struct GoodsList {
+  @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
   @Provide goodsListData: ListDataSource = new ListDataSource();
   private startTouchOffsetY: number = 0;
   private endTouchOffsetY: number = 0;
@@ -41,18 +43,19 @@ export default struct GoodsList {
               Column() {
                 Text(item?.goodsName)
                   .fontSize(commonConst.NORMAL_FONT_SIZE)
+                  .fontColor(this.currentThemeColors.primaryTextColor)
 
                 Text(item?.advertisingLanguage)
-                  .fontColor($r('app.color.gray'))
+                  .fontColor(this.currentThemeColors.primaryTextColor)
                   .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
                   .margin({ right: commonConst.MARGIN_RIGHT })
 
                 Row() {
                   Text(item?.evaluate)
                     .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                    .fontColor($r('app.color.deepGray'))
+                    .fontColor(this.currentThemeColors.accentColor)
                     .width(commonConst.EVALUATE_WIDTH)
-                  Text(item?.price).fontSize(commonConst.NORMAL_FONT_SIZE).fontColor($r('app.color.freshRed'))
+                  Text(item?.price).fontSize(commonConst.NORMAL_FONT_SIZE).fontColor(this.currentThemeColors.accentColor)
                 }
                 .justifyContent(FlexAlign.SpaceAround)
                 .width(commonConst.GOODS_LIST_WIDTH)
@@ -87,6 +90,10 @@ export default struct GoodsList {
         })
       }
       .width(commonConst.GOODS_LIST_WIDTH)
+      .divider({
+        strokeWidth: 1, // 分割线粗细，单位 vp
+        color: this.currentThemeColors.dividerColor, // 使用主题定义的分割线颜色
+      })
     }
     .justifyContent(FlexAlign.Center)
     .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
