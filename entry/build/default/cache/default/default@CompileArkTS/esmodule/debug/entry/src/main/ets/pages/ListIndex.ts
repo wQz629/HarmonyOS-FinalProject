@@ -68,6 +68,7 @@ class ListIndex extends ViewPU {
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor(this.currentThemeColors.primaryTextColor);
+            Text.margin({ top: 34 });
         }, Text);
         Text.pop();
         Row.pop();
@@ -102,7 +103,7 @@ class ListIndex extends ViewPU {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 68, col: 9 });
+                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 69, col: 9 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -125,7 +126,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 分类页面
-                                CategoryPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 74, col: 7 });
+                                CategoryPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 75, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -146,7 +147,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 购物车页面
-                                ShoppingCartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 77, col: 7 });
+                                ShoppingCartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 78, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -167,7 +168,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 个人中心页面
-                                PersonalPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 80, col: 7 });
+                                PersonalPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 81, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -213,7 +214,7 @@ class ListIndex extends ViewPU {
                 if (isInitialRender) {
                     let componentCall = new 
                     // 底部 Tab Bar
-                    BottomTabBar(this, { currentIndex: this.__currentTabIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 97, col: 7 });
+                    BottomTabBar(this, { currentIndex: this.__currentTabIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 98, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {

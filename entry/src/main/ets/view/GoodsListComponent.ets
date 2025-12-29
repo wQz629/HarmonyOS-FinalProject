@@ -17,6 +17,7 @@ import * as commonConst from '../common/CommonConstants';
 import { GoodsListItemType } from '../viewmodel/InitialData';
 import { ListDataSource } from '../viewmodel/ListDataSource';
 import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
+import router from '@ohos.router'; // 引入路由模块
 
 @Component
 export default struct GoodsList {
@@ -86,6 +87,18 @@ export default struct GoodsList {
                 }
                 break;
             }
+          })
+          .onClick(() => {
+            // 使用 router.pushUrl 跳转到详情页
+            router.pushUrl({
+              url: 'pages/GoodsDetailPage', // 目标页面的路径
+              params: {
+                goodsId: item.id, // 传递参数：将当前点击商品的 ID 传过去
+                goodsName: item.goodsName,
+                goodsPrice: item.price,
+                goodsImg: item.goodsImg
+              }
+            })
           })
         })
       }
