@@ -38,6 +38,7 @@ struct ListIndex {
         .fontSize(20)
         .fontWeight(FontWeight.Bold)
         .fontColor(this.currentThemeColors.primaryTextColor)
+        .margin({top:34})
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(NAV_BAR_HEIGHT)

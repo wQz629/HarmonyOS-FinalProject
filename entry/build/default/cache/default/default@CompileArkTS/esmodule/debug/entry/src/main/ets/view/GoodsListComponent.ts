@@ -12,6 +12,7 @@ import type { GoodsListItemType } from '../viewmodel/InitialData';
 import { ListDataSource } from "@bundle:com.example.list_harmony/entry/ets/viewmodel/ListDataSource";
 import { DEFAULT_THEME } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
 import type { ThemeColors } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
+import router from "@ohos:router";
 export default class GoodsList extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
@@ -102,6 +103,18 @@ export default class GoodsList extends ViewPU {
                                     }
                                     break;
                             }
+                        });
+                        ListItem.onClick(() => {
+                            // 使用 router.pushUrl 跳转到详情页
+                            router.pushUrl({
+                                url: 'pages/GoodsDetailPage',
+                                params: {
+                                    goodsId: item.id,
+                                    goodsName: item.goodsName,
+                                    goodsPrice: item.price,
+                                    goodsImg: item.goodsImg
+                                }
+                            });
                         });
                     };
                     const observedDeepRender = () => {
