@@ -99,5 +99,6 @@ struct ListIndex {
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(LAYOUT_WIDTH_OR_HEIGHT)
     .backgroundColor(this.currentThemeColors.backgroundColor) //$r('app.color.primaryBgColor')
+    .margin({top:34})
   }
 }

@@ -194,6 +194,7 @@ class ListIndex extends ViewPU {
             Column.width(LAYOUT_WIDTH_OR_HEIGHT);
             Column.height(LAYOUT_WIDTH_OR_HEIGHT);
             Column.backgroundColor(this.currentThemeColors.backgroundColor);
+            Column.margin({ top: 34 });
         }, Column);
         // 顶部导航栏
         this.NavigationTitle.bind(this)();
