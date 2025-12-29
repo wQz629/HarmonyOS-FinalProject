@@ -22,7 +22,7 @@ import router from '@ohos.router'; // 引入路由模块
 @Component
 export default struct GoodsList {
   @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
-  @Provide goodsListData: ListDataSource = new ListDataSource();
+  @Provide goodsListData: ListDataSource = ListDataSource.getInstance();
   @Prop layoutMode: 'list' | 'grid' = 'list'; // 添加布局模式属性
   private startTouchOffsetY: number = 0;
   private endTouchOffsetY: number = 0;

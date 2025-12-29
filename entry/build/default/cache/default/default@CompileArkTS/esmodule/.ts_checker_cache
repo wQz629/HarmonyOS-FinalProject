@@ -656,7 +656,9 @@
         "D:\\DevEcoStudio\\Project\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
         "D:\\DevEcoStudio\\Project\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
-        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PersonalPage.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PublishGoodsPage.ets"
       ],
       "error": false
     },
@@ -2140,7 +2142,8 @@
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\CategorySubComponent.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\ShoppingCartPage.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PersonalPage.ets",
-        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PublishGoodsPage.ets"
       ],
       "error": false
     },
@@ -2162,7 +2165,7 @@
       ]
     },
     "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets": {
-      "mtimeMs": 1767025140215.1816,
+      "mtimeMs": 1767027972618.6528,
       "children": [
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
@@ -2212,19 +2215,20 @@
       "error": false
     },
     "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PersonalPage.ets": {
-      "mtimeMs": 1767021016603.7522,
+      "mtimeMs": 1767030348184.23,
       "children": [
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.promptAction.d.ts",
-        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\Colors.ets"
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\Colors.ets",
+        "D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
       ],
       "parent": [
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\ListIndex.ets"
       ],
       "error": true,
       "errorCodes": [
-        28040,
-        28007
+        28007,
+        28040
       ]
     },
     "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets": {
@@ -2242,7 +2246,8 @@
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\CategorySubComponent.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\ShoppingCartPage.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PersonalPage.ets",
-        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets"
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\GoodsDetailPage.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PublishGoodsPage.ets"
       ],
       "error": false
     },
@@ -2261,17 +2266,18 @@
       "error": false
     },
     "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets": {
-      "mtimeMs": 1767021016608.747,
+      "mtimeMs": 1767031104520.9048,
       "children": [],
       "parent": [
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\TabBarsComponent.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
-        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets"
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PublishGoodsPage.ets"
       ],
       "error": false
     },
     "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets": {
-      "mtimeMs": 1767024262674.2947,
+      "mtimeMs": 1767031152827.2722,
       "children": [
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
@@ -2299,13 +2305,14 @@
       "error": false
     },
     "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets": {
-      "mtimeMs": 1766757158422.6558,
+      "mtimeMs": 1767031150599.2805,
       "children": [
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets"
       ],
       "parent": [
-        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets"
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\view\\GoodsListComponent.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PublishGoodsPage.ets"
       ],
       "error": false
     },
@@ -2337,6 +2344,21 @@
         "D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
         "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\Colors.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\pages\\PublishGoodsPage.ets": {
+      "mtimeMs": 1767031155157.6394,
+      "children": [
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\CommonConstants.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\InitialData.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\viewmodel\\ListDataSource.ets",
+        "E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets\\common\\Colors.ets",
+        "D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
       ],
       "parent": [],
       "error": true,

@@ -21,7 +21,7 @@ export default class GoodsList extends ViewPU {
             this.paramsGenerator_ = paramsLambda;
         }
         this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
-        this.__goodsListData = new ObservedPropertyObjectPU(new ListDataSource(), this, "goodsListData");
+        this.__goodsListData = new ObservedPropertyObjectPU(ListDataSource.getInstance(), this, "goodsListData");
         this.addProvidedVar("goodsListData", this.__goodsListData, false);
         this.__layoutMode = new SynchedPropertySimpleOneWayPU(params.layoutMode, this, "layoutMode");
         this.startTouchOffsetY = 0;

@@ -21,6 +21,7 @@ import {
 } from '../common/CommonConstants';
 import promptAction from '@ohos.promptAction';
 import { ThemeType, getThemeColors, ThemeColors, DEFAULT_THEME } from '../common/Colors';
+import router from '@ohos.router';
 
 interface MenuItem {
   id:number;
@@ -44,6 +45,7 @@ export default struct PersonalPage {
     { id:2, icon: $r('app.media.ic_history'), title: $r('app.string.browse_history'), showArrow: true },
     { id:3, icon: $r('app.media.ic_theme'), title: $r('app.string.theme_settings'), showArrow: true },
     { id:4, icon: $r('app.media.ic_compare'), title: $r('app.string.goods_compare'), showArrow: true },
+    { id:7, icon: $r('app.media.ic_order'), title: $r('app.string.publish_goods'), showArrow: true },
     { id:5, icon: $r('app.media.ic_clear'), title: $r('app.string.clear_cache'), showArrow: true },
     { id:6, icon: $r('app.media.ic_about'), title: $r('app.string.about_us'), showArrow: true }
   ];
@@ -170,6 +172,10 @@ export default struct PersonalPage {
       // 菜单项点击逻辑 根据id判断点击逻辑 update1.2
       if (item.id === 3) {
         this.showThemeDialog();
+      } else if (item.id === 7) {
+        router.pushUrl({
+          url: 'pages/PublishGoodsPage'
+        });
       } else {
         // 其他菜单项逻辑
         console.info('Clicked menu item:', item.id);

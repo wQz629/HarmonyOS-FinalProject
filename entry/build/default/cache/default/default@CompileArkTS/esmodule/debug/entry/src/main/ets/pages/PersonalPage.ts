@@ -12,6 +12,7 @@ import { LAYOUT_WIDTH_OR_HEIGHT, NORMAL_FONT_SIZE, BIGGER_FONT_SIZE, SMALL_FONT_
 import promptAction from "@ohos:promptAction";
 import { ThemeType, getThemeColors, DEFAULT_THEME } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
 import type { ThemeColors } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
+import router from "@ohos:router";
 interface MenuItem {
     id: number;
     icon: Resource;
@@ -33,6 +34,7 @@ export default class PersonalPage extends ViewPU {
             { id: 2, icon: { "id": 16777307, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777224, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
             { id: 3, icon: { "id": 16777314, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777285, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
             { id: 4, icon: { "id": 16777306, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777239, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
+            { id: 7, icon: { "id": 16777310, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777318, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
             { id: 5, icon: { "id": 16777305, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777228, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
             { id: 6, icon: { "id": 16777298, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777220, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true }
         ];
@@ -245,6 +247,11 @@ export default class PersonalPage extends ViewPU {
                 // 菜单项点击逻辑 根据id判断点击逻辑 update1.2
                 if (item.id === 3) {
                     this.showThemeDialog();
+                }
+                else if (item.id === 7) {
+                    router.pushUrl({
+                        url: 'pages/PublishGoodsPage'
+                    });
                 }
                 else {
                     // 其他菜单项逻辑
