@@ -55,48 +55,37 @@ export default struct GoodsList {
     }
   }
 
-  /**
-   * 【核心逻辑修改】加载更多数据
-   * 同时满足：1.数据加载完成 2.动画至少播放完一轮
-   */
   async loadMore() {
     // 防止重复触发
     if (this.isLoading) {
       return;
     }
     this.isLoading = true;
-
     const startTime = Date.now();
 
-    // 任务1: 最小动画时长的 Promise
+    // 任务1: 最小动画时长
     const animationTask = new Promise<void>((resolve) => {
       setTimeout(() => {
         resolve();
       }, this.ANIMATION_DURATION);
     });
 
-    // 任务2: 数据加载的 Promise
-    // 注意：目前的 loadNextPage 是同步的，为了演示效果我们把它包装一下。
-    // 如果以后 goodsListData 变成网络请求，这里天然就是异步的。
+    // 任务2: 数据加载
     const dataTask = new Promise<void>((resolve) => {
-      // 这里可以模拟网络延迟，例如 setTimeout 500ms
-      // 实际上这里是立即执行
+      // 模拟网络延迟，setTimeout 500ms
       resolve();
     });
 
-    // 等待 动画 和 数据准备 两个都完成
+    // 等待动画 和 数据准备 两个都完成
     await Promise.all([animationTask, dataTask]);
-
-    // 只有当两者都结束后，才真正往列表中塞入数据（刷新界面）并关闭 Loading
     this.goodsListData.loadNextPage();
     this.isLoading = false;
   }
 
-  // 【新增】底部加载指示器组件
   @Builder
   LoadingIndicator() {
     Row() {
-      Image($r('app.media.refreshing')) // 使用你指定的 GIF
+      Image($r('app.media.refreshing'))
         .width(30)
         .height(30)
         .margin({ right: 10 })
@@ -221,6 +210,7 @@ export default struct GoodsList {
                 .justifyContent(FlexAlign.SpaceBetween)
                 .height(commonConst.GOODS_LIST_HEIGHT)
                 .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+
               }
               .onClick(() => {
                 router.pushUrl({
@@ -235,7 +225,7 @@ export default struct GoodsList {
               })
             })
 
-            // 【List 特有】在列表末尾添加加载条 ListItem
+            // 在列表末尾添加加载条 ListItem
             if (this.isLoading) {
               ListItem() {
                 this.LoadingIndicator()
@@ -274,7 +264,7 @@ export default struct GoodsList {
             this.loadMore();
           })
 
-          // 【Grid 特有】由于 GridItem 难以做跨列 Footer，我们在 Grid 下方显示加载条
+          // 由于 GridItem 难以做跨列 Footer，我们在 Grid 下方显示加载条
           if (this.isLoading) {
             this.LoadingIndicator()
           }
