@@ -4,7 +4,6 @@
 
 # hvigor 构建缓存与输出
 .hvigor/
-hvigor/
 
 # ArkTS 预览与中间产物
 entry/.preview/
