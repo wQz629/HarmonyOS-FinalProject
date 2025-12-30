@@ -22,8 +22,9 @@ import {
   BUTTON_BORDER_RADIUS
 } from '../common/CommonConstants';
 import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
+import router from '@ohos.router';
 
-interface CartItem {
+export interface CartItem {
   id: number;
   name: Resource;
   price: string;
@@ -35,7 +36,7 @@ interface CartItem {
 @Component
 export default struct ShoppingCartPage {
   @StorageLink('isLoggedIn') isLoggedIn: boolean = false;
-  @State cartItems: CartItem[] = [
+  @StorageLink('cartItems') cartItems: CartItem[] = [
     {
       id: 1,
       name: $r('app.string.goodsName'),
@@ -57,34 +58,82 @@ export default struct ShoppingCartPage {
   @State totalPrice: number = 0;
   @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;//使用 @StorageLink 确保当 PersonalPage 改变主题时，这里会自动刷新
 
+  // 添加商品
+  // 此方法可以被外部调用（商品详情页）来向数组添加数据
+  addItem(item: CartItem) {
+    const index = this.cartItems.findIndex(i => i.id === item.id);
+    if (index > -1) {
+      // 如果商品已存在，增加数量
+      this.cartItems[index].quantity += 1;
+    } else {
+      // 如果不存在，添加新项
+      this.cartItems.push(item);
+    }
+    this.cartItems = [...this.cartItems]; // 触发 UI 刷新
+    this.isAllSelected = this.cartItems.every(i => i.selected);
+    this.calculateTotalPrice();
+  }
+
+  // 删除单个物品
+  deleteItem(id: number) {
+    this.cartItems = this.cartItems.filter(item => item.id !== id);
+    // 删除后重新判断全选状态
+    this.isAllSelected = this.cartItems.length > 0 ? this.cartItems.every(item => item.selected) : false;
+    this.calculateTotalPrice();
+  }
+
+  // 确保每次计算都是基于最新状态
   calculateTotalPrice() {
-    this.totalPrice = 0;
+    let total = 0;
     this.cartItems.forEach(item => {
       if (item.selected) {
-        const price = parseFloat(item.price.replace('¥', ''));
-        this.totalPrice += price * item.quantity;
+        // 移除所有非数字字符（保留小数点），确保解析准确
+        const priceNum = parseFloat(item.price.replace(/[^\d.]/g, ''));
+        if (!isNaN(priceNum)) {
+          total += priceNum * item.quantity;
+        }
       }
     });
+    this.totalPrice = total;
   }
 
-  toggleSelectAll() {
-    this.isAllSelected = !this.isAllSelected;
-    this.cartItems.forEach(item => {
-      item.selected = this.isAllSelected;
+  // 全选逻辑
+  toggleSelectAll(checked: boolean) {
+    // 如果当前逻辑状态已经和传入的 checked 一致，说明是单选触发的状态回流，直接拦截，不执行批量操作
+    if (this.isAllSelected === checked) {
+      return;
+    }
+
+    this.isAllSelected = checked;
+    this.cartItems = this.cartItems.map(item => {
+      item.selected = checked;
+      return item;
     });
     this.calculateTotalPrice();
   }
 
-  toggleItemSelect(index: number) {
-    this.cartItems[index].selected = !this.cartItems[index].selected;
-    this.isAllSelected = this.cartItems.every(item => item.selected);
+  // 单选逻辑：使用 Checkbox 传递的最新 value
+  toggleItemSelect(index: number, checked: boolean) {
+    // 先更新当前项状态
+    this.cartItems[index].selected = checked;
+
+    // 计算最新的全选状态
+    const newAllSelected = this.cartItems.every(item => item.selected);
+
+    // 更新全选状态（这可能会触发 BottomBar 中 Checkbox 的 onChange）
+    this.isAllSelected = newAllSelected;
+
+    // 强制刷新数组并计算价格
+    this.cartItems = [...this.cartItems];
     this.calculateTotalPrice();
   }
 
+  // 数量更新逻辑
   updateQuantity(index: number, delta: number) {
     const newQuantity = this.cartItems[index].quantity + delta;
     if (newQuantity >= 1 && newQuantity <= 99) {
       this.cartItems[index].quantity = newQuantity;
+      this.cartItems = [...this.cartItems]; // 触发更新
       this.calculateTotalPrice();
     }
   }
@@ -103,7 +152,7 @@ export default struct ShoppingCartPage {
         .select(item.selected)
         .selectedColor(this.currentThemeColors.accentColor)
         .onChange((value: boolean) => {
-          this.toggleItemSelect(index);
+          this.toggleItemSelect(index, value);
         })
 
       // 商品图片
@@ -126,35 +175,57 @@ export default struct ShoppingCartPage {
           .fontColor(this.currentThemeColors.accentColor)
           .fontWeight(FontWeight.Bold)
 
-        // 数量选择器
-        Row({ space: 8 }) {
-          Button('-')
-            .width(28)
-            .height(28)
-            .fontSize(NORMAL_FONT_SIZE)
-            .backgroundColor(item.quantity <= 1 ? this.currentThemeColors.tabUnselectedColor : this.currentThemeColors.accentColor)
-            .fontColor(item.quantity <= 1 ? this.currentThemeColors.secondaryTextColor : this.currentThemeColors.accentColor)
-            .enabled(item.quantity > 1)
-            .onClick(() => {
-              this.updateQuantity(index, -1);
-            })
+        // 数量选择器 + 删除按钮
+        Row() {
+          // 左侧数量调节
+          Row({ space: 8 }) {
+            Button() {Text('-')}
+              .width(28)
+              .height(28)
+              .fontSize(NORMAL_FONT_SIZE)
+              .backgroundColor(item.quantity <= 1 ? this.currentThemeColors.tabUnselectedColor : '#F1F3F5')
+              .fontColor(item.quantity <= 1 ? this.currentThemeColors.secondaryTextColor : this.currentThemeColors.primaryTextColor)
+              .enabled(item.quantity > 1)
+              .onClick(() => this.updateQuantity(index, -1))
 
-          Text(item.quantity.toString())
-            .fontSize(NORMAL_FONT_SIZE)
-            .fontColor(this.currentThemeColors.primaryTextColor)
-            .width(32)
-            .textAlign(TextAlign.Center)
+            Text(item.quantity.toString())
+              .fontSize(NORMAL_FONT_SIZE)
+              .fontColor(this.currentThemeColors.primaryTextColor)
+              .width(32)
+              .textAlign(TextAlign.Center)
 
-          Button('+')
-            .width(28)
-            .height(28)
-            .fontSize(NORMAL_FONT_SIZE)
-            .backgroundColor(this.currentThemeColors.accentColor)
-            .fontColor(this.currentThemeColors.primaryTextColor)
-            .onClick(() => {
-              this.updateQuantity(index, 1);
-            })
+            Button() {Text('+')}
+              .width(28)
+              .height(28)
+              .fontSize(NORMAL_FONT_SIZE)
+              .backgroundColor('#F1F3F5')
+              .fontColor(this.currentThemeColors.primaryTextColor)
+              .onClick(() => this.updateQuantity(index, 1))
+          }
+          .backgroundColor('#F1F3F5') // 给数量选择器加个浅色背景底色
+          .borderRadius(6)
+
+          Blank() // 自动撑开中间空白
+
+          // 删除按钮
+          Button() {
+            //
+            Text('删除')
+              .fontSize(20)
+              .fontColor(Color.Red)
+              .fontWeight(FontWeight.Bold)
+          }
+          .width(64)
+          .height(32)
+          .backgroundColor(Color.Transparent)
+          .border({ width: 1, color: '#FF4D4F' }) // 红色边框
+          .borderRadius(6)
+          .onClick(() => {
+            this.deleteItem(item.id);
+          })
         }
+        .width('100%') // 撑满父容器宽度
+        .alignItems(VerticalAlign.Center)
       }
       .alignItems(HorizontalAlign.Start)
       .layoutWeight(1)
@@ -169,14 +240,9 @@ export default struct ShoppingCartPage {
   @Builder
   EmptyCartBuilder() {
     Column({ space: 16 }) {
-      // Image($r('app.media.ic_empty_cart'))
-      //   .width(120)
-      //   .height(120)
-      // 空购物车图标
-      Circle()
+      Image($r('app.media.ic_cart_normal'))
         .width(120)
-        .height(120)
-        .fill('#E0E0E0')
+        .height(120) // 空购物车图标
 
       Text($r('app.string.empty_cart'))
         .fontSize(NORMAL_FONT_SIZE)
@@ -189,6 +255,11 @@ export default struct ShoppingCartPage {
         .height(BUTTON_HEIGHT)
         .borderRadius(BUTTON_BORDER_RADIUS)
         .width(200)
+        .onClick(() => {
+          router.replaceUrl({
+            url: 'pages/ListIndex'
+          });
+        })
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(LAYOUT_WIDTH_OR_HEIGHT)
@@ -203,8 +274,8 @@ export default struct ShoppingCartPage {
         Checkbox()
           .select(this.isAllSelected)
           .selectedColor(this.currentThemeColors.accentColor)
-          .onChange(() => {
-            this.toggleSelectAll();
+          .onChange((value: boolean) => {
+            this.toggleSelectAll(value);
           })
 
         Text($r('app.string.select_all'))
