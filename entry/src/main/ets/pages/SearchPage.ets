@@ -93,7 +93,7 @@ export default struct SearchPage {
 
                 Text(item)
                   .fontSize(NORMAL_FONT_SIZE)
-                  .fontColor('#666666')
+                  .fontColor(this.currentThemeColors.primaryTextColor)
                   .margin({ left: 12 })
                   .layoutWeight(1)
 
@@ -111,16 +111,16 @@ export default struct SearchPage {
             }
           })
         }
-        .divider({ strokeWidth: 1, color: '#F0F0F0' })
+        .divider({ strokeWidth: 1, color: this.currentThemeColors.dividerColor })
       } else {
         Text($r('app.string.no_search_history'))
           .fontSize(SMALL_FONT_SIZE)
-          .fontColor('#999999')
+          .fontColor(this.currentThemeColors.secondaryTextColor)
           .margin({ top: 24 })
       }
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
-    .backgroundColor('#FFFFFF')
+    .backgroundColor(this.currentThemeColors.backgroundColor)
     .margin({ top: 8 })
   }
 
@@ -131,7 +131,7 @@ export default struct SearchPage {
       Text($r('app.string.hot_search'))
         .fontSize(NORMAL_FONT_SIZE)
         .fontWeight(FontWeight.Bold)
-        .fontColor('#333333')
+        .fontColor(this.currentThemeColors.primaryTextColor)
         .width(LAYOUT_WIDTH_OR_HEIGHT)
         .padding({ left: 16, right: 16, top: 12, bottom: 12 })
 
@@ -140,9 +140,9 @@ export default struct SearchPage {
         ForEach(this.hotSearchList, (item: string) => {
           Text(item)
             .fontSize(SMALL_FONT_SIZE)
-            .fontColor('#666666')
+            .fontColor(this.currentThemeColors.secondaryTextColor)
             .padding({ left: 16, right: 16, top: 8, bottom: 8 })
-            .backgroundColor('#F5F5F5')
+            .backgroundColor(this.currentThemeColors.backgroundColor)
             .borderRadius(16)
             .margin({ right: 8, bottom: 8 })
             .onClick(() => {
@@ -155,7 +155,7 @@ export default struct SearchPage {
       .padding({ left: 16, right: 16, bottom: 16 })
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
-    .backgroundColor('#FFFFFF')
+    .backgroundColor(this.currentThemeColors.cardBackgroundColor)
     .margin({ top: 8 })
   }
 
@@ -166,21 +166,21 @@ export default struct SearchPage {
       Row() {
         Text($r('app.string.search_result_prefix'))
           .fontSize(SMALL_FONT_SIZE)
-          .fontColor('#666666')
+          .fontColor(this.currentThemeColors.secondaryTextColor)
 
         Text(this.searchResults.toString())
           .fontSize(SMALL_FONT_SIZE)
-          .fontColor('#FF4D4F')
+          .fontColor(this.currentThemeColors.accentColor)
           .fontWeight(FontWeight.Bold)
 
         Text($r('app.string.search_result_suffix'))
           .fontSize(SMALL_FONT_SIZE)
-          .fontColor('#666666')
+          .fontColor(this.currentThemeColors.secondaryTextColor)
       }
       .width(LAYOUT_WIDTH_OR_HEIGHT)
       .height(NAV_BAR_HEIGHT)
       .justifyContent(FlexAlign.Center)
-      .backgroundColor('#F5F5F5')
+      .backgroundColor(this.currentThemeColors.backgroundColor)
 
       // 搜索结果列表
       GoodsList()
@@ -206,7 +206,7 @@ export default struct SearchPage {
       .width(LAYOUT_WIDTH_OR_HEIGHT)
       .height(NAV_BAR_HEIGHT)
       .padding({ left: 8, right: 8 })
-      .backgroundColor('#FFFFFF')
+      .backgroundColor(this.currentThemeColors.cardBackgroundColor)
 
       // 内容区域
       if (this.isSearching) {
@@ -223,11 +223,11 @@ export default struct SearchPage {
         }
         .width(LAYOUT_WIDTH_OR_HEIGHT)
         .layoutWeight(1)
-        .backgroundColor('#F5F5F5')
+        .backgroundColor(this.currentThemeColors.cardBackgroundColor)
       }
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(LAYOUT_WIDTH_OR_HEIGHT)
-    .backgroundColor('#F5F5F5')
+    .backgroundColor(this.currentThemeColors.cardBackgroundColor)
   }
 }
