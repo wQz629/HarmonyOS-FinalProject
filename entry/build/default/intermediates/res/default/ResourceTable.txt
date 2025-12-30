@@ -89,6 +89,8 @@ media ic_category_normal 0x01000057
 media ic_category_selected 0x01000058
 media ic_clear 0x01000059
 media ic_compare 0x0100005a
+media ic_compare_selected 0x01000066
+media ic_compare_unselected 0x01000067
 media ic_history 0x0100005b
 media ic_home_normal 0x0100005c
 media ic_home_selected 0x0100005d
