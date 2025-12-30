@@ -3,7 +3,10 @@
     "MODULES": [
       {
         "MODULE_NAME": "923fe53966c6cd9343e11af776cd4b05be315ea4b200b02e4d5dfb0f929b73bf",
-        "API_TYPE": "stageMode"
+        "API_TYPE": "stageMode",
+        "INCREMENTAL_TASKS": {
+          "COMPILE_ARKTS": true
+        }
       }
     ],
     "NATIVE_COMPILER": "Default",
@@ -16,21 +19,23 @@
     "IS_HVIGORFILE_TYPE_CHECK": false,
     "TASK_TIME": {
       "923fe53966c6cd9343e11af776cd4b05be315ea4b200b02e4d5dfb0f929b73bf": {
-        "CreateModuleInfo": 2490700,
-        "ConfigureCmake": 2734400,
-        "PreCheckSyscap": 1024900,
-        "GeneratePkgContextInfo": 8060200,
-        "ProcessIntegratedHsp": 2150100,
-        "BuildNativeWithCmake": 1274100,
-        "SyscapTransform": 13512300,
-        "ProcessStartupConfig": 3110000,
-        "BuildNativeWithNinja": 1270800,
-        "BuildJS": 6664400,
-        "ProcessCompiledResources": 3106000,
-        "PackingCheck": 15672400,
-        "SignHap": 5609600,
-        "CollectDebugSymbol": 6109300,
-        "assembleHap": 813500
+        "CreateModuleInfo": 1081200,
+        "ConfigureCmake": 497200,
+        "PreCheckSyscap": 863200,
+        "GeneratePkgContextInfo": 5980300,
+        "ProcessIntegratedHsp": 1047200,
+        "BuildNativeWithCmake": 870000,
+        "SyscapTransform": 7761600,
+        "ProcessStartupConfig": 1778200,
+        "BuildNativeWithNinja": 1537400,
+        "BuildJS": 4305900,
+        "CompileArkTS": 1409635100,
+        "ProcessCompiledResources": 1010400,
+        "PackageHap": 75737000,
+        "PackingCheck": 3509600,
+        "SignHap": 1250900,
+        "CollectDebugSymbol": 767700,
+        "assembleHap": 163700
       }
     },
     "APIS": [
@@ -51,10 +56,11 @@
       "getProductName",
       "nodesEvaluated",
       "getParameter",
-      "getCommandEntryTask"
+      "getCommandEntryTask",
+      "getStartParams"
     ],
     "CONFIG_PROPERTIES": {},
-    "TOTAL_TIME": 649855700,
-    "BUILD_ID": "202512300201113010"
+    "TOTAL_TIME": 1857045100,
+    "BUILD_ID": "202512301347024720"
   }
 }
