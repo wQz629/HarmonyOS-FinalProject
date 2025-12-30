@@ -139,8 +139,7 @@ export default struct PublishGoodsPage {
             router.back();
           })
       }
-      .width(LAYOUT_WIDTH_OR_HEIGHT)
-      .padding(16)
+      .margin({ left: 16, right: 16, bottom: 16 })
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT)
     .height(LAYOUT_WIDTH_OR_HEIGHT)
