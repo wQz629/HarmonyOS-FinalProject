@@ -34,6 +34,7 @@ interface CartItem {
 
 @Component
 export default struct ShoppingCartPage {
+  @StorageLink('isLoggedIn') isLoggedIn: boolean = false;
   @State cartItems: CartItem[] = [
     {
       id: 1,
@@ -248,28 +249,47 @@ export default struct ShoppingCartPage {
   }
 
   build() {
-    Column() {
-      if (this.cartItems.length === 0) {
-        this.EmptyCartBuilder()
-      } else {
-        // 购物车列表
-        List({ space: 8 }) {
-          ForEach(this.cartItems, (item: CartItem, index?: number) => {
-            ListItem() {
-              this.CartItemBuilder(item, index !== undefined ? index : 0)
-            }
-          })
-        }
-        .layoutWeight(1)
-        .padding(8)
-        .backgroundColor(this.currentThemeColors.backgroundColor)
+    if (!this.isLoggedIn) {
+      // 未登录时显示登录提示
+      Column() {
+        Text('请先登录')
+          .fontSize(18)
+          .fontColor(this.currentThemeColors.primaryTextColor)
+          .fontWeight(FontWeight.Bold)
+          .margin({ bottom: 16 })
 
-        // 底部操作栏
-        this.BottomBar()
+        Text('登录后可以查看和管理您的购物车')
+          .fontSize(14)
+          .fontColor(this.currentThemeColors.secondaryTextColor)
       }
+      .width(LAYOUT_WIDTH_OR_HEIGHT)
+      .height(LAYOUT_WIDTH_OR_HEIGHT)
+      .justifyContent(FlexAlign.Center)
+      .backgroundColor(this.currentThemeColors.backgroundColor)
+    } else {
+      Column() {
+        if (this.cartItems.length === 0) {
+          this.EmptyCartBuilder()
+        } else {
+          // 购物车列表
+          List({ space: 8 }) {
+            ForEach(this.cartItems, (item: CartItem, index?: number) => {
+              ListItem() {
+                this.CartItemBuilder(item, index !== undefined ? index : 0)
+              }
+            })
+          }
+          .layoutWeight(1)
+          .padding(8)
+          .backgroundColor(this.currentThemeColors.backgroundColor)
+
+          // 底部操作栏
+          this.BottomBar()
+        }
+      }
+      .width(LAYOUT_WIDTH_OR_HEIGHT)
+      .height(LAYOUT_WIDTH_OR_HEIGHT)
+      .backgroundColor(this.currentThemeColors.backgroundColor)
     }
-    .width(LAYOUT_WIDTH_OR_HEIGHT)
-    .height(LAYOUT_WIDTH_OR_HEIGHT)
-    .backgroundColor(this.currentThemeColors.backgroundColor)
   }
 }
