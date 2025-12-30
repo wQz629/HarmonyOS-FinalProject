@@ -1,4 +1,4 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ&/if (!("finalizeConstruction" in ViewPU.prototype)) {
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ3»if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 /*
@@ -19,12 +19,14 @@ import * as commonConst from '../common/CommonConstants';
 import { ListDataSource } from '../viewmodel/ListDataSource';
 import { DEFAULT_THEME } from '../common/Colors';
 import router from '@ohos.router'; // å¼•å…¥è·¯ç”±æ¨¡å—
+import promptAction from '@ohos.promptAction';
 export default class GoodsList extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
+        this.__compareList = this.createStorageLink('compareList', [], "compareList");
         this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
         this.__goodsListData = new ObservedPropertyObjectPU(new ListDataSource(), this, "goodsListData");
         this.addProvidedVar("goodsListData", this.__goodsListData, false);
@@ -47,14 +49,22 @@ export default class GoodsList extends ViewPU {
     updateStateVars(params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__compareList.purgeDependencyOnElmtId(rmElmtId);
         this.__currentThemeColors.purgeDependencyOnElmtId(rmElmtId);
         this.__goodsListData.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
+        this.__compareList.aboutToBeDeleted();
         this.__currentThemeColors.aboutToBeDeleted();
         this.__goodsListData.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
+    }
+    get compareList() {
+        return this.__compareList.get();
+    }
+    set compareList(newValue) {
+        this.__compareList.set(newValue);
     }
     get currentThemeColors() {
         return this.__currentThemeColors.get();
@@ -68,7 +78,33 @@ export default class GoodsList extends ViewPU {
     set goodsListData(newValue) {
         this.__goodsListData.set(newValue);
     }
+    // åˆ¤æ–­å•†å“æ˜¯å¦å·²åœ¨å¯¹æ¯”åˆ—è¡¨ä¸­
+    isInCompareList(item) {
+        return this.compareList.some(compareItem => compareItem.id === item.id);
+    }
+    // å¤„ç†å¯¹æ¯”ç‚¹å‡»
+    handleCompare(item) {
+        if (this.isInCompareList(item)) {
+            // å¦‚æœå·²å­˜åœ¨ï¼Œåˆ™ç§»é™¤
+            this.compareList = this.compareList.filter(compareItem => compareItem.id !== item.id);
+        }
+        else {
+            // å¦‚æœä¸å­˜åœ¨ï¼Œåˆ¤æ–­æ˜¯å¦è¶…è¿‡é™åˆ¶ (æ¯”å¦‚æœ€å¤š2ä¸ª)
+            if (this.compareList.length >= 2) {
+                promptAction.showToast({ message: 'æœ€å¤šåŒæ—¶å¯¹æ¯”ä¸¤ä¸ªå•†å“' });
+                return;
+            }
+            // åŠ å…¥å¯¹æ¯”
+            this.compareList.push(item);
+            promptAction.showToast({ message: 'å·²åŠ å…¥å¯¹æ¯”' });
+        }
+    }
     initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create({ alignContent: Alignment.BottomEnd });
+            Stack.width('100%');
+            Stack.height('100%');
+        }, Stack);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
             Row.justifyContent(FlexAlign.Center);
@@ -77,10 +113,7 @@ export default class GoodsList extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             List.create({ space: commonConst.LIST_ITEM_SPACE });
             List.width(commonConst.GOODS_LIST_WIDTH);
-            List.divider({
-                strokeWidth: 1,
-                color: this.currentThemeColors.dividerColor, // ä½¿ç”¨ä¸»é¢˜å®šä¹‰çš„åˆ†å‰²çº¿é¢œè‰²
-            });
+            List.divider({ strokeWidth: 1, color: this.currentThemeColors.dividerColor });
         }, List);
         {
             const __lazyForEachItemGenFunction = _item => {
@@ -88,26 +121,7 @@ export default class GoodsList extends ViewPU {
                 {
                     const itemCreation2 = (elmtId, isInitialRender) => {
                         ListItem.create(() => { }, false);
-                        ListItem.onTouch((event) => {
-                            if (event === undefined) {
-                                return;
-                            }
-                            switch (event.type) {
-                                case TouchType.Down:
-                                    this.startTouchOffsetY = event.touches[0].y;
-                                    break;
-                                case TouchType.Up:
-                                    this.startTouchOffsetY = event.touches[0].y;
-                                    break;
-                                case TouchType.Move:
-                                    if (this.startTouchOffsetY - this.endTouchOffsetY > 0) {
-                                        this.goodsListData.pushData();
-                                    }
-                                    break;
-                            }
-                        });
                         ListItem.onClick(() => {
-                            // ä½¿ç”¨ router.pushUrl è·³è½¬åˆ°è¯¦æƒ…é¡µ
                             router.pushUrl({
                                 url: 'pages/GoodsDetailPage',
                                 params: {
@@ -128,8 +142,11 @@ export default class GoodsList extends ViewPU {
                             Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
                         }, Row);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            // ... åŸæœ‰çš„å›¾ç‰‡ Column ...
                             Column.create();
+                            // ... åŸæœ‰çš„å›¾ç‰‡ Column ...
                             Column.width(commonConst.GOODS_IMAGE_WIDTH);
+                            // ... åŸæœ‰çš„å›¾ç‰‡ Column ...
                             Column.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
                         }, Column);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -138,6 +155,7 @@ export default class GoodsList extends ViewPU {
                             Image.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
                             Image.draggable(false);
                         }, Image);
+                        // ... åŸæœ‰çš„å›¾ç‰‡ Column ...
                         Column.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Column.create();
@@ -161,14 +179,19 @@ export default class GoodsList extends ViewPU {
                         Text.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Row.create();
-                            Row.justifyContent(FlexAlign.SpaceAround);
-                            Row.width(commonConst.GOODS_LIST_WIDTH);
+                            Row.justifyContent(FlexAlign.SpaceBetween);
+                            Row.width('100%');
                         }, Row);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            // ä»·æ ¼å’Œè¯„ä»·
+                            Column.create();
+                            // ä»·æ ¼å’Œè¯„ä»·
+                            Column.alignItems(HorizontalAlign.Start);
+                        }, Column);
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             Text.create(item?.evaluate);
                             Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
                             Text.fontColor(this.currentThemeColors.accentColor);
-                            Text.width(commonConst.EVALUATE_WIDTH);
                         }, Text);
                         Text.pop();
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -177,6 +200,24 @@ export default class GoodsList extends ViewPU {
                             Text.fontColor(this.currentThemeColors.accentColor);
                         }, Text);
                         Text.pop();
+                        // ä»·æ ¼å’Œè¯„ä»·
+                        Column.pop();
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            // ğŸ‘‡ 2. æ–°å¢ï¼šå¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                            Image.create(this.isInCompareList(item) ? { "id": 16777318, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777319, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                            // ğŸ‘‡ 2. æ–°å¢ï¼šå¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                            Image.width(24);
+                            // ğŸ‘‡ 2. æ–°å¢ï¼šå¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                            Image.height(24);
+                            Gesture.create(GesturePriority.Low);
+                            TapGesture.create();
+                            TapGesture.onAction(() => {
+                                // TapGesture é»˜è®¤ä¼šæ¶ˆè´¹äº‹ä»¶ï¼Œé€šå¸¸ä¸ä¼šå†’æ³¡ç»™çˆ¶ç»„ä»¶çš„ onClick
+                                this.handleCompare(item);
+                            });
+                            TapGesture.pop();
+                            Gesture.pop();
+                        }, Image);
                         Row.pop();
                         Column.pop();
                         Row.pop();
@@ -190,12 +231,40 @@ export default class GoodsList extends ViewPU {
         }
         List.pop();
         Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // ğŸ‘‡ 3. æ–°å¢ï¼šè¿›å…¥å¯¹æ¯”é¡µé¢çš„æ‚¬æµ®å…¥å£
+            if (this.compareList.length > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithLabel(`å¼€å§‹å¯¹æ¯” (${this.compareList.length})`);
+                        Button.backgroundColor(this.currentThemeColors.accentColor);
+                        Button.fontColor(Color.White);
+                        Button.margin({ bottom: 80, right: 20 });
+                        Button.onClick(() => {
+                            if (this.compareList.length < 2) {
+                                promptAction.showToast({ message: 'è¯·è‡³å°‘é€‰æ‹©ä¸¤ä¸ªå•†å“è¿›è¡Œå¯¹æ¯”' });
+                                return;
+                            }
+                            router.pushUrl({ url: 'pages/ComparisonPage' });
+                        });
+                    }, Button);
+                    Button.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Stack.pop();
     }
     rerender() {
         this.updateDirtyElements();
     }
 }
-//# sourceMappingURL=GoodsListComponent.js.mapÂ”ÙV/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.etsÙX/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.etsÙM/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.etsÙi hvigor_ignore__Applications_DevEco-Studio.app_Contents_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙW/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.etsÔrBœªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ./Users/changchen/working_place/cybermall/entryÙ(/Users/changchen/working_place/cybermall¥entry¥1.0.0Ô  ’ÔrC’²hostDependencyName®hostModuleName´./GoodsListComponent¥entryCº../view/GoodsListComponent¥entryÙ./Users/changchen/working_place/cybermall/entryÔrDÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFile³createIntrinsicTypeÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚˆ/*
+//# sourceMappingURL=GoodsListComponent.js.mapÂ•ÙV/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.etsÙX/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.etsÙM/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.etsÙi hvigor_ignore__Applications_DevEco-Studio.app_Contents_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙo hvigor_ignore__Applications_DevEco-Studio.app_Contents_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙW/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.etsÔrBœªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ./Users/changchen/working_place/cybermall/entryÙ(/Users/changchen/working_place/cybermall¥entry¥1.0.0Ô  ’ÔrC’²hostDependencyName®hostModuleName´./GoodsListComponent¥entryCº../view/GoodsListComponent¥entryÙ./Users/changchen/working_place/cybermall/entryÔrDÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFile³createIntrinsicTypeÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ®/*
  * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License,Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -215,108 +284,149 @@ import { GoodsListItemType } from '../viewmodel/InitialData';
 import { ListDataSource } from '../viewmodel/ListDataSource';
 import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
 import router from '@ohos.router'; // å¼•å…¥è·¯ç”±æ¨¡å—
+import promptAction from '@ohos.promptAction';
 
 @Component
 export default struct GoodsList {
+  // ğŸ‘‡ 1. é“¾æ¥å…¨å±€å¯¹æ¯”åˆ—è¡¨ï¼Œåˆå§‹åŒ–ä¸ºç©ºæ•°ç»„
+  @StorageLink('compareList') compareList: GoodsListItemType[] = [];
   @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
+
   @Provide goodsListData: ListDataSource = new ListDataSource();
   private startTouchOffsetY: number = 0;
   private endTouchOffsetY: number = 0;
 
+  // åˆ¤æ–­å•†å“æ˜¯å¦å·²åœ¨å¯¹æ¯”åˆ—è¡¨ä¸­
+  isInCompareList(item: GoodsListItemType): boolean {
+    return this.compareList.some(compareItem => compareItem.id === item.id);
+  }
+
+  // å¤„ç†å¯¹æ¯”ç‚¹å‡»
+  handleCompare(item: GoodsListItemType) {
+    if (this.isInCompareList(item)) {
+      // å¦‚æœå·²å­˜åœ¨ï¼Œåˆ™ç§»é™¤
+      this.compareList = this.compareList.filter(compareItem => compareItem.id !== item.id);
+    } else {
+      // å¦‚æœä¸å­˜åœ¨ï¼Œåˆ¤æ–­æ˜¯å¦è¶…è¿‡é™åˆ¶ (æ¯”å¦‚æœ€å¤š2ä¸ª)
+      if (this.compareList.length >= 2) {
+        promptAction.showToast({ message: 'æœ€å¤šåŒæ—¶å¯¹æ¯”ä¸¤ä¸ªå•†å“' });
+        return;
+      }
+      // åŠ å…¥å¯¹æ¯”
+      this.compareList.push(item);
+      promptAction.showToast({ message: 'å·²åŠ å…¥å¯¹æ¯”' });
+    }
+  }
+
+
   build() {
-    Row() {
-      List({ space: commonConst.LIST_ITEM_SPACE }) {
-        LazyForEach(this.goodsListData, (item: GoodsListItemType) => {
-          ListItem() {
-            Row() {
-              Column() {
-                Image(item?.goodsImg)
-                  .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-                  .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-                  .draggable(false)
-              }
-              .width(commonConst.GOODS_IMAGE_WIDTH)
-              .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+    Stack({ alignContent: Alignment.BottomEnd }) { // ä½¿ç”¨ Stack ä»¥ä¾¿æ”¾ç½®æ‚¬æµ®æŒ‰é’®
+      Row() {
+        List({ space: commonConst.LIST_ITEM_SPACE }) {
+          LazyForEach(this.goodsListData, (item: GoodsListItemType) => {
+            ListItem() {
+              Row() {
+                // ... åŸæœ‰çš„å›¾ç‰‡ Column ...
+                Column() {
+                  Image(item?.goodsImg)
+                    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+                    .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+                    .draggable(false)
+                }
+                .width(commonConst.GOODS_IMAGE_WIDTH)
+                .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
 
-              Column() {
-                Text(item?.goodsName)
-                  .fontSize(commonConst.NORMAL_FONT_SIZE)
-                  .fontColor(this.currentThemeColors.primaryTextColor)
+                Column() {
+                  Text(item?.goodsName)
+                    .fontSize(commonConst.NORMAL_FONT_SIZE)
+                    .fontColor(this.currentThemeColors.primaryTextColor)
 
-                Text(item?.advertisingLanguage)
-                  .fontColor(this.currentThemeColors.primaryTextColor)
-                  .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                  .margin({ right: commonConst.MARGIN_RIGHT })
-
-                Row() {
-                  Text(item?.evaluate)
+                  Text(item?.advertisingLanguage)
+                    .fontColor(this.currentThemeColors.primaryTextColor)
                     .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                    .fontColor(this.currentThemeColors.accentColor)
-                    .width(commonConst.EVALUATE_WIDTH)
-                  Text(item?.price).fontSize(commonConst.NORMAL_FONT_SIZE).fontColor(this.currentThemeColors.accentColor)
+                    .margin({ right: commonConst.MARGIN_RIGHT })
+
+                  Row() {
+                    // ä»·æ ¼å’Œè¯„ä»·
+                    Column() {
+                      Text(item?.evaluate)
+                        .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
+                        .fontColor(this.currentThemeColors.accentColor)
+                      Text(item?.price)
+                        .fontSize(commonConst.NORMAL_FONT_SIZE)
+                        .fontColor(this.currentThemeColors.accentColor)
+                    }
+                    .alignItems(HorizontalAlign.Start)
+
+                    // ğŸ‘‡ 2. æ–°å¢ï¼šå¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                    Image(this.isInCompareList(item) ? $r('app.media.ic_compare_selected') : $r('app.media.ic_compare_unselected')) // ç¡®ä¿ä½ æœ‰è¿™ä¸ªå›¾æ ‡ï¼Œæˆ–è€…ç”¨å…¶ä»–å›¾æ ‡ä»£æ›¿
+                      .width(24)
+                      .height(24)
+                      .gesture(
+                        TapGesture()
+                          .onAction(() => {
+                            // TapGesture é»˜è®¤ä¼šæ¶ˆè´¹äº‹ä»¶ï¼Œé€šå¸¸ä¸ä¼šå†’æ³¡ç»™çˆ¶ç»„ä»¶çš„ onClick
+                            this.handleCompare(item);
+                          })
+                      )
+                  }
+                  .justifyContent(FlexAlign.SpaceBetween) // æ”¹ä¸ºä¸¤ç«¯å¯¹é½
+                  .width('100%') // å æ»¡å®½åº¦
                 }
-                .justifyContent(FlexAlign.SpaceAround)
-                .width(commonConst.GOODS_LIST_WIDTH)
+                .padding(commonConst.GOODS_LIST_PADDING)
+                .width(commonConst.GOODS_FONT_WIDTH)
+                .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+                .justifyContent(FlexAlign.SpaceBetween)
               }
-              .padding(commonConst.GOODS_LIST_PADDING)
-              .width(commonConst.GOODS_FONT_WIDTH)
-              .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
               .justifyContent(FlexAlign.SpaceBetween)
+              .height(commonConst.GOODS_LIST_HEIGHT)
+              .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
             }
-            .justifyContent(FlexAlign.SpaceBetween)
-            .height(commonConst.GOODS_LIST_HEIGHT)
-            .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-          }
-          .onTouch((event?: TouchEvent) => {
-            if (event === undefined) {
-              return;
-            }
-            switch (event.type) {
-              case TouchType.Down:
-                this.startTouchOffsetY = event.touches[0].y;
-                break;
-              case TouchType.Up:
-                this.startTouchOffsetY = event.touches[0].y;
-                break;
-              case TouchType.Move:
-                if (this.startTouchOffsetY - this.endTouchOffsetY > 0) {
-                  this.goodsListData.pushData();
+            .onClick(() => {
+              router.pushUrl({
+                url: 'pages/GoodsDetailPage',
+                params: {
+                  goodsId: item.id,
+                  goodsName: item.goodsName,
+                  goodsPrice: item.price,
+                  goodsImg: item.goodsImg
                 }
-                break;
-            }
-          })
-          .onClick(() => {
-            // ä½¿ç”¨ router.pushUrl è·³è½¬åˆ°è¯¦æƒ…é¡µ
-            router.pushUrl({
-              url: 'pages/GoodsDetailPage', // ç›®æ ‡é¡µé¢çš„è·¯å¾„
-              params: {
-                goodsId: item.id, // ä¼ é€’å‚æ•°ï¼šå°†å½“å‰ç‚¹å‡»å•†å“çš„ ID ä¼ è¿‡å»
-                goodsName: item.goodsName,
-                goodsPrice: item.price,
-                goodsImg: item.goodsImg
-              }
+              })
             })
           })
-        })
+        }
+        .width(commonConst.GOODS_LIST_WIDTH)
+        .divider({ strokeWidth: 1, color: this.currentThemeColors.dividerColor })
       }
-      .width(commonConst.GOODS_LIST_WIDTH)
-      .divider({
-        strokeWidth: 1, // åˆ†å‰²çº¿ç²—ç»†ï¼Œå•ä½ vp
-        color: this.currentThemeColors.dividerColor, // ä½¿ç”¨ä¸»é¢˜å®šä¹‰çš„åˆ†å‰²çº¿é¢œè‰²
-      })
+      .justifyContent(FlexAlign.Center)
+      .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+
+      // ğŸ‘‡ 3. æ–°å¢ï¼šè¿›å…¥å¯¹æ¯”é¡µé¢çš„æ‚¬æµ®å…¥å£
+      if (this.compareList.length > 0) {
+        Button(`å¼€å§‹å¯¹æ¯” (${this.compareList.length})`)
+          .backgroundColor(this.currentThemeColors.accentColor)
+          .fontColor(Color.White)
+          .margin({ bottom: 80, right: 20 }) // è°ƒæ•´ä½ç½®
+          .onClick(() => {
+            if (this.compareList.length < 2) {
+              promptAction.showToast({ message: 'è¯·è‡³å°‘é€‰æ‹©ä¸¤ä¸ªå•†å“è¿›è¡Œå¯¹æ¯”' });
+              return;
+            }
+            router.pushUrl({ url: 'pages/ComparisonPage' });
+          })
+      }
     }
-    .justifyContent(FlexAlign.Center)
-    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+    .width('100%')
+    .height('100%')
   }
-}ÀÔrE”¬@ohos.router¹../common/CommonConstants°../common/Colors»../viewmodel/ListDataSourceÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙi hvigor_ignore__Applications_DevEco-Studio.app_Contents_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂFAÂÙV/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.etsAÃªoh-resolveÂFAÂÙM/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.etsAÃªoh-resolveÂFAÂÙX/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappingsµGoodsListComponent.js ‘¶GoodsListComponent.etsÜ Á‘”    ‘” —”   ” ” ” ” ”8 8”9 9˜”   ” ”	 	” ” ” ”< <”= =˜”   ” ”	 ” #” %” +”0 =”1 >˜”   ” ” ” ”! !”" "”# #”, ,–”   ” ” ” ” ” ‘”  ””; ”ÌH ”ÌJ Ì@”ÌW ÌM””< +”Ì@ /”ÌN =”ÌP ?’”! &”" '’” $”  %‘” "’” ” 0’” ” 0’” ” ’” ” ‘” ’” ” ˜” ” ” Ìn” Ìn” Ìn”( Ìn”) Ìn”/ Ìn$˜” ” ” Ìo” Ìo
-” Ìo”! Ìo”" Ìo”8 Ìo-š” ” 
-” ” ” ”! ”, ”-  ”< /”> 1˜” ” 
-” Ìh” Ìh” Ìh”" Ìh”# Ìh”3 Ìh)•” ” 
-” Ìi” Ìi” Ìi”” Ìj” Ìj” Ìj” Ìjš” Ìk” Ìk” Ìk” Ìk” Ìk”. Ìk&”/ Ìk'”; Ìk3”= Ìk5”ÌL ÌkÌD‘” Ìl™”  
-”   ”! ÌH”( ÌH”) ÌH”* ÌH”/ ÌH&”1 ÌH(”3 ÌH*–” ÌI”  ÌI”% ÌI”* ÌI”3 ÌI#”5 ÌI%’”  ÌJ”' ÌJ‘” ÌK–” ÌL”$ ÌL”) ÌL”* ÌL”. ÌL”0 ÌL •”  ÌM”% ÌM”. ÌM”/ ÌM”3 ÌM!”$ ÌN”( ÌN”) ÌN”: ÌN&”= ÌN)”ÌB ÌN.”ÌC ÌN/”ÌJ ÌN6”ÌK ÌN7”ÌL ÌN8”ÌM ÌN9”ÌN ÌN:”ÌO ÌN;”ÌP ÌN<’”$ ÌO”* ÌO•”  ÌP”% ÌP”. ÌP”/ ÌP”1 ÌP”$ ÌQ”( ÌQ”) ÌQ”: ÌQ&”= ÌQ)”ÌB ÌQ.”ÌC ÌQ/”ÌJ ÌQ6”ÌK ÌQ7”ÌL ÌQ8”ÌM ÌQ9”ÌN ÌQ:”ÌO ÌQ;”ÌP ÌQ<’”$ ÌR”* ÌR•”  ÌS”% ÌS”. ÌS”/ ÌS”3 ÌS!œ”$ ÌT”( ÌT”, ÌT”- ÌT”> ÌT*”ÌA ÌT-”ÌE ÌT1”ÌF ÌT2”ÌU ÌTÌA”ÌX ÌTÌD”ÌY ÌTÌE”Ì[ ÌTÌG˜”( ÌU”, ÌU”- ÌU”: ÌU$”; ÌU%”ÌC ÌU-”ÌE ÌU/”ÌF ÌU0‘”% ÌV’”$ ÌW”* ÌW‘” ÌX’” ÌY
-” ÌY—”  
-”   ”! ÌZ”( ÌZ”) ÌZ”, ÌZ”. ÌZ’” Ì[”7 Ì['•” Ì\”" Ì\”# Ì\”* Ì\”+ Ì\””  Ì]”# Ì]”% Ì]”< Ì]*“”  Ì^”& Ì^”( Ì^–”$ Ì_”+ Ì_”- Ì_”1 Ì_”2 Ì_”4 Ì_ –”$ Ì`”- Ì`”/ Ì`”3 Ì`”4 Ì` ”= Ì`)–”$ Ìa”. Ìa”0 Ìa”4 Ìa ”5 Ìa!”: Ìa&–”$ Ìb”, Ìb”. Ìb”2 Ìb”3 Ìb”; Ìb'‘”! Ìc“” Ìd” Ìd” Ìd’” Ìe
-” Ìe’” !” !˜” !” !”  ÌD”. ÌD”/ ÌD”8 ÌD%”9 ÌD&”ÌE ÌD2˜” !” !”  ÌE”& ÌE”' ÌE”2 ÌE”3 ÌE ”ÌD ÌE1˜” !” !”  ÌF”% ÌF”& ÌF”1 ÌF”2 ÌF”ÌH ÌF5’” "”" "˜” "”" "”# (”( (”) (”4 ( ”5 (!”ÌF (2˜” "”" "”# )”) )”* )”5 )!”6 )"”ÌL )8–” #”! #”) #”- #”/ #”7 #$˜” #”! #”" $”' $”( $”3 $$”4 $%”ÌJ $;˜” #”! #”" %”( %”) %”4 %%”5 %&”ÌK %<–” #”! #”" &”+ &”, &”1 &"’” "” "’” +”" +˜” +”" +”# ?”* ?”+ ?”6 ?"”7 ?#”ÌI ?5˜” +”" +”# Ì@”( Ì@”) Ì@”4 Ì@ ”5 Ì@!”ÌE Ì@1˜” +”" +”# ÌA”) ÌA”* ÌA”5 ÌA!”6 ÌA"”ÌL ÌA8˜” +”" +”# ÌB”1 ÌB”2 ÌB”; ÌB'”< ÌB(”ÌH ÌB4–” ,”  ,”( ,”, ,”. ,”7 ,$˜” ,”  ,”! -”) -”* -”5 -'”6 -(”ÌF -8š” ,”  ,”! .”* .”+ .”/ .!”0 ."”ÌB .4”ÌC .5”ÌS .ÌE’” ,” ,–” 0”  0”( 0”, 0”. 0”ÌA 0.š” 0”  0”! 1”* 1”+ 1”/ 1!”0 1"”ÌB 14”ÌC 15”ÌS 1ÌE˜” 0”  0”! 2”) 2”* 2”5 2'”6 2(”ÌN 2Ì@œ” 0”  0”! 3”' 3”( 3”* 3”/ 3!”1 3#”< 3.”= 3/”ÌI 3;”ÌK 3=’” 0” 0’” 5” 5˜” 5” 5”  <”. <”/ < ”8 <)”9 <*”ÌD <5˜” 5” 5”  =”% =”& =”1 ="”2 =#”ÌB =3–” 6”  6”( 6”, 6”. 6”6 6%˜” 6”  6”! 7”) 7”* 7”5 7)”6 7*”ÌN 7ÌBš” 6”  6”! 8”* 8”+ 8”/ 8#”0 8$”ÌB 86”ÌC 87”ÌN 8ÌB˜” 6”  6”! 9”& 9”' 9”2 9&”3 9'”ÌA 95’” 6” 6–” :”  :”( :”, :”. :”3 :"˜” :”  :”! :$”) :,”* :-”5 :8”6 :9”ÌF :ÌIš” :”  :”! :ÌK”* :ÌT”+ :ÌU”/ :ÌY”0 :ÌZ”ÌB :Ìl”ÌC :Ìm”ÌN :Ìx’” :” :’” 5” 5’” +” +’” !” !’”  
-”   ””* ”. ”/ ”< &’” ” ’” ” 
-’” ” ‘” ÌpÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ Æ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
- ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache”ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍéÍ"‘ÔrL”¤type¥start£end¥local¸ImportNamespaceSpecifierÍğÍ ÔrM”¤type¥start£end¤nameªIdentifierÍõÍ «commonConstÔrN•¤type¥start£end¥value£raw§LiteralÍÍ!¹../common/CommonConstants»'../common/CommonConstants'K±ImportDeclarationÍ$Ía‘ÔrO•¤type¥start£end¨imported¥local¯ImportSpecifierÍ-Í;MªIdentifierÍ-Í;®ListDataSourceMªIdentifierÍ-Í;®ListDataSourceN§LiteralÍCÍ`»../viewmodel/ListDataSource½'../viewmodel/ListDataSource'K±ImportDeclarationÍcÍ”‘O¯ImportSpecifierÍlÍyMªIdentifierÍlÍy­DEFAULT_THEMEMªIdentifierÍlÍy­DEFAULT_THEMEN§LiteralÍÍ“°../common/Colors²'../common/Colors'K±ImportDeclarationÍ–Í¸‘L¶ImportDefaultSpecifierÍÍ£MªIdentifierÍÍ£¦routerN§LiteralÍ©Í·¬@ohos.router®'@ohos.router'
+}ÀÔrE•¬@ohos.router²@ohos.promptAction¹../common/CommonConstants°../common/Colors»../viewmodel/ListDataSourceÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙi hvigor_ignore__Applications_DevEco-Studio.app_Contents_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂFAÃÙo hvigor_ignore__Applications_DevEco-Studio.app_Contents_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsAÃªoh-resolveÂFAÂÙV/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.etsAÃªoh-resolveÂFAÂÙM/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.etsAÃªoh-resolveÂFAÂÙX/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappingsµGoodsListComponent.js ‘¶GoodsListComponent.etsÜ‘”    ‘” —”   ” ” ” ” ”8 8”9 9˜”   ” ”	 	” ” ” ”< <”= =˜”   ” ”	 ” #” %” +”0 =”1 >˜”   ” ” ” ”! !”" "”# #”, ,–”   ” ” ” ”- -”. .–”   ” ” ” ” ” ‘”  ””4 ”ÌA ”ÌC ÌA”ÌE ÌC””; ”ÌH ”ÌJ Ì@”ÌW ÌM””< +”Ì@ /”ÌN =”ÌP ?’”! &”" '’” $”  %‘” .’” ” )’” ” )’” ” 0’” ” 0’” ” ’” ” ’”  ”  ”” !” !” !” !)Ü ” "” "” "” "” "”  "”$ " ”% "!”0 ",”1 "-”3 "/”4 "0”? ";”Ì@ "<”ÌB ">”ÌG "ÌC”ÌK "ÌG”ÌL "ÌH”ÌN "ÌJ”ÌO "ÌK”ÌP "ÌL’” #” #’” %” %”” &” &” &” &'™” '” '” '” '”  '”! '”% '!”& '"”( '$’” (” (Ü ” )” )
+” )” )” )”# )”$ )”/ ))”0 )*”6 )0”7 )1”ÌB )<”ÌC )=”ÌE )?”ÌF )Ì@”ÌQ )ÌK”ÌR )ÌL”ÌT )ÌN”ÌY )ÌS”Ì] )ÌW”Ì^ )ÌX”Ì` )ÌZ”Ìa )Ì[”Ìb )Ì\‘”	 *‘” *’” +”& + š” ,” ,
+” ,” ,”  ,”! ,”' ,!”+ ,%”, ,&”. ,(œ” -” -” -”& -”' -”) -!”0 -(”2 -*”> -6”Ì@ -8”ÌA -9”ÌB -:’” .” .‘” /’” 0” 0š” 1” 1
+” 1” 1” 1”! 1”" 1”& 1 ”' 1!”( 1"œ” 2” 2” 2”" 2”# 2”% 2”, 2&”. 2(”5 2/”7 21”8 22”9 23‘”	 3’” 4” 4‘” 7š” 8” 8	” 8
+” 8”' 8”) 8”2 8#”3 8$”< 8-”> 8/–” 8” 8	” Ì˜” Ì˜
+” Ì˜” Ì˜–” 8” 8	” Ì™” Ì™” Ì™” Ì™’” 9” 9	˜” 9” 9	” Ì†” Ì†” Ì†”( Ì†”) Ì† ”/ Ì†&˜” 9” 9	” Ì‡” Ì‡” Ì‡”! Ì‡”" Ì‡”8 Ì‡/š” :” :” :” :” :”! :”, :!”- :"”< :1”> :3˜” :” :” Ìƒ	” Ìƒ” Ìƒ”" Ìƒ”# Ìƒ”3 Ìƒ+Ü ” :” :” Ì„	” Ì„” Ì„” Ì„”& Ì„”( Ì„ ”) Ì„!”+ Ì„#”0 Ì„(”2 Ì„*”6 Ì„.”7 Ì„/”ÌI Ì„ÌA”ÌJ Ì„ÌB”ÌV Ì„ÌN”ÌX Ì„ÌP—” <”  <”! Ìv”( Ìv”) Ìv”, Ìv”. Ìv•” Ìw”" Ìw”# Ìw”* Ìw”+ Ìw””  Ìx”# Ìx”% Ìx”< Ìx,“”  Ìy”& Ìy”( Ìy–”$ Ìz”+ Ìz”- Ìz”1 Ìz”2 Ìz ”4 Ìz"–”$ Ì{”- Ì{”/ Ì{”3 Ì{!”4 Ì{"”= Ì{+–”$ Ì|”. Ì|”0 Ì|”4 Ì|"”5 Ì|#”: Ì|(–”$ Ì}”, Ì}”. Ì}”2 Ì} ”3 Ì}!”; Ì})‘”! Ì~“” Ì” Ì” Ì’” Ì€” Ì€’” =” =˜” =” =”  Ìr”. Ìr”/ Ìr”8 Ìr'”9 Ìr(”ÌE Ìr4˜” =” =”  Ìs”& Ìs”' Ìs”2 Ìs!”3 Ìs"”ÌD Ìs3˜” =” =”  Ìt”% Ìt”& Ìt”1 Ìt ”2 Ìt!”ÌH Ìt7’” >”3 >'’” ?”" ?’” >”3 >'˜” ?”" ?”# ÌE”( ÌE”) ÌE”4 ÌE"”5 ÌE#”ÌF ÌE4’” >”3 >'˜” ?”" ?”# ÌF”) ÌF”* ÌF”5 ÌF#”6 ÌF$”ÌL ÌF:–” Ì@”! Ì@”) Ì@”- Ì@”/ Ì@”7 Ì@&˜” Ì@”! Ì@”" ÌA”' ÌA”( ÌA”3 ÌA&”4 ÌA'”ÌJ ÌA=˜” Ì@”! Ì@”" ÌB”( ÌB”) ÌB”4 ÌB'”5 ÌB(”ÌK ÌB>–” Ì@”! Ì@”" ÌC”+ ÌC”, ÌC”1 ÌC$’” >”/ >'’” ?” ?’” ÌH”" ÌH˜” ÌH”" ÌH”# Ìm”* Ìm”+ Ìm”6 Ìm$”7 Ìm%”ÌI Ìm7˜” ÌH”" ÌH”# Ìn”( Ìn”) Ìn”4 Ìn"”5 Ìn#”ÌE Ìn3˜” ÌH”" ÌH”# Ìo”) Ìo”* Ìo”5 Ìo#”6 Ìo$”ÌL Ìo:˜” ÌH”" ÌH”# Ìp”1 Ìp”2 Ìp ”; Ìp)”< Ìp*”ÌH Ìp6–” ÌI”  ÌI”( ÌI”, ÌI”. ÌI”7 ÌI&˜” ÌI”  ÌI”! ÌJ”) ÌJ”* ÌJ”5 ÌJ)”6 ÌJ*”ÌF ÌJ:š” ÌI”  ÌI”! ÌK”* ÌK”+ ÌK”/ ÌK#”0 ÌK$”ÌB ÌK6”ÌC ÌK7”ÌS ÌKÌG’” ÌI” ÌI–” ÌM”  ÌM”( ÌM”, ÌM”. ÌM”ÌA ÌM0š” ÌM”  ÌM”! ÌN”* ÌN”+ ÌN”/ ÌN#”0 ÌN$”ÌB ÌN6”ÌC ÌN7”ÌS ÌNÌG˜” ÌM”  ÌM”! ÌO”) ÌO”* ÌO”5 ÌO)”6 ÌO*”ÌN ÌOÌBœ” ÌM”  ÌM”! ÌP”' ÌP”( ÌP”* ÌP”/ ÌP#”1 ÌP%”< ÌP0”= ÌP1”ÌI ÌP=”ÌK ÌP?’” ÌM” ÌM’” ÌR” ÌR˜” ÌR” ÌR”  Ìj”. Ìj!”/ Ìj"”8 Ìj+”9 Ìj,”ÌE Ìj8–” ÌR” ÌR”  Ìk”% Ìk”& Ìk”, Ìk’” ÌS”$ ÌS’” ÌT”" ÌT’” ÌS”$ ÌS˜” ÌT”" ÌT”# Ì\”- Ì\”. Ì\ ”= Ì\/”> Ì\0”ÌC Ì\5–” ÌU”  ÌU”( ÌU”, ÌU”. ÌU!”6 ÌU)˜” ÌU”  ÌU”! ÌV”) ÌV!”* ÌV"”5 ÌV-”6 ÌV.”ÌN ÌVÌFš” ÌU”  ÌU”! ÌW”* ÌW"”+ ÌW#”/ ÌW'”0 ÌW(”ÌB ÌW:”ÌC ÌW;”ÌN ÌWÌF’” ÌU” ÌU–” ÌX”  ÌX”( ÌX”, ÌX”. ÌX!”3 ÌX&˜” ÌX”  ÌX”! ÌY”) ÌY!”* ÌY"”5 ÌY-”6 ÌY.”ÌF ÌY>š” ÌX”  ÌX”! ÌZ”* ÌZ"”+ ÌZ#”/ ÌZ'”0 ÌZ(”ÌB ÌZ:”ÌC ÌZ;”ÌN ÌZÌF’” ÌX” ÌX’” ÌS”  ÌS’” ÌT” ÌT’” Ì^”/ Ì^'” Ì_”! Ì_”) Ì_”- Ì_”. Ì_”= Ì_.”> Ì_/”ÌB Ì_3”ÌC Ì_4”ÌD Ì_5”ÌE Ì_6”Ìµ Ì_Ì[”Ì¶ Ì_Ì\”Í% Ì_Ì‚’” Ì^”/ Ì^'–” Ì_”! Ì_”" Ì`”' Ì`”( Ì`”* Ì`’” Ì^”/ Ì^'–” Ì_”! Ì_”" Ìa”( Ìa”) Ìa”+ Ìa ’” Ìc”& Ìc"—” Ìc”& Ìc"”' Ìd”/ Ìd#”0 Ìd$”3 Ìd'”5 Ìd)’”  Ìe”ÌI ÌeÌE˜”  Ìf”$ Ìf ”% Ìf!”2 Ìf.”3 Ìf/”7 Ìf3”8 Ìf4”9 Ìf5’” Ìg” Ìg’” Ìc”& Ìc"’” ÌR” ÌR’” ÌH” ÌH’” =” =’” <”  <””* ;”. ;”/ ;”< ;(’” ;
+” ;’” :” :’” 9” 9	’” Ì‰”# Ì‰š” ÌŠ” ÌŠ
+” ÌŠ” ÌŠ”  ÌŠ”! ÌŠ”' ÌŠ!”* ÌŠ$”+ ÌŠ%”- ÌŠ'š” Ì‹” Ì‹”/ Ì‹”8 Ì‹”< Ì‹”= Ì‹”ÌH Ì‹(”ÌI Ì‹)”ÌO Ì‹/”ÌR Ì‹2š” Ì‹” Ì‹” ÌŒ”. ÌŒ”/ ÌŒ”3 ÌŒ”4 ÌŒ ”ÌF ÌŒ2”ÌG ÌŒ3”ÌR ÌŒ>˜” Ì‹” Ì‹” Ì”( Ì”) Ì”. Ì”/ Ì”4 Ì ” Ì‹” Ì‹” Ì”% Ì”& Ì”( Ì”. Ì”0 Ì”2 Ì”4 Ì ”9 Ì%”; Ì'”= Ì)”? Ì+—” Ì‹” Ì‹” Ì”& Ì”' Ì”* Ì”, Ìš” Ì”  Ì”$ Ì”% Ì”0 Ì ”1 Ì!”7 Ì'”: Ì*”; Ì+”= Ì-œ”  Ì‘”, Ì‘”- Ì‘”6 Ì‘$”7 Ì‘%”9 Ì‘'”Ì@ Ì‘.”ÌB Ì‘0”ÌQ Ì‘?”ÌS Ì‘ÌA”ÌT Ì‘ÌB”ÌU Ì‘ÌC’”  Ì’”' Ì’‘” Ì“œ” Ì””" Ì””# Ì””* Ì””+ Ì””- Ì””0 Ì” ”2 Ì”"”ÌH Ì”8”ÌJ Ì”:”ÌK Ì”;”ÌL Ì”<’” Ì•
+” Ì•’” Ì‹” Ì‹‘” Ì–‘” Ì–’” 8” 8	‘” ÌšÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache•ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍéÍ"‘ÔrL”¤type¥start£end¥local¸ImportNamespaceSpecifierÍğÍ ÔrM”¤type¥start£end¤nameªIdentifierÍõÍ «commonConstÔrN•¤type¥start£end¥value£raw§LiteralÍÍ!¹../common/CommonConstants»'../common/CommonConstants'K±ImportDeclarationÍ$Ía‘ÔrO•¤type¥start£end¨imported¥local¯ImportSpecifierÍ-Í;MªIdentifierÍ-Í;®ListDataSourceMªIdentifierÍ-Í;®ListDataSourceN§LiteralÍCÍ`»../viewmodel/ListDataSource½'../viewmodel/ListDataSource'K±ImportDeclarationÍcÍ”‘O¯ImportSpecifierÍlÍyMªIdentifierÍlÍy­DEFAULT_THEMEMªIdentifierÍlÍy­DEFAULT_THEMEN§LiteralÍÍ“°../common/Colors²'../common/Colors'K±ImportDeclarationÍ–Í¸‘L¶ImportDefaultSpecifierÍÍ£MªIdentifierÍÍ£¦routerN§LiteralÍ©Í·¬@ohos.router®'@ohos.router'K±ImportDeclarationÍÄÍò‘L¶ImportDefaultSpecifierÍËÍ×MªIdentifierÍËÍ×¬promptActionN§LiteralÍİÍñ²@ohos.promptAction´'@ohos.promptAction'

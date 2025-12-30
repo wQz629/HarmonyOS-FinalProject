@@ -407,5 +407,13 @@
 			"type":	"profile",
 			"name":	"main_pages",
 			"id":	"0x01000065"
+		}, {
+			"type":	"media",
+			"name":	"ic_compare_selected",
+			"id":	"0x01000066"
+		}, {
+			"type":	"media",
+			"name":	"ic_compare_unselected",
+			"id":	"0x01000067"
 		}]
 }
