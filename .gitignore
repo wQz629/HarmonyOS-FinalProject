@@ -1,22 +1,57 @@
-# =========================
-# HarmonyOS / DevEco Studio
-# =========================
+############################
+# HarmonyOS / ArkTS build
+############################
 
-# hvigor build cache & logs
+# hvigor 构建缓存与输出
 .hvigor/
+hvigor/
 
-# Build outputs
-entry/build/
+# ArkTS 预览与中间产物
 entry/.preview/
 
-# ArkTS / TypeScript cache
-**/.tsbuildinfo
-**/.ts_checker_cache
-**/compiler.cache/
+# 构建输出目录
+/build/
 
-# Logs
+############################
+# IDE / Editor
+############################
+
+# DevEco Studio / IntelliJ IDEA
+.idea/
+
+# VS Code
+.vscode/
+
+############################
+# Native / CXX
+############################
+
+.cxx/
+
+############################
+# Node / OH modules
+############################
+
+node_modules/
+oh_modules/
+
+############################
+# Logs / Reports / Cache
+############################
+
 *.log
+*.tmp
+*.cache
 
-# OS
+############################
+# Test / Temp
+############################
+
+.test/
+
+############################
+# OS generated
+############################
+
 .DS_Store
 Thumbs.db
