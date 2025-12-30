@@ -26,27 +26,33 @@ export default class BottomTabBar extends ViewPU {
         this.tabBarData = [
             {
                 title: { "id": 16777242, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                icon: { "id": 16777308, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                selectedIcon: { "id": 16777309, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                icon: { "id": 16777311, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                selectedIcon: { "id": 16777312, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 index: 0
             },
             {
                 title: { "id": 16777226, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                icon: { "id": 16777303, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                selectedIcon: { "id": 16777304, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                icon: { "id": 16777304, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                selectedIcon: { "id": 16777305, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 index: 1
             },
             {
-                title: { "id": 16777272, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                icon: { "id": 16777301, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                selectedIcon: { "id": 16777302, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                title: { "id": 16777266, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                icon: { "id": 16777316, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                selectedIcon: { "id": 16777316, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 index: 2
             },
             {
-                title: { "id": 16777254, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                icon: { "id": 16777311, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
-                selectedIcon: { "id": 16777312, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                title: { "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                icon: { "id": 16777302, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                selectedIcon: { "id": 16777303, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 index: 3
+            },
+            {
+                title: { "id": 16777254, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                icon: { "id": 16777314, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                selectedIcon: { "id": 16777315, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                index: 4
             }
         ];
         this.setInitiallyProvidedValue(params);

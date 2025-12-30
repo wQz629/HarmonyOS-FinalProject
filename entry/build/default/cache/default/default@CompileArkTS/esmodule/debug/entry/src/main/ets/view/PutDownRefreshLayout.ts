@@ -42,7 +42,7 @@ export default class PutDownRefresh extends ViewPU {
             Row.height(commonConst.GOODS_LIST_HEIGHT);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777316, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.create({ "id": 16777319, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(commonConst.ICON_WIDTH);
             Image.height(commonConst.ICON_HEIGHT);
         }, Image);

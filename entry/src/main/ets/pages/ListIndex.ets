@@ -17,6 +17,7 @@ import TabBar from '../view/TabBarsComponent';
 import BottomTabBar from '../view/BottomTabBarComponent';
 import CategoryPage from './CategoryPage';
 import ShoppingCartPage from './ShoppingCartPage';
+import SearchPage from './SearchPage';
 import PersonalPage from './PersonalPage';
 import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
 import {
@@ -28,6 +29,7 @@ import {
 @Component
 struct ListIndex {
   @State currentTabIndex: number = 0;
+  @State layoutMode: 'list' | 'grid' = 'list'; // 添加布局模式状态
   @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;//使用 @StorageLink 确保当 PersonalPage 改变主题时，这里会自动刷新
 
 
@@ -53,8 +55,10 @@ struct ListIndex {
       case 1:
         return $r('app.string.category');
       case 2:
-        return $r('app.string.shopping_cart');
+        return $r('app.string.search');
       case 3:
+        return $r('app.string.shopping_cart');
+      case 4:
         return $r('app.string.personal');
       default:
         return $r('app.string.shopping_mall');
@@ -65,18 +69,19 @@ struct ListIndex {
   PageContent() {
     if (this.currentTabIndex === 0) {
       // 首页内容
-      Column() {
-        TabBar()
-      }
-      .width(LAYOUT_WIDTH_OR_HEIGHT)
-      .height(LAYOUT_WIDTH_OR_HEIGHT)
+      TabBar({
+        layoutMode: $layoutMode
+      })
     } else if (this.currentTabIndex === 1) {
       // 分类页面
       CategoryPage()
     } else if (this.currentTabIndex === 2) {
+      // 搜索页面
+      SearchPage()
+    } else if (this.currentTabIndex === 3) {
       // 购物车页面
       ShoppingCartPage()
-    } else if (this.currentTabIndex === 3) {
+    } else if (this.currentTabIndex === 4) {
       // 个人中心页面
       PersonalPage()
     }

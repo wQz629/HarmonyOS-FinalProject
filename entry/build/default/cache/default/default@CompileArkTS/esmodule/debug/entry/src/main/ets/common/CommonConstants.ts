@@ -48,9 +48,9 @@ export const LIST_ITEM_SPACE: number = 16;
 export const CATEGORY_LIST_WIDTH: string = '94%';
 export const CATEGORY_ITEM_HEIGHT: number = 48;
 // ============ Navigation Title ============
-export const STORE: ResourceStr = { "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+export const STORE: ResourceStr = { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
 export const CATEGORY: ResourceStr = { "id": 16777226, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
-export const SHOPPING_CART: ResourceStr = { "id": 16777272, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+export const SHOPPING_CART: ResourceStr = { "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
 export const PERSONAL: ResourceStr = { "id": 16777254, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
 // ============ Offset and Threshold ============
 export const MAX_OFFSET_Y: number = 100;

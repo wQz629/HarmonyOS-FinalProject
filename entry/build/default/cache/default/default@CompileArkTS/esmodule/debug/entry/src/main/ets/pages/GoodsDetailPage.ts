@@ -218,12 +218,6 @@ export default class GoodsDetailPage extends ViewPU {
             Swiper.loop(true);
         }, Swiper);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Image.create({ "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.width(LAYOUT_WIDTH_OR_HEIGHT);
-            Image.height(400);
-            Image.objectFit(ImageFit.Cover);
-        }, Image);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(LAYOUT_WIDTH_OR_HEIGHT);
             Image.height(400);
@@ -231,6 +225,12 @@ export default class GoodsDetailPage extends ViewPU {
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Image.width(LAYOUT_WIDTH_OR_HEIGHT);
+            Image.height(400);
+            Image.objectFit(ImageFit.Cover);
+        }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 16777297, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Image.width(LAYOUT_WIDTH_OR_HEIGHT);
             Image.height(400);
             Image.objectFit(ImageFit.Cover);
@@ -325,7 +325,7 @@ export default class GoodsDetailPage extends ViewPU {
             Row.alignItems(VerticalAlign.Center);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777260, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create({ "id": 16777261, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.fontSize(NORMAL_FONT_SIZE);
             Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.layoutWeight(1);

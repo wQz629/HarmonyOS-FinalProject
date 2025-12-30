@@ -43,10 +43,10 @@
 						"actions":	["action.system.home"]
 					}],
 				"descriptionId":	16777218,
-				"iconId":	16777315,
+				"iconId":	16777318,
 				"labelId":	16777219,
-				"startWindowIconId":	16777315,
-				"startWindowBackgroundId":	16777293
+				"startWindowIconId":	16777318,
+				"startWindowBackgroundId":	16777294
 			}],
 		"packageName":	"entry",
 		"virtualMachine":	"ark12.0.6.0",

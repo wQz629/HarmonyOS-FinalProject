@@ -2,6 +2,7 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 interface ShoppingCartPage_Params {
+    isLoggedIn?: boolean;
     cartItems?: CartItem[];
     isAllSelected?: boolean;
     totalPrice?: number;
@@ -24,13 +25,14 @@ export default class ShoppingCartPage extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
+        this.__isLoggedIn = this.createStorageLink('isLoggedIn', false, "isLoggedIn");
         this.__cartItems = new ObservedPropertyObjectPU([
             {
                 id: 1,
                 name: { "id": 16777238, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 price: '¥199',
                 quantity: 1,
-                image: { "id": 16777294, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                image: { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 selected: false
             },
             {
@@ -38,7 +40,7 @@ export default class ShoppingCartPage extends ViewPU {
                 name: { "id": 16777223, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 price: '¥265',
                 quantity: 2,
-                image: { "id": 16777295, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                image: { "id": 16777296, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 selected: false
             }
         ], this, "cartItems");
@@ -62,18 +64,27 @@ export default class ShoppingCartPage extends ViewPU {
     updateStateVars(params: ShoppingCartPage_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__isLoggedIn.purgeDependencyOnElmtId(rmElmtId);
         this.__cartItems.purgeDependencyOnElmtId(rmElmtId);
         this.__isAllSelected.purgeDependencyOnElmtId(rmElmtId);
         this.__totalPrice.purgeDependencyOnElmtId(rmElmtId);
         this.__currentThemeColors.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
+        this.__isLoggedIn.aboutToBeDeleted();
         this.__cartItems.aboutToBeDeleted();
         this.__isAllSelected.aboutToBeDeleted();
         this.__totalPrice.aboutToBeDeleted();
         this.__currentThemeColors.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
+    }
+    private __isLoggedIn: ObservedPropertyAbstractPU<boolean>;
+    get isLoggedIn() {
+        return this.__isLoggedIn.get();
+    }
+    set isLoggedIn(newValue: boolean) {
+        this.__isLoggedIn.set(newValue);
     }
     private __cartItems: ObservedPropertyObjectPU<CartItem[]>;
     get cartItems() {
@@ -311,7 +322,7 @@ export default class ShoppingCartPage extends ViewPU {
         }, Checkbox);
         Checkbox.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777270, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create({ "id": 16777271, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.fontSize(SMALL_FONT_SIZE);
             Text.fontColor(this.currentThemeColors.primaryTextColor);
         }, Text);
@@ -330,7 +341,7 @@ export default class ShoppingCartPage extends ViewPU {
             Row.create({ space: 4 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create({ "id": 16777287, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.create({ "id": 16777288, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
             Text.fontSize(SMALL_FONT_SIZE);
             Text.fontColor(this.currentThemeColors.secondaryTextColor);
         }, Text);
@@ -367,67 +378,107 @@ export default class ShoppingCartPage extends ViewPU {
     }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
-            Column.height(LAYOUT_WIDTH_OR_HEIGHT);
-            Column.backgroundColor(this.currentThemeColors.backgroundColor);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            if (this.cartItems.length === 0) {
+            if (!this.isLoggedIn) {
                 this.ifElseBranchUpdateFunction(0, () => {
-                    this.EmptyCartBuilder.bind(this)();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // 未登录时显示登录提示
+                        Column.create();
+                        // 未登录时显示登录提示
+                        Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+                        // 未登录时显示登录提示
+                        Column.height(LAYOUT_WIDTH_OR_HEIGHT);
+                        // 未登录时显示登录提示
+                        Column.justifyContent(FlexAlign.Center);
+                        // 未登录时显示登录提示
+                        Column.backgroundColor(this.currentThemeColors.backgroundColor);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('请先登录');
+                        Text.fontSize(18);
+                        Text.fontColor(this.currentThemeColors.primaryTextColor);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.margin({ bottom: 16 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('登录后可以查看和管理您的购物车');
+                        Text.fontSize(14);
+                        Text.fontColor(this.currentThemeColors.secondaryTextColor);
+                    }, Text);
+                    Text.pop();
+                    // 未登录时显示登录提示
+                    Column.pop();
                 });
             }
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 购物车列表
-                        List.create({ space: 8 });
-                        // 购物车列表
-                        List.layoutWeight(1);
-                        // 购物车列表
-                        List.padding(8);
-                        // 购物车列表
-                        List.backgroundColor(this.currentThemeColors.backgroundColor);
-                    }, List);
+                        Column.create();
+                        Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+                        Column.height(LAYOUT_WIDTH_OR_HEIGHT);
+                        Column.backgroundColor(this.currentThemeColors.backgroundColor);
+                    }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        ForEach.create();
-                        const forEachItemGenFunction = (_item, index?: number) => {
-                            const item = _item;
-                            {
-                                const itemCreation = (elmtId, isInitialRender) => {
-                                    ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
-                                    ListItem.create(deepRenderFunction, true);
-                                    if (!isInitialRender) {
-                                        ListItem.pop();
-                                    }
-                                    ViewStackProcessor.StopGetAccessRecording();
-                                };
-                                const itemCreation2 = (elmtId, isInitialRender) => {
-                                    ListItem.create(deepRenderFunction, true);
-                                };
-                                const deepRenderFunction = (elmtId, isInitialRender) => {
-                                    itemCreation(elmtId, isInitialRender);
-                                    this.CartItemBuilder.bind(this)(item, index !== undefined ? index : 0);
-                                    ListItem.pop();
-                                };
-                                this.observeComponentCreation2(itemCreation2, ListItem);
-                                ListItem.pop();
-                            }
-                        };
-                        this.forEachUpdateFunction(elmtId, this.cartItems, forEachItemGenFunction, undefined, true, false);
-                    }, ForEach);
-                    ForEach.pop();
-                    // 购物车列表
-                    List.pop();
-                    // 底部操作栏
-                    this.BottomBar.bind(this)();
+                        If.create();
+                        if (this.cartItems.length === 0) {
+                            this.ifElseBranchUpdateFunction(0, () => {
+                                this.EmptyCartBuilder.bind(this)();
+                            });
+                        }
+                        else {
+                            this.ifElseBranchUpdateFunction(1, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    // 购物车列表
+                                    List.create({ space: 8 });
+                                    // 购物车列表
+                                    List.layoutWeight(1);
+                                    // 购物车列表
+                                    List.padding(8);
+                                    // 购物车列表
+                                    List.backgroundColor(this.currentThemeColors.backgroundColor);
+                                }, List);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    ForEach.create();
+                                    const forEachItemGenFunction = (_item, index?: number) => {
+                                        const item = _item;
+                                        {
+                                            const itemCreation = (elmtId, isInitialRender) => {
+                                                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                                                ListItem.create(deepRenderFunction, true);
+                                                if (!isInitialRender) {
+                                                    ListItem.pop();
+                                                }
+                                                ViewStackProcessor.StopGetAccessRecording();
+                                            };
+                                            const itemCreation2 = (elmtId, isInitialRender) => {
+                                                ListItem.create(deepRenderFunction, true);
+                                            };
+                                            const deepRenderFunction = (elmtId, isInitialRender) => {
+                                                itemCreation(elmtId, isInitialRender);
+                                                this.CartItemBuilder.bind(this)(item, index !== undefined ? index : 0);
+                                                ListItem.pop();
+                                            };
+                                            this.observeComponentCreation2(itemCreation2, ListItem);
+                                            ListItem.pop();
+                                        }
+                                    };
+                                    this.forEachUpdateFunction(elmtId, this.cartItems, forEachItemGenFunction, undefined, true, false);
+                                }, ForEach);
+                                ForEach.pop();
+                                // 购物车列表
+                                List.pop();
+                                // 底部操作栏
+                                this.BottomBar.bind(this)();
+                            });
+                        }
+                    }, If);
+                    If.pop();
+                    Column.pop();
                 });
             }
         }, If);
         If.pop();
-        Column.pop();
     }
     rerender() {
         this.updateDirtyElements();

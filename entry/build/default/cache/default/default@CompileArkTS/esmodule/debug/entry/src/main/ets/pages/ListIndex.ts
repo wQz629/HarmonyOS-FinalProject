@@ -3,12 +3,14 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 }
 interface ListIndex_Params {
     currentTabIndex?: number;
+    layoutMode?: 'list' | 'grid';
     currentThemeColors?: ThemeColors;
 }
 import TabBar from "@bundle:com.example.list_harmony/entry/ets/view/TabBarsComponent";
 import BottomTabBar from "@bundle:com.example.list_harmony/entry/ets/view/BottomTabBarComponent";
 import CategoryPage from "@bundle:com.example.list_harmony/entry/ets/pages/CategoryPage";
 import ShoppingCartPage from "@bundle:com.example.list_harmony/entry/ets/pages/ShoppingCartPage";
+import SearchPage from "@bundle:com.example.list_harmony/entry/ets/pages/SearchPage";
 import PersonalPage from "@bundle:com.example.list_harmony/entry/ets/pages/PersonalPage";
 import { DEFAULT_THEME } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
 import type { ThemeColors } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
@@ -20,6 +22,7 @@ class ListIndex extends ViewPU {
             this.paramsGenerator_ = paramsLambda;
         }
         this.__currentTabIndex = new ObservedPropertySimplePU(0, this, "currentTabIndex");
+        this.__layoutMode = new ObservedPropertySimplePU('list', this, "layoutMode");
         this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -28,15 +31,20 @@ class ListIndex extends ViewPU {
         if (params.currentTabIndex !== undefined) {
             this.currentTabIndex = params.currentTabIndex;
         }
+        if (params.layoutMode !== undefined) {
+            this.layoutMode = params.layoutMode;
+        }
     }
     updateStateVars(params: ListIndex_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__currentTabIndex.purgeDependencyOnElmtId(rmElmtId);
+        this.__layoutMode.purgeDependencyOnElmtId(rmElmtId);
         this.__currentThemeColors.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__currentTabIndex.aboutToBeDeleted();
+        this.__layoutMode.aboutToBeDeleted();
         this.__currentThemeColors.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
@@ -47,6 +55,13 @@ class ListIndex extends ViewPU {
     }
     set currentTabIndex(newValue: number) {
         this.__currentTabIndex.set(newValue);
+    }
+    private __layoutMode: ObservedPropertySimplePU<'list' | 'grid'>; // 添加布局模式状态
+    get layoutMode() {
+        return this.__layoutMode.get();
+    }
+    set layoutMode(newValue: 'list' | 'grid') {
+        this.__layoutMode.set(newValue);
     }
     private __currentThemeColors: ObservedPropertyAbstractPU<ThemeColors>; //使用 @StorageLink 确保当 PersonalPage 改变主题时，这里会自动刷新
     get currentThemeColors() {
@@ -76,15 +91,17 @@ class ListIndex extends ViewPU {
     getPageTitle(): Resource {
         switch (this.currentTabIndex) {
             case 0:
-                return { "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+                return { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
             case 1:
                 return { "id": 16777226, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
             case 2:
-                return { "id": 16777272, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+                return { "id": 16777266, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
             case 3:
+                return { "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+            case 4:
                 return { "id": 16777254, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
             default:
-                return { "id": 16777273, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
+                return { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" };
         }
     }
     PageContent(parent = null) {
@@ -92,21 +109,19 @@ class ListIndex extends ViewPU {
             If.create();
             if (this.currentTabIndex === 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 首页内容
-                        Column.create();
-                        // 首页内容
-                        Column.width(LAYOUT_WIDTH_OR_HEIGHT);
-                        // 首页内容
-                        Column.height(LAYOUT_WIDTH_OR_HEIGHT);
-                    }, Column);
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new TabBar(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 69, col: 9 });
+                                let componentCall = new 
+                                // 首页内容
+                                TabBar(this, {
+                                    layoutMode: this.__layoutMode
+                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 72, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
-                                    return {};
+                                    return {
+                                        layoutMode: this.layoutMode
+                                    };
                                 };
                                 componentCall.paramsGenerator_ = paramsLambda;
                             }
@@ -115,8 +130,6 @@ class ListIndex extends ViewPU {
                             }
                         }, { name: "TabBar" });
                     }
-                    // 首页内容
-                    Column.pop();
                 });
             }
             else if (this.currentTabIndex === 1) {
@@ -126,7 +139,7 @@ class ListIndex extends ViewPU {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 分类页面
-                                CategoryPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 75, col: 7 });
+                                CategoryPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 77, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -146,8 +159,29 @@ class ListIndex extends ViewPU {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
                                 let componentCall = new 
+                                // 搜索页面
+                                SearchPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 80, col: 7 });
+                                ViewPU.create(componentCall);
+                                let paramsLambda = () => {
+                                    return {};
+                                };
+                                componentCall.paramsGenerator_ = paramsLambda;
+                            }
+                            else {
+                                this.updateStateVarsOfChildByElmtId(elmtId, {});
+                            }
+                        }, { name: "SearchPage" });
+                    }
+                });
+            }
+            else if (this.currentTabIndex === 3) {
+                this.ifElseBranchUpdateFunction(3, () => {
+                    {
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            if (isInitialRender) {
+                                let componentCall = new 
                                 // 购物车页面
-                                ShoppingCartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 78, col: 7 });
+                                ShoppingCartPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 83, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -161,14 +195,14 @@ class ListIndex extends ViewPU {
                     }
                 });
             }
-            else if (this.currentTabIndex === 3) {
-                this.ifElseBranchUpdateFunction(3, () => {
+            else if (this.currentTabIndex === 4) {
+                this.ifElseBranchUpdateFunction(4, () => {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
                                 let componentCall = new 
                                 // 个人中心页面
-                                PersonalPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 81, col: 7 });
+                                PersonalPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 86, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -183,7 +217,7 @@ class ListIndex extends ViewPU {
                 });
             }
             else {
-                this.ifElseBranchUpdateFunction(4, () => {
+                this.ifElseBranchUpdateFunction(5, () => {
                 });
             }
         }, If);
@@ -214,7 +248,7 @@ class ListIndex extends ViewPU {
                 if (isInitialRender) {
                     let componentCall = new 
                     // 底部 Tab Bar
-                    BottomTabBar(this, { currentIndex: this.__currentTabIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 98, col: 7 });
+                    BottomTabBar(this, { currentIndex: this.__currentTabIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ListIndex.ets", line: 103, col: 7 });
                     ViewPU.create(componentCall);
                     let paramsLambda = () => {
                         return {

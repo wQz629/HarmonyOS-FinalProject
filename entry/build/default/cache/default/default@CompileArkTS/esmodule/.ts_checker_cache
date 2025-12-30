@@ -50,6 +50,7 @@
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/ability/startAbilityParameter.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.bundle.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/application/AppServiceExtensionContext.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.account.appAccount.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/embedded_component.d.ts"
       ],
       "error": false
@@ -85,6 +86,11 @@
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.bundle.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.rdb.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.multimodalInput.pointer.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountModel.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.account.appAccount.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.preferences.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/graphics3d/SceneResources.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/embedded_component.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/image.d.ts",
@@ -103,7 +109,8 @@
       "mtimeMs": 1766667715831.682,
       "children": [],
       "parent": [
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets"
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/Logger.ets"
       ],
       "error": false
     },
@@ -132,8 +139,31 @@
       ],
       "error": false
     },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets": {
+      "mtimeMs": 1767104228607.8975,
+      "children": [],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ListIndex.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/TabBarsComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/BottomTabBarComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategoryTabComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategorySubComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ShoppingCartPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/SearchPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/SearchBarComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PublishGoodsPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ComparisonPage.ets"
+      ],
+      "error": false
+    },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets": {
-      "mtimeMs": 1766733439985.0662,
+      "mtimeMs": 1767104228608.5657,
       "children": [
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.AbilityConstant.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.UIAbility.d.ts",
@@ -412,7 +442,8 @@
       "parent": [
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.UIAbility.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.multimedia.image.d.ts",
-        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/ability/connectOptions.d.ts"
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/ability/connectOptions.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.account.appAccount.d.ts"
       ],
       "error": false
     },
@@ -450,7 +481,8 @@
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/application/Context.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.common.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/app/context.d.ts",
-        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.rdb.d.ts"
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.rdb.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.preferences.d.ts"
       ],
       "error": false
     },
@@ -613,12 +645,13 @@
       ],
       "parent": [
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.arkui.UIContext.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/action_sheet.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/alert_dialog.d.ts",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/common.d.ts",
-        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/custom_dialog_controller.d.ts",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets"
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/custom_dialog_controller.d.ts"
       ],
       "error": false
     },
@@ -630,7 +663,9 @@
       "parent": [
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.arkui.UIContext.d.ts",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PublishGoodsPage.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ComparisonPage.ets"
       ],
       "error": false
@@ -719,7 +754,10 @@
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/ability/abilityResult.d.ts"
       ],
       "parent": [
-        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.arkui.UIContext.d.ts"
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.arkui.UIContext.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountData.ets"
       ],
       "error": false
     },
@@ -1459,7 +1497,7 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/TabBarsComponent.ets": {
-      "mtimeMs": 1766995366506.197,
+      "mtimeMs": 1767104228611.4592,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
@@ -1473,7 +1511,7 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/BottomTabBarComponent.ets": {
-      "mtimeMs": 1766994381996.346,
+      "mtimeMs": 1767104228610.5906,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
@@ -1484,7 +1522,7 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets": {
-      "mtimeMs": 1766994714705.2441,
+      "mtimeMs": 1767104228609.235,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategoryTabComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategorySubComponent.ets",
@@ -1498,7 +1536,7 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ShoppingCartPage.ets": {
-      "mtimeMs": 1766765609445.9492,
+      "mtimeMs": 1767104228610.4736,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
@@ -1508,24 +1546,42 @@
       ],
       "error": false
     },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/SearchPage.ets": {
+      "mtimeMs": 1767106261308.6504,
+      "children": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/SearchBarComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ListIndex.ets"
+      ],
+      "error": false
+    },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets": {
-      "mtimeMs": 1767070897705.4878,
+      "mtimeMs": 1767104228609.9656,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.promptAction.d.ts",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.router.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountData.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.common.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.base.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/Logger.ets"
       ],
       "parent": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ListIndex.ets"
       ],
       "error": true,
       "errorCodes": [
-        28040,
         28007
       ]
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets": {
-      "mtimeMs": 1767001451333.885,
+      "mtimeMs": 1767104228608.1802,
       "children": [],
       "parent": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ListIndex.ets",
@@ -1538,18 +1594,23 @@
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategoryTabComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategorySubComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ShoppingCartPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/SearchPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/SearchBarComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets"
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PublishGoodsPage.ets"
       ],
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ListIndex.ets": {
-      "mtimeMs": 1767001486243.5962,
+      "mtimeMs": 1767104228609.7485,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/TabBarsComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/BottomTabBarComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ShoppingCartPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/SearchPage.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets"
@@ -1558,21 +1619,19 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets": {
-      "mtimeMs": 1766998739607.6592,
+      "mtimeMs": 1767104228611.5588,
       "children": [],
       "parent": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/TabBarsComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PublishGoodsPage.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ComparisonPage.ets"
       ],
-      "error": false,
-      "errorCodes": [
-        2345
-      ]
+      "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets": {
-      "mtimeMs": 1767071507023.707,
+      "mtimeMs": 1767104228611.0032,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets",
@@ -1583,16 +1642,16 @@
       ],
       "parent": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/TabBarsComponent.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets"
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/SearchPage.ets"
       ],
       "error": true,
       "errorCodes": [
-        28040,
         28007
       ]
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/PutDownRefreshLayout.ets": {
-      "mtimeMs": 1766650150544.0967,
+      "mtimeMs": 1767104228611.2732,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets"
       ],
@@ -1602,18 +1661,19 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.ets": {
-      "mtimeMs": 1766650150544.4775,
+      "mtimeMs": 1767104228611.7678,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets"
       ],
       "parent": [
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets"
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PublishGoodsPage.ets"
       ],
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategoryTabComponent.ets": {
-      "mtimeMs": 1766995058208.7031,
+      "mtimeMs": 1767104228610.7769,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
@@ -1624,7 +1684,7 @@
       "error": false
     },
     "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategorySubComponent.ets": {
-      "mtimeMs": 1766994907001.5442,
+      "mtimeMs": 1767104228610.678,
       "children": [
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
@@ -1633,6 +1693,139 @@
         "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets"
       ],
       "error": false
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/SearchBarComponent.ets": {
+      "mtimeMs": 1767106900095.8328,
+      "children": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/SearchPage.ets"
+      ],
+      "error": false
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets": {
+      "mtimeMs": 1767104228611.1128,
+      "children": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountModel.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountData.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.common.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.base.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.promptAction.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/Logger.ets"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets"
+      ],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountData.ets": {
+      "mtimeMs": 1767104228608.8218,
+      "children": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/Logger.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.common.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.preferences.d.ts"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets"
+      ],
+      "error": false
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/Logger.ets": {
+      "mtimeMs": 1767104228609.0613,
+      "children": [
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.hilog.d.ts"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountModel.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountData.ets"
+      ],
+      "error": false
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountModel.ets": {
+      "mtimeMs": 1767104228608.8867,
+      "children": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/Logger.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.account.appAccount.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.base.d.ts"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/LoginComponent.ets"
+      ],
+      "error": false
+    },
+    "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.account.appAccount.d.ts": {
+      "mtimeMs": 1766667715766.04,
+      "children": [
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.base.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.app.ability.Want.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.rpc.d.ts"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountModel.ets"
+      ],
+      "error": false
+    },
+    "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.data.preferences.d.ts": {
+      "mtimeMs": 1766667715801.987,
+      "children": [
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.base.d.ts",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/application/BaseContext.d.ts"
+      ],
+      "parent": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/model/AccountData.ets"
+      ],
+      "error": false
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets": {
+      "mtimeMs": 1767104228609.5334,
+      "children": [
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.router.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PublishGoodsPage.ets": {
+      "mtimeMs": 1767104228610.0945,
+      "children": [
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/ListDataSource.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets",
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.router.d.ts"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ComparisonPage.ets": {
+      "mtimeMs": 1767104228609.3047,
+      "children": [
+        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.router.d.ts",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets",
+        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
     },
     "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/build-tools/ets-loader/declarations/action_sheet.d.ts": {
       "mtimeMs": 1766667719114.754,
@@ -2081,51 +2274,6 @@
         "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.security.cert.d.ts"
       ],
       "error": false
-    },
-    "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets": {
-      "mtimeMs": 1766767313785.5493,
-      "children": [],
-      "parent": [
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/entryability/EntryAbility.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/PersonalPage.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ShoppingCartPage.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/CategoryPage.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ListIndex.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/BottomTabBarComponent.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategorySubComponent.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/CategoryTabComponent.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/GoodsListComponent.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/view/TabBarsComponent.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ComparisonPage.ets"
-      ],
-      "error": false
-    },
-    "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/GoodsDetailPage.ets": {
-      "mtimeMs": 1767000356516.5007,
-      "children": [
-        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.router.d.ts",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/CommonConstants.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "/Users/changchen/working_place/cybermall/entry/src/main/ets/pages/ComparisonPage.ets": {
-      "mtimeMs": 1767057979609.0073,
-      "children": [
-        "/Applications/DevEco-Studio.app/Contents/sdk/default/openharmony/ets/api/@ohos.router.d.ts",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/viewmodel/InitialData.ets",
-        "/Users/changchen/working_place/cybermall/entry/src/main/ets/common/Colors.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
     }
   }
 }

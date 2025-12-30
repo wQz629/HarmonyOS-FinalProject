@@ -28,47 +28,47 @@ export default class CategoryPage extends ViewPU {
         this.categoryData = [
             {
                 id: 0,
-                name: { "id": 16777271, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                name: { "id": 16777272, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 subCategories: [
-                    { id: 0, name: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 1, name: { "id": 16777280, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 2, name: { "id": 16777283, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+                    { id: 0, name: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 1, name: { "id": 16777281, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 2, name: { "id": 16777284, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
                 ]
             },
             {
                 id: 1,
                 name: { "id": 16777247, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 subCategories: [
-                    { id: 0, name: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 1, name: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 2, name: { "id": 16777281, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+                    { id: 0, name: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 1, name: { "id": 16777276, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 2, name: { "id": 16777282, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
                 ]
             },
             {
                 id: 2,
                 name: { "id": 16777230, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 subCategories: [
-                    { id: 0, name: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 1, name: { "id": 16777282, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 2, name: { "id": 16777284, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+                    { id: 0, name: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 1, name: { "id": 16777283, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 2, name: { "id": 16777285, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
                 ]
             },
             {
                 id: 3,
-                name: { "id": 16777288, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
+                name: { "id": 16777289, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 subCategories: [
-                    { id: 0, name: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 1, name: { "id": 16777276, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 2, name: { "id": 16777278, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+                    { id: 0, name: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 1, name: { "id": 16777277, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 2, name: { "id": 16777279, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
                 ]
             },
             {
                 id: 4,
                 name: { "id": 16777243, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" },
                 subCategories: [
-                    { id: 0, name: { "id": 16777274, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 1, name: { "id": 16777279, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
-                    { id: 2, name: { "id": 16777277, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
+                    { id: 0, name: { "id": 16777275, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 1, name: { "id": 16777280, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } },
+                    { id: 2, name: { "id": 16777278, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } }
                 ]
             }
         ];
