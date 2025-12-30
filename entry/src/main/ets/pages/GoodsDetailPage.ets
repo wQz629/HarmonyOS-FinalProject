@@ -41,18 +41,53 @@ const GOODS_NAMES: Resource[] = [
   $r('app.string.goodsName'),
   $r('app.string.another_goodsName'),
 ];
+import { BrowsingHistoryItem } from '../viewmodel/InitialData';
 
 @Entry
 @Component
 export default struct GoodsDetailPage {
   @State goodsName: string = (router.getParams() as Record<string, Object>)['goodsName'] as string;
   @State goodsPrice: string = (router.getParams() as Record<string, Object>)['goodsPrice'] as string;
+  @State goodsImg: string = '';
+  @State goodsId: number = 0;
   @State originalPrice: string = '¥299';
   @State salesCount: string = '6662人已购买';
   @State rating: string = '95%好评';
   @State selectedQuantity: number = 1;
-  @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;//使用 @StorageLink 确保当 PersonalPage 改变主题时，这里会自动刷新
+  @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
+  @StorageLink('browsingHistory') browsingHistory: BrowsingHistoryItem[] = [];
 
+  aboutToAppear(): void {
+    // 获取路由参数
+    const params = router.getParams() as Record<string, Object>;
+    this.goodsImg = params['goodsImg'] as string;
+    this.goodsId = params['goodsId'] as number;
+    // 记录浏览历史
+    this.recordBrowsingHistory();
+  }
+
+  private recordBrowsingHistory(): void {
+    // 检查是否已经浏览过该商品（防止重复）
+    const existingIndex = this.browsingHistory.findIndex(item => item.id === this.goodsId);
+    
+    if (existingIndex !== -1) {
+      // 如果已存在，更新时间戳并移到最前面
+      const existingItem = this.browsingHistory[existingIndex];
+      existingItem.browsedTime = Date.now();
+      this.browsingHistory.splice(existingIndex, 1);
+      this.browsingHistory.unshift(existingItem);
+    } else {
+      // 如果不存在，创建新记录
+      const newRecord = new BrowsingHistoryItem(
+        this.goodsId,
+        $r('app.media.goodsImg'),
+        this.goodsName,
+        this.goodsPrice,
+        Date.now()
+      );
+      this.browsingHistory.unshift(newRecord);
+    }
+  }
 
   @Builder
   TopNavigationBar() {
