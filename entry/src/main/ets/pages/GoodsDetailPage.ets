@@ -27,6 +27,7 @@ import {
 import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
 import { CartItem } from './ShoppingCartPage';
 import promptAction from '@ohos.promptAction';
+import { BrowsingHistoryItem } from '../viewmodel/InitialData';
 
 // 在组件外或类中定义一个图片资源池
 const GOODS_IMAGES: Resource[] = [
@@ -41,7 +42,7 @@ const GOODS_NAMES: Resource[] = [
   $r('app.string.goodsName'),
   $r('app.string.another_goodsName'),
 ];
-import { BrowsingHistoryItem } from '../viewmodel/InitialData';
+
 
 @Entry
 @Component
