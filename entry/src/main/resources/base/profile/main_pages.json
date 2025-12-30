@@ -3,6 +3,7 @@
     "pages/ListIndex",
     "pages/GoodsDetailPage",
     "pages/PublishGoodsPage",
-    "pages/ComparisonPage"
+    "pages/ComparisonPage",
+    "pages/BrowsingHistoryPage"
   ]
 }
