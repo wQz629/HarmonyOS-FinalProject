@@ -1,4 +1,4 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ&›if (!("finalizeConstruction" in ViewPU.prototype)) {
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚdif (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 /*
@@ -17,14 +17,20 @@
  */
 import * as commonConst from '../common/CommonConstants';
 import { ListDataSource } from '../viewmodel/ListDataSource';
+import { DEFAULT_THEME } from '../common/Colors';
+import router from '@ohos.router'; // å¼•å…¥è·¯ç”±æ¨¡å—
+import promptAction from '@ohos.promptAction';
 export default class GoodsList extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
         super(parent, __localStorage, elmtId, extraInfo);
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
-        this.__goodsListData = new ObservedPropertyObjectPU(new ListDataSource(), this, "goodsListData");
+        this.__compareList = this.createStorageLink('compareList', [], "compareList");
+        this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
+        this.__goodsListData = new ObservedPropertyObjectPU(ListDataSource.getInstance(), this, "goodsListData");
         this.addProvidedVar("goodsListData", this.__goodsListData, false);
+        this.__layoutMode = new SynchedPropertySimpleOneWayPU(params.layoutMode, this, "layoutMode");
         this.startTouchOffsetY = 0;
         this.endTouchOffsetY = 0;
         this.setInitiallyProvidedValue(params);
@@ -34,6 +40,9 @@ export default class GoodsList extends ViewPU {
         if (params.goodsListData !== undefined) {
             this.goodsListData = params.goodsListData;
         }
+        if (params.layoutMode === undefined) {
+            this.__layoutMode.set('list');
+        }
         if (params.startTouchOffsetY !== undefined) {
             this.startTouchOffsetY = params.startTouchOffsetY;
         }
@@ -42,14 +51,33 @@ export default class GoodsList extends ViewPU {
         }
     }
     updateStateVars(params) {
+        this.__layoutMode.reset(params.layoutMode);
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__compareList.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentThemeColors.purgeDependencyOnElmtId(rmElmtId);
         this.__goodsListData.purgeDependencyOnElmtId(rmElmtId);
+        this.__layoutMode.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
+        this.__compareList.aboutToBeDeleted();
+        this.__currentThemeColors.aboutToBeDeleted();
         this.__goodsListData.aboutToBeDeleted();
+        this.__layoutMode.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
+    }
+    get compareList() {
+        return this.__compareList.get();
+    }
+    set compareList(newValue) {
+        this.__compareList.set(newValue);
+    }
+    get currentThemeColors() {
+        return this.__currentThemeColors.get();
+    }
+    set currentThemeColors(newValue) {
+        this.__currentThemeColors.set(newValue);
     }
     get goodsListData() {
         return this.__goodsListData.get();
@@ -57,129 +85,385 @@ export default class GoodsList extends ViewPU {
     set goodsListData(newValue) {
         this.__goodsListData.set(newValue);
     }
-    initialRender() {
+    get layoutMode() {
+        return this.__layoutMode.get();
+    }
+    set layoutMode(newValue) {
+        this.__layoutMode.set(newValue);
+    }
+    // å°†å•†å“æ•°æ®æŒ‰ä¸¤åˆ—åˆ†ç»„ï¼ˆç”¨äºç½‘æ ¼å¸ƒå±€ï¼‰
+    groupItems(data) {
+        let rows = [];
+        for (let i = 0; i < data.totalCount(); i += 2) {
+            let row = [];
+            let item1 = data.getData(i);
+            if (item1)
+                row.push(item1);
+            if (i + 1 < data.totalCount()) {
+                let item2 = data.getData(i + 1);
+                if (item2)
+                    row.push(item2);
+            }
+            if (row.length > 0)
+                rows.push(row);
+        }
+        return rows;
+    }
+    // åˆ¤æ–­å•†å“æ˜¯å¦å·²åœ¨å¯¹æ¯”åˆ—è¡¨ä¸­
+    isInCompareList(item) {
+        return this.compareList.some(compareItem => compareItem.id === item.id);
+    }
+    // å¤„ç†å¯¹æ¯”ç‚¹å‡»
+    handleCompare(item) {
+        if (this.isInCompareList(item)) {
+            // å¦‚æœå·²å­˜åœ¨ï¼Œåˆ™ç§»é™¤
+            this.compareList = this.compareList.filter(compareItem => compareItem.id !== item.id);
+        }
+        else {
+            // å¦‚æœä¸å­˜åœ¨ï¼Œåˆ¤æ–­æ˜¯å¦è¶…è¿‡é™åˆ¶ (æ¯”å¦‚æœ€å¤š2ä¸ª)
+            if (this.compareList.length >= 2) {
+                try {
+                    promptAction.showToast({ message: 'æœ€å¤šåŒæ—¶å¯¹æ¯”ä¸¤ä¸ªå•†å“' });
+                }
+                catch (_) {
+                    // å¤„ç†å¼‚å¸¸
+                }
+                return;
+            }
+            // åŠ å…¥å¯¹æ¯”
+            this.compareList.push(item);
+            try {
+                promptAction.showToast({ message: 'å·²åŠ å…¥å¯¹æ¯”' });
+            }
+            catch (_) {
+                // å¤„ç†å¼‚å¸¸
+            }
+        }
+    }
+    GoodsItem(item, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(80:5)", "entry");
+            Column.padding(8);
+            Column.backgroundColor(this.currentThemeColors.cardBackgroundColor);
+            Column.borderRadius(8);
+            Column.width('48%');
+            Column.onClick(() => {
+                router.pushUrl({
+                    url: 'pages/GoodsDetailPage',
+                    params: {
+                        goodsId: item.id,
+                        goodsName: item.goodsName,
+                        goodsPrice: item.price,
+                        goodsImg: item.goodsImg
+                    }
+                });
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create(item?.goodsImg);
+            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(81:7)", "entry");
+            Image.width(140);
+            Image.height(140);
+            Image.draggable(false);
+        }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(item?.goodsName);
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(86:7)", "entry");
+            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
+            Text.margin({ top: 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(item?.advertisingLanguage);
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(91:7)", "entry");
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
+            Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(27:5)", "entry");
-            Row.justifyContent(FlexAlign.Center);
-            Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(96:7)", "entry");
+            Row.justifyContent(FlexAlign.SpaceBetween);
+            Row.margin({ top: 4 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            List.create({ space: commonConst.LIST_ITEM_SPACE });
-            List.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(28:7)", "entry");
-            List.width(commonConst.GOODS_LIST_WIDTH);
-        }, List);
-        {
-            const __lazyForEachItemGenFunction = _item => {
-                const item = _item;
-                {
-                    const itemCreation2 = (elmtId, isInitialRender) => {
-                        ListItem.create(() => { }, false);
-                        ListItem.onTouch((event) => {
-                            if (event === undefined) {
-                                return;
-                            }
-                            switch (event.type) {
-                                case TouchType.Down:
-                                    this.startTouchOffsetY = event.touches[0].y;
-                                    break;
-                                case TouchType.Up:
-                                    this.startTouchOffsetY = event.touches[0].y;
-                                    break;
-                                case TouchType.Move:
-                                    if (this.startTouchOffsetY - this.endTouchOffsetY > 0) {
-                                        this.goodsListData.pushData();
-                                    }
-                                    break;
-                            }
-                        });
-                        ListItem.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(30:11)", "entry");
-                    };
-                    const observedDeepRender = () => {
-                        this.observeComponentCreation2(itemCreation2, ListItem);
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Row.create();
-                            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(31:13)", "entry");
-                            Row.justifyContent(FlexAlign.SpaceBetween);
-                            Row.height(commonConst.GOODS_LIST_HEIGHT);
-                            Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                        }, Row);
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Column.create();
-                            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(32:15)", "entry");
-                            Column.width(commonConst.GOODS_IMAGE_WIDTH);
-                            Column.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                        }, Column);
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Image.create(item?.goodsImg);
-                            Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(33:17)", "entry");
-                            Image.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                            Image.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                            Image.draggable(false);
-                        }, Image);
-                        Column.pop();
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Column.create();
-                            Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(41:15)", "entry");
-                            Column.padding(commonConst.GOODS_LIST_PADDING);
-                            Column.width(commonConst.GOODS_FONT_WIDTH);
-                            Column.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
-                            Column.justifyContent(FlexAlign.SpaceBetween);
-                        }, Column);
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Text.create(item?.goodsName);
-                            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(42:17)", "entry");
-                            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-                        }, Text);
-                        Text.pop();
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Text.create(item?.advertisingLanguage);
-                            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(45:17)", "entry");
-                            Text.fontColor({ "id": 16777308, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                            Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                            Text.margin({ right: commonConst.MARGIN_RIGHT });
-                        }, Text);
-                        Text.pop();
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Row.create();
-                            Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(50:17)", "entry");
-                            Row.justifyContent(FlexAlign.SpaceAround);
-                            Row.width(commonConst.GOODS_LIST_WIDTH);
-                        }, Row);
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Text.create(item?.evaluate);
-                            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(51:19)", "entry");
-                            Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
-                            Text.fontColor({ "id": 16777306, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                            Text.width(commonConst.EVALUATE_WIDTH);
-                        }, Text);
-                        Text.pop();
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Text.create(item?.price);
-                            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(55:19)", "entry");
-                            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
-                            Text.fontColor({ "id": 16777307, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                        }, Text);
-                        Text.pop();
-                        Row.pop();
-                        Column.pop();
-                        Row.pop();
-                        ListItem.pop();
-                    };
-                    observedDeepRender();
-                }
-            };
-            LazyForEach.create("1", this, this.goodsListData, __lazyForEachItemGenFunction);
-            LazyForEach.pop();
-        }
-        List.pop();
+            Text.create(item?.evaluate);
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(97:9)", "entry");
+            Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
+            Text.fontColor(this.currentThemeColors.accentColor);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(item?.price);
+            Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(100:9)", "entry");
+            Text.fontSize(commonConst.NORMAL_FONT_SIZE);
+            Text.fontColor(this.currentThemeColors.accentColor);
+        }, Text);
+        Text.pop();
         Row.pop();
+        Column.pop();
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.layoutMode === 'list') {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // å¹³é“ºå¸ƒå±€ï¼ˆåŸæœ‰å¸ƒå±€ï¼‰
+                        Stack.create({ alignContent: Alignment.BottomEnd });
+                        Stack.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(127:7)", "entry");
+                        // å¹³é“ºå¸ƒå±€ï¼ˆåŸæœ‰å¸ƒå±€ï¼‰
+                        Stack.width('100%');
+                        // å¹³é“ºå¸ƒå±€ï¼ˆåŸæœ‰å¸ƒå±€ï¼‰
+                        Stack.height('100%');
+                    }, Stack);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(128:9)", "entry");
+                        Row.justifyContent(FlexAlign.Center);
+                        Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        List.create({ space: commonConst.LIST_ITEM_SPACE });
+                        List.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(129:11)", "entry");
+                        List.width(commonConst.GOODS_LIST_WIDTH);
+                        List.divider({ strokeWidth: 1, color: this.currentThemeColors.dividerColor });
+                    }, List);
+                    {
+                        const __lazyForEachItemGenFunction = _item => {
+                            const item = _item;
+                            {
+                                const itemCreation2 = (elmtId, isInitialRender) => {
+                                    ListItem.create(() => { }, false);
+                                    ListItem.onTouch((event) => {
+                                        if (event === undefined) {
+                                            return;
+                                        }
+                                        switch (event.type) {
+                                            case TouchType.Down:
+                                                this.startTouchOffsetY = event.touches[0].y;
+                                                break;
+                                            case TouchType.Up:
+                                                this.startTouchOffsetY = event.touches[0].y;
+                                                break;
+                                            case TouchType.Move:
+                                                if (this.startTouchOffsetY - this.endTouchOffsetY > 0) {
+                                                    this.goodsListData.pushData();
+                                                }
+                                                break;
+                                        }
+                                    });
+                                    ListItem.onClick(() => {
+                                        router.pushUrl({
+                                            url: 'pages/GoodsDetailPage',
+                                            params: {
+                                                goodsId: item.id,
+                                                goodsName: item.goodsName,
+                                                goodsPrice: item.price,
+                                                goodsImg: item.goodsImg
+                                            }
+                                        });
+                                    });
+                                    ListItem.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(131:15)", "entry");
+                                };
+                                const observedDeepRender = () => {
+                                    this.observeComponentCreation2(itemCreation2, ListItem);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Row.create();
+                                        Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(132:17)", "entry");
+                                        Row.justifyContent(FlexAlign.SpaceBetween);
+                                        Row.height(commonConst.GOODS_LIST_HEIGHT);
+                                        Row.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                                    }, Row);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Column.create();
+                                        Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(133:19)", "entry");
+                                        Column.width(commonConst.GOODS_IMAGE_WIDTH);
+                                        Column.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                                    }, Column);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Image.create(item?.goodsImg);
+                                        Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(134:21)", "entry");
+                                        Image.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                                        Image.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                                        Image.draggable(false);
+                                    }, Image);
+                                    Column.pop();
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Column.create();
+                                        Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(142:19)", "entry");
+                                        Column.padding(commonConst.GOODS_LIST_PADDING);
+                                        Column.width(commonConst.GOODS_FONT_WIDTH);
+                                        Column.height(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                                        Column.justifyContent(FlexAlign.SpaceBetween);
+                                    }, Column);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(item?.goodsName);
+                                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(143:21)", "entry");
+                                        Text.fontSize(commonConst.NORMAL_FONT_SIZE);
+                                        Text.fontColor(this.currentThemeColors.primaryTextColor);
+                                    }, Text);
+                                    Text.pop();
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(item?.advertisingLanguage);
+                                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(147:21)", "entry");
+                                        Text.fontColor(this.currentThemeColors.primaryTextColor);
+                                        Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
+                                        Text.margin({ right: commonConst.MARGIN_RIGHT });
+                                    }, Text);
+                                    Text.pop();
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Row.create();
+                                        Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(152:21)", "entry");
+                                        Row.justifyContent(FlexAlign.SpaceBetween);
+                                        Row.width('100%');
+                                    }, Row);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        // ä»·æ ¼å’Œè¯„ä»·
+                                        Column.create();
+                                        Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(154:23)", "entry");
+                                        // ä»·æ ¼å’Œè¯„ä»·
+                                        Column.alignItems(HorizontalAlign.Start);
+                                    }, Column);
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(item?.evaluate);
+                                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(155:25)", "entry");
+                                        Text.fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE);
+                                        Text.fontColor(this.currentThemeColors.accentColor);
+                                    }, Text);
+                                    Text.pop();
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        Text.create(item?.price);
+                                        Text.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(158:25)", "entry");
+                                        Text.fontSize(commonConst.NORMAL_FONT_SIZE);
+                                        Text.fontColor(this.currentThemeColors.accentColor);
+                                    }, Text);
+                                    Text.pop();
+                                    // ä»·æ ¼å’Œè¯„ä»·
+                                    Column.pop();
+                                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                        // å¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                                        Image.create(this.isInCompareList(item) ? { "id": 16777320, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" } : { "id": 16777318, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+                                        Image.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(165:23)", "entry");
+                                        // å¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                                        Image.width(24);
+                                        // å¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                                        Image.height(24);
+                                        Gesture.create(GesturePriority.Low);
+                                        TapGesture.create();
+                                        TapGesture.onAction(() => {
+                                            this.handleCompare(item);
+                                        });
+                                        TapGesture.pop();
+                                        Gesture.pop();
+                                    }, Image);
+                                    Row.pop();
+                                    Column.pop();
+                                    Row.pop();
+                                    ListItem.pop();
+                                };
+                                observedDeepRender();
+                            }
+                        };
+                        LazyForEach.create("1", this, this.goodsListData, __lazyForEachItemGenFunction);
+                        LazyForEach.pop();
+                    }
+                    List.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        If.create();
+                        // æ‚¬æµ®çš„è¿›å…¥å¯¹æ¯”é¡µé¢æŒ‰é’®
+                        if (this.compareList.length > 0) {
+                            this.ifElseBranchUpdateFunction(0, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Button.createWithLabel(`å¼€å§‹å¯¹æ¯” (${this.compareList.length})`);
+                                    Button.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(226:11)", "entry");
+                                    Button.backgroundColor(this.currentThemeColors.accentColor);
+                                    Button.fontColor('#FFFFFF');
+                                    Button.margin({ bottom: 80, right: 20 });
+                                    Button.onClick(() => {
+                                        if (this.compareList.length < 2) {
+                                            try {
+                                                promptAction.showToast({ message: 'è¯·è‡³å°‘é€‰æ‹©ä¸¤ä¸ªå•†å“è¿›è¡Œå¯¹æ¯”' });
+                                            }
+                                            catch (_) {
+                                                // å¤„ç†å¼‚å¸¸
+                                            }
+                                            return;
+                                        }
+                                        router.pushUrl({ url: 'pages/ComparisonPage' });
+                                    });
+                                }, Button);
+                                Button.pop();
+                            });
+                        }
+                        else {
+                            this.ifElseBranchUpdateFunction(1, () => {
+                            });
+                        }
+                    }, If);
+                    If.pop();
+                    // å¹³é“ºå¸ƒå±€ï¼ˆåŸæœ‰å¸ƒå±€ï¼‰
+                    Stack.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // 2åˆ—ç½‘æ ¼å¸ƒå±€
+                        Column.create();
+                        Column.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(247:7)", "entry");
+                        // 2åˆ—ç½‘æ ¼å¸ƒå±€
+                        Column.width(commonConst.LAYOUT_WIDTH_OR_HEIGHT);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const row = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create({ space: 8 });
+                                Row.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(249:11)", "entry");
+                                Row.padding({ left: 8, right: 8 });
+                            }, Row);
+                            this.GoodsItem.bind(this)(row[0]);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                If.create();
+                                if (row.length > 1) {
+                                    this.ifElseBranchUpdateFunction(0, () => {
+                                        this.GoodsItem.bind(this)(row[1]);
+                                    });
+                                }
+                                else {
+                                    this.ifElseBranchUpdateFunction(1, () => {
+                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                            Blank.create();
+                                            Blank.debugLine("entry/src/main/ets/view/GoodsListComponent.ets(254:15)", "entry");
+                                        }, Blank);
+                                        Blank.pop();
+                                    });
+                                }
+                            }, If);
+                            If.pop();
+                            Row.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, this.groupItems(ObservedObject.GetRawObject(this.goodsListData)), forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    // 2åˆ—ç½‘æ ¼å¸ƒå±€
+                    Column.pop();
+                });
+            }
+        }, If);
+        If.pop();
     }
     rerender() {
         this.updateDirtyElements();
     }
 }
-//# sourceMappingURL=GoodsListComponent.js.mapÂ’Ù\D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entry\src\main\ets\common\CommonConstants.etsÙ^D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entry\src\main\ets\viewmodel\ListDataSource.etsÙ]D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entry\src\main\ets\view\GoodsListComponent.etsÔrBœªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ4D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entryÙ.D:\DevEcoStudio\Project\HarmonyOS-FinalProject¥entry¥1.0.0Ô  ’ÔrC’²hostDependencyName®hostModuleNameº../view/GoodsListComponent¥entryC´./GoodsListComponent¥entryÙ4D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entryÔrDÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ1/*
+//# sourceMappingURL=GoodsListComponent.js.mapÂ•ÙSE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\common\CommonConstants.etsÙUE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\viewmodel\ListDataSource.etsÙJE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\common\Colors.etsÙ^ hvigor_ignore_D:_DevEcoStudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙd hvigor_ignore_D:_DevEcoStudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙTE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\view\GoodsListComponent.etsÔrBœªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ+E:\VsCode\MIPP\HarmonyOS-FinalProject\entryÙ%E:\VsCode\MIPP\HarmonyOS-FinalProject¥entry¥1.0.0Ô  ’ÔrC’²hostDependencyName®hostModuleName´./GoodsListComponent¥entryCº../view/GoodsListComponent¥entryÙ+E:\VsCode\MIPP\HarmonyOS-FinalProject\entryÔrDÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ&k/*
  * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License,Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -197,87 +481,298 @@ export default class GoodsList extends ViewPU {
 import * as commonConst from '../common/CommonConstants';
 import { GoodsListItemType } from '../viewmodel/InitialData';
 import { ListDataSource } from '../viewmodel/ListDataSource';
+import { ThemeColors, DEFAULT_THEME } from '../common/Colors';
+import router from '@ohos.router'; // å¼•å…¥è·¯ç”±æ¨¡å—
+import promptAction from '@ohos.promptAction';
 
 @Component
 export default struct GoodsList {
-  @Provide goodsListData: ListDataSource = new ListDataSource();
+  @StorageLink('compareList') compareList: GoodsListItemType[] = [];
+  @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
+  @Provide goodsListData: ListDataSource = ListDataSource.getInstance();
+  @Prop layoutMode: 'list' | 'grid' = 'list'; // æ·»åŠ å¸ƒå±€æ¨¡å¼å±æ€§
   private startTouchOffsetY: number = 0;
   private endTouchOffsetY: number = 0;
 
+  // å°†å•†å“æ•°æ®æŒ‰ä¸¤åˆ—åˆ†ç»„ï¼ˆç”¨äºç½‘æ ¼å¸ƒå±€ï¼‰
+  private groupItems(data: ListDataSource): GoodsListItemType[][] {
+    let rows: GoodsListItemType[][] = [];
+    for (let i = 0; i < data.totalCount(); i += 2) {
+      let row: GoodsListItemType[] = [];
+      let item1 = data.getData(i);
+      if (item1) row.push(item1);
+      if (i + 1 < data.totalCount()) {
+        let item2 = data.getData(i + 1);
+        if (item2) row.push(item2);
+      }
+      if (row.length > 0) rows.push(row);
+    }
+    return rows;
+  }
+
+  // åˆ¤æ–­å•†å“æ˜¯å¦å·²åœ¨å¯¹æ¯”åˆ—è¡¨ä¸­
+  isInCompareList(item: GoodsListItemType): boolean {
+    return this.compareList.some(compareItem => compareItem.id === item.id);
+  }
+
+  // å¤„ç†å¯¹æ¯”ç‚¹å‡»
+  handleCompare(item: GoodsListItemType) {
+    if (this.isInCompareList(item)) {
+      // å¦‚æœå·²å­˜åœ¨ï¼Œåˆ™ç§»é™¤
+      this.compareList = this.compareList.filter(compareItem => compareItem.id !== item.id);
+    } else {
+      // å¦‚æœä¸å­˜åœ¨ï¼Œåˆ¤æ–­æ˜¯å¦è¶…è¿‡é™åˆ¶ (æ¯”å¦‚æœ€å¤š2ä¸ª)
+      if (this.compareList.length >= 2) {
+        try {
+          promptAction.showToast({ message: 'æœ€å¤šåŒæ—¶å¯¹æ¯”ä¸¤ä¸ªå•†å“' });
+        } catch (_) {
+          // å¤„ç†å¼‚å¸¸
+        }
+        return;
+      }
+      // åŠ å…¥å¯¹æ¯”
+      this.compareList.push(item);
+      try {
+        promptAction.showToast({ message: 'å·²åŠ å…¥å¯¹æ¯”' });
+      } catch (_) {
+        // å¤„ç†å¼‚å¸¸
+      }
+    }
+  }
+
+  @Builder
+  GoodsItem(item: GoodsListItemType) {
+    Column() {
+      Image(item?.goodsImg)
+        .width(140) // ç½‘æ ¼å¸ƒå±€ä¸­å›¾ç‰‡å®½åº¦è°ƒæ•´ä¸º140
+        .height(140) // é«˜åº¦ä¹Ÿè°ƒæ•´ä¸º140
+        .draggable(false)
+
+      Text(item?.goodsName)
+        .fontSize(commonConst.NORMAL_FONT_SIZE)
+        .fontColor(this.currentThemeColors.primaryTextColor)
+        .margin({ top: 8 })
+
+      Text(item?.advertisingLanguage)
+        .fontColor(this.currentThemeColors.primaryTextColor)
+        .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
+        .margin({ top: 4 })
+
+      Row() {
+        Text(item?.evaluate)
+          .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
+          .fontColor(this.currentThemeColors.accentColor)
+        Text(item?.price)
+          .fontSize(commonConst.NORMAL_FONT_SIZE)
+          .fontColor(this.currentThemeColors.accentColor)
+      }
+      .justifyContent(FlexAlign.SpaceBetween)
+      .margin({ top: 4 })
+    }
+    .padding(8)
+    .backgroundColor(this.currentThemeColors.cardBackgroundColor)
+    .borderRadius(8)
+    .width('48%') // è®¾ç½®å®½åº¦ä¸º48%ä»¥é€‚åº”ä¸¤åˆ—å¸ƒå±€
+    .onClick(() => {
+      router.pushUrl({
+        url: 'pages/GoodsDetailPage',
+        params: {
+          goodsId: item.id,
+          goodsName: item.goodsName,
+          goodsPrice: item.price,
+          goodsImg: item.goodsImg
+        }
+      });
+    })
+  }
+
   build() {
-    Row() {
-      List({ space: commonConst.LIST_ITEM_SPACE }) {
-        LazyForEach(this.goodsListData, (item: GoodsListItemType) => {
-          ListItem() {
-            Row() {
-              Column() {
-                Image(item?.goodsImg)
-                  .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-                  .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-                  .draggable(false)
-              }
-              .width(commonConst.GOODS_IMAGE_WIDTH)
-              .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-
-              Column() {
-                Text(item?.goodsName)
-                  .fontSize(commonConst.NORMAL_FONT_SIZE)
-
-                Text(item?.advertisingLanguage)
-                  .fontColor($r('app.color.gray'))
-                  .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                  .margin({ right: commonConst.MARGIN_RIGHT })
-
+    if (this.layoutMode === 'list') {
+      // å¹³é“ºå¸ƒå±€ï¼ˆåŸæœ‰å¸ƒå±€ï¼‰
+      Stack({ alignContent: Alignment.BottomEnd }) {
+        Row() {
+          List({ space: commonConst.LIST_ITEM_SPACE }) {
+            LazyForEach(this.goodsListData, (item: GoodsListItemType) => {
+              ListItem() {
                 Row() {
-                  Text(item?.evaluate)
-                    .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
-                    .fontColor($r('app.color.deepGray'))
-                    .width(commonConst.EVALUATE_WIDTH)
-                  Text(item?.price).fontSize(commonConst.NORMAL_FONT_SIZE).fontColor($r('app.color.freshRed'))
+                  Column() {
+                    Image(item?.goodsImg)
+                      .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+                      .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+                      .draggable(false)
+                  }
+                  .width(commonConst.GOODS_IMAGE_WIDTH)
+                  .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+
+                  Column() {
+                    Text(item?.goodsName)
+                      .fontSize(commonConst.NORMAL_FONT_SIZE)
+                      .fontColor(this.currentThemeColors.primaryTextColor)
+
+                    Text(item?.advertisingLanguage)
+                      .fontColor(this.currentThemeColors.primaryTextColor)
+                      .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
+                      .margin({ right: commonConst.MARGIN_RIGHT })
+
+                    Row() {
+                      // ä»·æ ¼å’Œè¯„ä»·
+                      Column() {
+                        Text(item?.evaluate)
+                          .fontSize(commonConst.GOODS_EVALUATE_FONT_SIZE)
+                          .fontColor(this.currentThemeColors.accentColor)
+                        Text(item?.price)
+                          .fontSize(commonConst.NORMAL_FONT_SIZE)
+                          .fontColor(this.currentThemeColors.accentColor)
+                      }
+                      .alignItems(HorizontalAlign.Start)
+
+                      // å¯¹æ¯”å›¾æ ‡/æŒ‰é’®
+                      Image(this.isInCompareList(item) ? $r('app.media.ic_compare_selected') : $r('app.media.ic_compare_unselected'))
+                        .width(24)
+                        .height(24)
+                        .gesture(
+                          TapGesture()
+                            .onAction(() => {
+                              this.handleCompare(item);
+                            })
+                        )
+                    }
+                    .justifyContent(FlexAlign.SpaceBetween)
+                    .width('100%')
+                  }
+                  .padding(commonConst.GOODS_LIST_PADDING)
+                  .width(commonConst.GOODS_FONT_WIDTH)
+                  .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+                  .justifyContent(FlexAlign.SpaceBetween)
                 }
-                .justifyContent(FlexAlign.SpaceAround)
-                .width(commonConst.GOODS_LIST_WIDTH)
+                .justifyContent(FlexAlign.SpaceBetween)
+                .height(commonConst.GOODS_LIST_HEIGHT)
+                .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
               }
-              .padding(commonConst.GOODS_LIST_PADDING)
-              .width(commonConst.GOODS_FONT_WIDTH)
-              .height(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-              .justifyContent(FlexAlign.SpaceBetween)
-            }
-            .justifyContent(FlexAlign.SpaceBetween)
-            .height(commonConst.GOODS_LIST_HEIGHT)
-            .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
-          }
-          .onTouch((event?: TouchEvent) => {
-            if (event === undefined) {
-              return;
-            }
-            switch (event.type) {
-              case TouchType.Down:
-                this.startTouchOffsetY = event.touches[0].y;
-                break;
-              case TouchType.Up:
-                this.startTouchOffsetY = event.touches[0].y;
-                break;
-              case TouchType.Move:
-                if (this.startTouchOffsetY - this.endTouchOffsetY > 0) {
-                  this.goodsListData.pushData();
+              .onTouch((event?: TouchEvent) => {
+                if (event === undefined) {
+                  return;
                 }
-                break;
+                switch (event.type) {
+                  case TouchType.Down:
+                    this.startTouchOffsetY = event.touches[0].y;
+                    break;
+                  case TouchType.Up:
+                    this.startTouchOffsetY = event.touches[0].y;
+                    break;
+                  case TouchType.Move:
+                    if (this.startTouchOffsetY - this.endTouchOffsetY > 0) {
+                      this.goodsListData.pushData();
+                    }
+                    break;
+                }
+              })
+              .onClick(() => {
+                router.pushUrl({
+                  url: 'pages/GoodsDetailPage',
+                  params: {
+                    goodsId: item.id,
+                    goodsName: item.goodsName,
+                    goodsPrice: item.price,
+                    goodsImg: item.goodsImg
+                  }
+                })
+              })
+            })
+          }
+          .width(commonConst.GOODS_LIST_WIDTH)
+          .divider({ strokeWidth: 1, color: this.currentThemeColors.dividerColor })
+        }
+        .justifyContent(FlexAlign.Center)
+        .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
+
+        // æ‚¬æµ®çš„è¿›å…¥å¯¹æ¯”é¡µé¢æŒ‰é’®
+        if (this.compareList.length > 0) {
+          Button(`å¼€å§‹å¯¹æ¯” (${this.compareList.length})`)
+            .backgroundColor(this.currentThemeColors.accentColor)
+            .fontColor('#FFFFFF')
+            .margin({ bottom: 80, right: 20 })
+            .onClick(() => {
+              if (this.compareList.length < 2) {
+                try {
+                  promptAction.showToast({ message: 'è¯·è‡³å°‘é€‰æ‹©ä¸¤ä¸ªå•†å“è¿›è¡Œå¯¹æ¯”' });
+                } catch (_) {
+                  // å¤„ç†å¼‚å¸¸
+                }
+                return;
+              }
+              router.pushUrl({ url: 'pages/ComparisonPage' });
+            })
+        }
+      }
+      .width('100%')
+      .height('100%')
+    } else {
+      // 2åˆ—ç½‘æ ¼å¸ƒå±€
+      Column() {
+        ForEach(this.groupItems(this.goodsListData), (row: GoodsListItemType[], index: number) => {
+          Row({ space: 8 }) {
+            this.GoodsItem(row[0])
+            if (row.length > 1) {
+              this.GoodsItem(row[1])
+            } else {
+              Blank()
             }
-          })
+          }
+          .padding({ left: 8, right: 8 })
         })
       }
-      .width(commonConst.GOODS_LIST_WIDTH)
+      .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
     }
-    .justifyContent(FlexAlign.Center)
-    .width(commonConst.LAYOUT_WIDTH_OR_HEIGHT)
   }
-}ÀÔrE’¹../common/CommonConstants»../viewmodel/ListDataSourceÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙ\D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entry\src\main\ets\common\CommonConstants.etsAÃªoh-resolveÂFAÂÙ^D:\DevEcoStudio\Project\HarmonyOS-FinalProject\entry\src\main\ets\viewmodel\ListDataSource.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappingsµGoodsListComponent.js ‘¶GoodsListComponent.etsÜ ±‘”    ‘” —”   ” ” ” ” ”8 8”9 9˜”   ” ”	 	” ” ” ”< <”= =–”   ” ” ” ” ” ‘”  ””< +”Ì@ /”ÌN =”ÌP ?’”! &”" '’” $”  %‘” =’” ” ’” ” ‘” ’” ” ˜” ” ” ÌZ” ÌZ” ÌZ”( ÌZ”) ÌZ”/ ÌZ$˜” ” ” Ì[” Ì[
-” Ì[”! Ì[”" Ì[”8 Ì[-š” ” 
-” ” ” ”! ”, ”-  ”< /”> 1˜” ” 
-” ÌX” ÌX” ÌX”" ÌX”# ÌX”3 ÌX)™” 
-”  ”! ÌD”( ÌD”) ÌD”* ÌD”/ ÌD&”1 ÌD(”3 ÌD*–” ÌE”  ÌE”% ÌE”* ÌE”3 ÌE#”5 ÌE%’”  ÌF”' ÌF‘” ÌG–” ÌH”$ ÌH”) ÌH”* ÌH”. ÌH”0 ÌH •”  ÌI”% ÌI”. ÌI”/ ÌI”3 ÌI!”$ ÌJ”( ÌJ”) ÌJ”: ÌJ&”= ÌJ)”ÌB ÌJ.”ÌC ÌJ/”ÌJ ÌJ6”ÌK ÌJ7”ÌL ÌJ8”ÌM ÌJ9”ÌN ÌJ:”ÌO ÌJ;”ÌP ÌJ<’”$ ÌK”* ÌK•”  ÌL”% ÌL”. ÌL”/ ÌL”1 ÌL”$ ÌM”( ÌM”) ÌM”: ÌM&”= ÌM)”ÌB ÌM.”ÌC ÌM/”ÌJ ÌM6”ÌK ÌM7”ÌL ÌM8”ÌM ÌM9”ÌN ÌM:”ÌO ÌM;”ÌP ÌM<’”$ ÌN”* ÌN•”  ÌO”% ÌO”. ÌO”/ ÌO”3 ÌO!œ”$ ÌP”( ÌP”, ÌP”- ÌP”> ÌP*”ÌA ÌP-”ÌE ÌP1”ÌF ÌP2”ÌU ÌPÌA”ÌX ÌPÌD”ÌY ÌPÌE”Ì[ ÌPÌG˜”( ÌQ”, ÌQ”- ÌQ”: ÌQ$”; ÌQ%”ÌC ÌQ-”ÌE ÌQ/”ÌF ÌQ0‘”% ÌR’”$ ÌS”* ÌS‘” ÌT’” ÌU
-” ÌU’” ” ˜” ” ”  Ì@”. Ì@”/ Ì@”8 Ì@%”9 Ì@&”ÌE Ì@2˜” ” ”  ÌA”& ÌA”' ÌA”2 ÌA”3 ÌA ”ÌD ÌA1˜” ” ”  ÌB”% ÌB”& ÌB”1 ÌB”2 ÌB”ÌH ÌB5’” ”" ˜” ”" ”# %”( %”) %”4 % ”5 %!”ÌF %2˜” ”" ”# &”) &”* &”5 &!”6 &"”ÌL &8–”  ”!  ”)  ”-  ”/  ”7  $˜”  ”!  ”" !”' !”( !”3 !$”4 !%”ÌJ !;˜”  ”!  ”" "”( "”) "”4 "%”5 "&”ÌK "<–”  ”!  ”" #”+ #”, #”1 #"’” ” ’” (”" (˜” (”" (”# ;”* ;”+ ;”6 ;"”7 ;#”ÌI ;5˜” (”" (”# <”( <”) <”4 < ”5 <!”ÌE <1˜” (”" (”# =”) =”* =”5 =!”6 ="”ÌL =8˜” (”" (”# >”1 >”2 >”; >'”< >(”ÌH >4–” )”  )”( )”, )”. )”7 )$˜” )”  )”! *”) *”* *”5 *'”6 *(”ÌF *8’” )” )–” ,”  ,”( ,”, ,”. ,”ÌA ,.”” ,”  ,”! -”* -˜” ,”  ,”! .”) .”* .”5 .'”6 .(”ÌN .Ì@œ” ,”  ,”! /”' /”( /”* /”/ /!”1 /#”< /.”= //”ÌI /;”ÌK /=’” ,” ,’” 1” 1˜” 1” 1”  8”. 8”/ 8 ”8 8)”9 8*”ÌD 85˜” 1” 1”  9”% 9”& 9”1 9"”2 9#”ÌB 93–” 2”  2”( 2”, 2”. 2”6 2%˜” 2”  2”! 3”) 3”* 3”5 3)”6 3*”ÌN 3ÌB”” 2”  2”! 4”* 4˜” 2”  2”! 5”& 5”' 5”2 5&”3 5'”ÌA 55’” 2” 2–” 6”  6”( 6”, 6”. 6”3 6"˜” 6”  6”! 6$”) 6,”* 6-”5 68”6 69”ÌF 6ÌI”” 6”  6”! 6ÌK”* 6ÌT’” 6” 6’” 1” 1’” (” (’” ” ’” 
-”  ””* ”. ”/ ”< &’” ” ’” ” 
-’” ” ‘” Ì\ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ ¶‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
- ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍéÍ"‘ÔrL”¤type¥start£end¥local¸ImportNamespaceSpecifierÍğÍ ÔrM”¤type¥start£end¤nameªIdentifierÍõÍ «commonConstÔrN•¤type¥start£end¥value£raw§LiteralÍÍ!¹../common/CommonConstants»'../common/CommonConstants'K±ImportDeclarationÍ$Ía‘ÔrO•¤type¥start£end¨imported¥local¯ImportSpecifierÍ-Í;MªIdentifierÍ-Í;®ListDataSourceMªIdentifierÍ-Í;®ListDataSourceN§LiteralÍCÍ`»../viewmodel/ListDataSource½'../viewmodel/ListDataSource'
+}ÀÔrE•¬@ohos.router²@ohos.promptAction¹../common/CommonConstants»../viewmodel/ListDataSource°../common/ColorsÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙ^ hvigor_ignore_D:_DevEcoStudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂFAÃÙd hvigor_ignore_D:_DevEcoStudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsAÃªoh-resolveÂFAÂÙSE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\common\CommonConstants.etsAÃªoh-resolveÂFAÂÙUE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\viewmodel\ListDataSource.etsAÃªoh-resolveÂFAÂÙJE:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets\common\Colors.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappingsµGoodsListComponent.js ‘¶GoodsListComponent.etsÜÍ‘”    ‘” —”   ” ” ” ” ”8 8”9 9˜”   ” ”	 	” ” ” ”< <”= =˜”   ” ”	 ” #” %” +”0 =”1 >˜”   ” ” ” ”! !”" "”# #”, ,–”   ” ” ” ”- -”. .–”   ” ” ” ” ” ‘”  ””4 ”ÌA ”ÌC ÌA”ÌE ÌC””; ”ÌH ”ÌJ Ì@”ÌW ÌM•”< +”ÌJ 9”ÌK :”ÌV ÌE”ÌX ÌG’”! &”" '’” $”  %‘” .’”" &”( ,’”' ”1 ’” ” )’” ” )’” ” 0’” ” 0’” ” ’” ” ’” ” ’” ” ’” ” ””  
+”  ”  ”  )–” !” !” !” !&” !(” !)Ü ” "” "	” "” "” "” "” "” "” "”  "”! "”+ "'”- ")”/ "+”0 ",”4 "0”5 "1”7 "3–” #” #
+” #” #%” #'” #(›” $” $
+” $” $” $” $”$ $”% $”& $ ”' $!”( $"“” %” %
+” %˜” %” %” %” %” %” %” % ”  %!›” &” &
+” &” &” &” &” &” &”' &!”) &#”+ &%” '” '” '” '”  '”! '”( ' ”) '!”* '"”- '%”. '&”/ ''”0 '(“” (” (” (˜” (” (” (” (” (”" (!”# ("”$ (#‘” )—” *” *
+” *” *” *” *” *˜” *” *” *” *#” *$” *'” *(” *)‘”	 +”” ,” ,” ,” ,’” -” -’” /” /”” 0” 0” 0” 0)Ü ” 1” 1” 1” 1” 1”  1”$ 1 ”% 1!”0 1,”1 1-”3 1/”4 10”? 1;”Ì@ 1<”ÌB 1>”ÌG 1ÌC”ÌK 1ÌG”ÌL 1ÌH”ÌN 1ÌJ”ÌO 1ÌK”ÌP 1ÌL’” 2” 2’” 4” 4”” 5” 5” 5” 5'™” 6” 6” 6” 6”  6”! 6”% 6!”& 6"”( 6$’” 7” 7Ü ” 8” 8
+” 8” 8” 8”# 8”$ 8”/ 8)”0 8*”6 80”7 81”ÌB 8<”ÌC 8=”ÌE 8?”ÌF 8Ì@”ÌQ 8ÌK”ÌR 8ÌL”ÌT 8ÌN”ÌY 8ÌS”Ì] 8ÌW”Ì^ 8ÌX”Ì` 8ÌZ”Ìa 8Ì[”Ìb 8Ì\‘”	 9‘” 9’” :”& : š” ;” ;
+” ;” ;”  ;”! ;”' ;!”+ ;%”, ;&”. ;(’” <” <œ” =
+”  =”! =”* = ”+ =!”- =#”4 =*”6 =,”ÌB =8”ÌD =:”ÌE =;”ÌF =<‘” >	”” >
+” >” >” >’” ?
+” ?‘” Ì@	’” ÌA” ÌA‘” ÌB’” ÌC” ÌCš” ÌD” ÌD
+” ÌD” ÌD” ÌD”! ÌD”" ÌD”& ÌD ”' ÌD!”( ÌD"’” ÌE” ÌE
+œ” ÌF” ÌF” ÌF”& ÌF”' ÌF”) ÌF!”0 ÌF(”2 ÌF*”9 ÌF1”; ÌF3”< ÌF4”= ÌF5‘” ÌG”” ÌG” ÌG” ÌG” ÌG’” ÌH” ÌH‘” ÌI‘”	 ÌJ’” ÌK” ÌK”” ÌN” ÌN” ÌN” ÌN#’” ÌO” ÌO
+–” ÌO” ÌO
+” Ìj” Ìj” Ìj” Ìjš” ÌO” ÌO
+” Ìk”" Ìk”# Ìk”' Ìk”( Ìk”: Ìk,”; Ìk-”ÌN ÌkÌ@–” ÌO” ÌO
+” Ìl” Ìl”  Ìl”! Ìl–” ÌO” ÌO
+” Ìm” Ìm
+” Ìm” Ìm—” ÌO” ÌO
+” Ìn” Ìn” Ìn” Ìn”  Ìn•” Ìo” Ìo” Ìo” Ìo” Ìo”” Ìp” Ìp” Ìp”0 Ìp$“” Ìq” Ìq” Ìq–” Ìr
+” Ìr”! Ìr”% Ìr”& Ìr”( Ìr–” Ìs
+”! Ìs”# Ìs”' Ìs”( Ìs”1 Ìs#–” Ìt
+”" Ìt”$ Ìt”( Ìt”) Ìt”. Ìt –” Ìu
+”  Ìu”" Ìu”& Ìu”' Ìu”/ Ìu!‘” Ìv	“” Ìw” Ìw” Ìw	’” Ìx” Ìx–” ÌP” ÌP” ÌP” ÌP” ÌP”' ÌP–” ÌP” ÌP” ÌQ	” ÌQ” ÌQ” ÌQ–” ÌP” ÌP” ÌR	” ÌR” ÌR” ÌR–” ÌP” ÌP” ÌS	” ÌS” ÌS”! ÌS–” ÌU” ÌU
+” ÌU” ÌU” ÌU”' ÌU˜” ÌU” ÌU
+” ÌV	” ÌV” ÌV”% ÌV”& ÌV”6 ÌV.š” ÌU” ÌU
+” ÌW	” ÌW” ÌW” ÌW”  ÌW”2 ÌW*”3 ÌW+”ÌC ÌW;š” ÌU” ÌU
+” ÌX	” ÌX” ÌX” ÌX” ÌX” ÌX”  ÌX”" ÌX’” ÌU” ÌU
+–” ÌZ” ÌZ
+” ÌZ” ÌZ” ÌZ”1 ÌZ$š” ÌZ” ÌZ
+” Ì[	” Ì[” Ì[” Ì[”  Ì[”2 Ì[*”3 Ì[+”ÌC Ì[;˜” ÌZ” ÌZ
+” Ì\	” Ì\” Ì\”% Ì\”& Ì\”> Ì\6š” ÌZ” ÌZ
+” Ì]	” Ì]” Ì]” Ì]” Ì]” Ì]”  Ì]”" Ì]’” ÌZ” ÌZ
+’” Ì_” Ì_	˜” Ì_” Ì_	” Ìg” Ìg” Ìg”( Ìg”) Ìg ”5 Ìg,š” Ì_” Ì_	” Ìh” Ìh” Ìh” Ìh” Ìh” Ìh” Ìh”! Ìh–” Ì`” Ì`” Ì`” Ì`” Ì`”& Ì`˜” Ì`” Ì`” Ìa” Ìa” Ìa”% Ìa”& Ìa ”> Ìa8š” Ì`” Ì`” Ìb” Ìb” Ìb” Ìb”  Ìb”2 Ìb,”3 Ìb-”> Ìb8’” Ì`” Ì`–” Ìc” Ìc” Ìc” Ìc” Ìc”# Ìc˜” Ìc” Ìc” Ìd” Ìd” Ìd”% Ìd”& Ìd ”6 Ìd0š” Ìc” Ìc” Ìe” Ìe” Ìe” Ìe”  Ìe”2 Ìe,”3 Ìe-”> Ìe8’” Ìc” Ìc’” Ì_” Ì_	’” ÌO” ÌO
+‘” Ìy‘” Ì{˜” Ì|” Ì|” Ì|” Ì|” Ì|”$ Ì|”* Ì|"”, Ì|$’” Ì}”% Ì}š” Ì~” Ì~”% Ì~”' Ì~”3 Ì~”5 Ì~”> Ì~%”? Ì~&”ÌH Ì~/”ÌJ Ì~1’” Ì}”% Ì}–” Ì~” Ì~” Ìò”# Ìò”$ Ìò”* Ìò’” Ì}”% Ì}–” Ì~” Ì~” Ìó”$ Ìó”% Ìó”+ Ìó’” Ì” Ì˜” Ì” Ì” ÌÜ	”* ÌÜ”+ ÌÜ”4 ÌÜ!”5 ÌÜ"”; ÌÜ(˜” Ì” Ì” Ìİ	”! Ìİ”" Ìİ”- Ìİ”. Ìİ”ÌD Ìİ1š” Ì€
+” Ì€”$ Ì€”& Ì€”+ Ì€”- Ì€”8 Ì€#”9 Ì€$”ÌH Ì€3”ÌJ Ì€5˜” Ì€
+” Ì€” ÌÙ”" ÌÙ”# ÌÙ”. ÌÙ”/ ÌÙ”? ÌÙ-Ü ” Ì€
+” Ì€” ÌÚ”$ ÌÚ”% ÌÚ”' ÌÚ”2 ÌÚ ”4 ÌÚ"”5 ÌÚ#”7 ÌÚ%”< ÌÚ*”> ÌÚ,”ÌB ÌÚ0”ÌC ÌÚ1”ÌU ÌÚÌC”ÌV ÌÚÌD”Ìb ÌÚÌP”Ìd ÌÚÌR™”$ Ì‚”, Ì‚”- Ìº”4 Ìº”5 Ìº”6 Ìº”; Ìº*”= Ìº,”? Ìº.–”( Ì»”, Ì»”1 Ì»”6 Ì»”? Ì»'”ÌA Ì»)’”, Ì¼”3 Ì¼‘”) Ì½–”( Ì¾”0 Ì¾”5 Ì¾”6 Ì¾”: Ì¾"”< Ì¾$•”, Ì¿”1 Ì¿”: Ì¿ ”; Ì¿!”? Ì¿%”0 ÌÀ”4 ÌÀ”5 ÌÀ”ÌF ÌÀ*”ÌI ÌÀ-”ÌN ÌÀ2”ÌO ÌÀ3”ÌV ÌÀ:”ÌW ÌÀ;”ÌX ÌÀ<”ÌY ÌÀ=”ÌZ ÌÀ>”Ì[ ÌÀ?”Ì\ ÌÀÌ@’”0 ÌÁ”6 ÌÁ•”, ÌÂ”1 ÌÂ”: ÌÂ ”; ÌÂ!”= ÌÂ#”0 ÌÃ”4 ÌÃ”5 ÌÃ”ÌF ÌÃ*”ÌI ÌÃ-”ÌN ÌÃ2”ÌO ÌÃ3”ÌV ÌÃ:”ÌW ÌÃ;”ÌX ÌÃ<”ÌY ÌÃ=”ÌZ ÌÃ>”Ì[ ÌÃ?”Ì\ ÌÃÌ@’”0 ÌÄ”6 ÌÄ•”, ÌÅ”1 ÌÅ”: ÌÅ ”; ÌÅ!”? ÌÅ%œ”0 ÌÆ”4 ÌÆ”8 ÌÆ”9 ÌÆ”ÌJ ÌÆ.”ÌM ÌÆ1”ÌQ ÌÆ5”ÌR ÌÆ6”Ìa ÌÆÌE”Ìd ÌÆÌH”Ìe ÌÆÌI”Ìg ÌÆÌK˜”4 ÌÇ”8 ÌÇ”9 ÌÇ”ÌF ÌÇ(”ÌG ÌÇ)”ÌO ÌÇ1”ÌQ ÌÇ3”ÌR ÌÇ4‘”1 ÌÈ’”0 ÌÉ”6 ÌÉ‘”) ÌÊ’”$ ÌË”% ÌË—”$ Ì‚”, Ì‚”- ÌÌ”4 ÌÌ”5 ÌÌ”8 ÌÌ”: ÌÌ•”( ÌÍ”. ÌÍ”/ ÌÍ”6 ÌÍ”7 ÌÍ””, ÌÎ”/ ÌÎ”1 ÌÎ”ÌH ÌÎ.“”, ÌÏ”2 ÌÏ”4 ÌÏ–”0 ÌĞ”7 ÌĞ”9 ÌĞ”= ÌĞ!”> ÌĞ"”Ì@ ÌĞ$–”0 ÌÑ”9 ÌÑ”; ÌÑ”? ÌÑ#”Ì@ ÌÑ$”ÌI ÌÑ-–”0 ÌÒ”: ÌÒ”< ÌÒ ”Ì@ ÌÒ$”ÌA ÌÒ%”ÌF ÌÒ*–”0 ÌÓ”8 ÌÓ”: ÌÓ”> ÌÓ"”? ÌÓ#”ÌG ÌÓ+‘”- ÌÔ“”) ÌÕ”* ÌÕ”+ ÌÕ’”$ ÌÖ”% ÌÖ’”( Ìƒ”+ Ìƒ˜”( Ìƒ”+ Ìƒ”, Ì¶”: Ì¶”; Ì¶ ”ÌD Ì¶)”ÌE Ì¶*”ÌQ Ì¶6˜”( Ìƒ”+ Ìƒ”, Ì·”2 Ì·”3 Ì·”> Ì·#”? Ì·$”ÌP Ì·5˜”( Ìƒ”+ Ìƒ”, Ì¸”1 Ì¸”2 Ì¸”= Ì¸"”> Ì¸#”ÌT Ì¸9’”( Ì„”. Ì„˜”( Ì„”. Ì„”/ ÌŠ”4 ÌŠ”5 ÌŠ”Ì@ ÌŠ$”ÌA ÌŠ%”ÌR ÌŠ6˜”( Ì„”. Ì„”/ Ì‹”5 Ì‹”6 Ì‹”ÌA Ì‹%”ÌB Ì‹&”ÌX Ì‹<–”( Ì…”- Ì…”5 Ì…”9 Ì…”; Ì… ”ÌC Ì…(˜”( Ì…”- Ì…”. Ì†”3 Ì†”4 Ì†”? Ì†(”Ì@ Ì†)”ÌV Ì†?˜”( Ì…”- Ì…”. Ì‡”4 Ì‡”5 Ì‡”Ì@ Ì‡)”ÌA Ì‡*”ÌW Ì‡Ì@–”( Ì…”- Ì…”. Ìˆ”7 Ìˆ ”8 Ìˆ!”= Ìˆ&’”$ Ì„”* Ì„’”( Ì”. Ì˜”( Ì”. Ì”/ Ì±”6 Ì±”7 Ì±”ÌB Ì±&”ÌC Ì±'”ÌU Ì±9˜”( Ì”. Ì”/ Ì²”4 Ì²”5 Ì²”Ì@ Ì²$”ÌA Ì²%”ÌQ Ì²5˜”( Ì”. Ì”/ Ì³”5 Ì³”6 Ì³”ÌA Ì³%”ÌB Ì³&”ÌX Ì³<˜”( Ì”. Ì”/ Ì´”= Ì´!”> Ì´"”ÌG Ì´+”ÌH Ì´,”ÌT Ì´8–”( Ì”, Ì”4 Ì”8 Ì”: Ì”ÌC Ì(˜”( Ì”, Ì”- Ì”5 Ì”6 Ì ”ÌA Ì+”ÌB Ì,”ÌR Ì<š”( Ì”, Ì”- Ì”6 Ì ”7 Ì!”; Ì%”< Ì&”ÌN Ì8”ÌO Ì9”Ì_ ÌÌI’”$ Ì”( Ì–”( Ì’”, Ì’”4 Ì’”8 Ì’”: Ì’”ÌM Ì’2š”( Ì’”, Ì’”- Ì“”6 Ì“ ”7 Ì“!”; Ì“%”< Ì“&”ÌN Ì“8”ÌO Ì“9”Ì_ Ì“ÌI˜”( Ì’”, Ì’”- Ì””5 Ì””6 Ì” ”ÌA Ì”+”ÌB Ì”,”ÌZ Ì”ÌDœ”( Ì’”, Ì’”- Ì•”3 Ì•”4 Ì•”6 Ì• ”; Ì•%”= Ì•'”ÌH Ì•2”ÌI Ì•3”ÌU Ì•?”ÌW Ì•ÌA’”$ Ì’”( Ì’’”( Ì—”+ Ì—˜”( Ì—”+ Ì—”, Ì®”: Ì®#”; Ì®$”ÌD Ì®-”ÌE Ì®.”ÌQ Ì®:–”( Ì—”+ Ì—”, Ì¯”1 Ì¯”2 Ì¯”8 Ì¯!’”( Ì˜”0 Ì˜’”( Ì™”. Ì™’”( Ì˜”0 Ì˜˜”( Ì™”. Ì™”/ Ì¡”9 Ì¡!”: Ì¡"”ÌI Ì¡1”ÌJ Ì¡2”ÌO Ì¡7–”( Ìš”, Ìš”4 Ìš”8 Ìš!”: Ìš#”ÌB Ìš+˜”( Ìš”, Ìš”- Ì›”5 Ì›#”6 Ì›$”ÌA Ì›/”ÌB Ì›0”ÌZ Ì›ÌHš”( Ìš”, Ìš”- Ìœ”6 Ìœ$”7 Ìœ%”; Ìœ)”< Ìœ*”ÌN Ìœ<”ÌO Ìœ=”ÌZ ÌœÌH’”$ Ìš”( Ìš–”( Ì”, Ì”4 Ì”8 Ì!”: Ì#”? Ì(˜”( Ì”, Ì”- Ì”5 Ì#”6 Ì$”ÌA Ì/”ÌB Ì0”ÌR ÌÌ@š”( Ì”, Ì”- ÌŸ”6 ÌŸ$”7 ÌŸ%”; ÌŸ)”< ÌŸ*”ÌN ÌŸ<”ÌO ÌŸ=”ÌZ ÌŸÌH’”$ Ì”( Ì’”$ Ì˜”, Ì˜’”$ Ì™”* Ì™’”( Ì£”2 Ì£ ”( Ì¤”- Ì¤”5 Ì¤”9 Ì¤ ”: Ì¤!”ÌI Ì¤0”ÌJ Ì¤1”ÌN Ì¤5”ÌO Ì¤6”ÌP Ì¤7”ÌQ Ì¤8”ÌÁ Ì¤Ì]”ÌÂ Ì¤Ì^”Í1 Ì¤Ì„’”( Ì£”2 Ì£ –”( Ì¤”- Ì¤”. Ì¥”3 Ì¥”4 Ì¥”6 Ì¥!’”( Ì£”2 Ì£ –”( Ì¤”- Ì¤”. Ì¦”4 Ì¦”5 Ì¦ ”7 Ì¦"’”( Ì¨”2 Ì¨$—”( Ì¨”2 Ì¨$”3 Ì©”; Ì©%”< Ì©&”? Ì©)”ÌA Ì©+˜”, Ìª”0 Ìª"”1 Ìª#”> Ìª0”? Ìª1”ÌC Ìª5”ÌD Ìª6”ÌE Ìª7’”( Ì«”) Ì«’”( Ì¨”2 Ì¨$’”$ Ì—”' Ì—’”$ Ì”* Ì’”$ Ìƒ”' Ìƒ’”$ Ì‚”, Ì‚””6 Ì”: Ì”; Ì”ÌH Ì*’” Ì”# Ì’” Ì€
+” Ì€’” Ì” Ì’” Ìß”& Ìßš” Ìà” Ìà”  Ìà”! Ìà”, Ìà”- Ìà”3 Ìà#”6 Ìà&”7 Ìà'”9 Ìà)š”$ Ìá
+”* Ìá”; Ìá”ÌD Ìá”ÌH Ìá”ÌI Ìá”ÌT Ìá*”ÌU Ìá+”Ì[ Ìá1”Ì^ Ìá4š”$ Ìá
+”* Ìá”+ Ìâ”: Ìâ”; Ìâ”? Ìâ!”Ì@ Ìâ"”ÌR Ìâ4”ÌS Ìâ5”Ì^ ÌâÌ@–”$ Ìá
+”* Ìá”+ Ìã”4 Ìã”5 Ìã”> Ìã ”$ Ìá
+”* Ìá”+ Ìä”1 Ìä”2 Ìä”4 Ìä”: Ìä”< Ìä”> Ìä ”Ì@ Ìä"”ÌE Ìä'”ÌG Ìä)”ÌI Ìä+”ÌK Ìä-—”$ Ìá
+”* Ìá”+ Ìå”2 Ìå”3 Ìå”6 Ìå”8 Ìåš”( Ìæ”, Ìæ”0 Ìæ”1 Ìæ”< Ìæ"”= Ìæ#”ÌC Ìæ)”ÌF Ìæ,”ÌG Ìæ-”ÌI Ìæ/’”, Ìç”0 Ìçœ”0 Ìè”< Ìè”= Ìè”ÌF Ìè(”ÌG Ìè)”ÌI Ìè+”ÌP Ìè2”ÌR Ìè4”Ìa ÌèÌC”Ìc ÌèÌE”Ìd ÌèÌF”Ìe ÌèÌG‘”- Ìé””, Ìé”3 Ìé”4 Ìé”6 Ìé’”0 Ìê”7 Ìê‘”- Ìë’”, Ìì”3 Ìì‘”) Ìíœ”( Ìî”. Ìî”/ Ìî”6 Ìî”7 Ìî”9 Ìî”< Ìî"”> Ìî$”ÌT Ìî:”ÌV Ìî<”ÌW Ìî=”ÌX Ìî>’”$ Ìï”% Ìï’”  Ìá
+”& Ìá‘” Ìğ	‘” Ìğ	’” Ì}”! Ì}’” Ì~” Ì~‘” Ìô‘” Ìô’” Ìõ”! Ìõ’” Ìö” Ìö’” Ìõ”! Ìõ˜” Ìö” Ìö” Í”$ Í”% Í”0 Í”1 Í”ÌG Í/’” Ì÷” Ì÷’”? Ì÷ÌP”ÌD Ì÷Ì]˜”  Ìø
+”# Ìø”+ Ìø”- Ìø”2 Ìø”4 Ìø”5 Ìø”7 Ìø”  Ìø
+”# Ìø”$ Í ”+ Í ”, Í ”. Í ”2 Í ”4 Í ”5 Í ”7 Í ”< Í #”> Í %”? Í &”ÌA Í (š” Ìù”  Ìù”! Ìù”* Ìù”6 Ìù”9 Ìù”: Ìù”; Ìù ”< Ìù!”= Ìù"˜”  Ìú”$ Ìú”' Ìú”( Ìú”. Ìú”1 Ìú”2 Ìú”4 Ìú š”( Ìû”, Ìû”- Ìû”6 Ìû”ÌB Ìû”ÌE Ìû ”ÌF Ìû!”ÌG Ìû"”ÌH Ìû#”ÌI Ìû$‘”! Ìü‘”% Ìü’”, Ìı”1 Ìı’”( Ìı”- Ìı‘”! Ìş’” Ìø
+” Ìø™”; Ì÷”? Ì÷”Ì@ Ì÷”ÌJ Ì÷”Ìg Ì÷ ”Ìk Ì÷$”Ìl Ì÷%”Ìy Ì÷2”Ì{ Ì÷3’” Ì÷” Ì÷’” Ìõ” Ìõ’” Ìö” Ìö‘” Í‘” ÍÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜÒ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache•ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍéÍ"‘ÔrL”¤type¥start£end¥local¸ImportNamespaceSpecifierÍğÍ ÔrM”¤type¥start£end¤nameªIdentifierÍõÍ «commonConstÔrN•¤type¥start£end¥value£raw§LiteralÍÍ!¹../common/CommonConstants»'../common/CommonConstants'K±ImportDeclarationÍ$Ía‘ÔrO•¤type¥start£end¨imported¥local¯ImportSpecifierÍ-Í;MªIdentifierÍ-Í;®ListDataSourceMªIdentifierÍ-Í;®ListDataSourceN§LiteralÍCÍ`»../viewmodel/ListDataSource½'../viewmodel/ListDataSource'K±ImportDeclarationÍcÍ”‘O¯ImportSpecifierÍlÍyMªIdentifierÍlÍy­DEFAULT_THEMEMªIdentifierÍlÍy­DEFAULT_THEMEN§LiteralÍÍ“°../common/Colors²'../common/Colors'K±ImportDeclarationÍ–Í¸‘L¶ImportDefaultSpecifierÍÍ£MªIdentifierÍÍ£¦routerN§LiteralÍ©Í·¬@ohos.router®'@ohos.router'K±ImportDeclarationÍÄÍò‘L¶ImportDefaultSpecifierÍËÍ×MªIdentifierÍËÍ×¬promptActionN§LiteralÍİÍñ²@ohos.promptAction´'@ohos.promptAction'

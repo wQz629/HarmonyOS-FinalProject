@@ -4,10 +4,26 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 interface PersonalPage_Params {
     userName?: string;
     userAvatar?: Resource;
+    isLoggedIn?: boolean;
+    currentUsername?: string;
+    currentThemeType?: ThemeType;
+    currentThemeColors?: ThemeColors;
+    accountData?: AccountData;
+    context?: common.Context;
     menuItems?: MenuItem[];
 }
 import { LAYOUT_WIDTH_OR_HEIGHT, NORMAL_FONT_SIZE, BIGGER_FONT_SIZE, SMALL_FONT_SIZE } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import promptAction from "@ohos:promptAction";
+import { ThemeType, getThemeColors, DEFAULT_THEME } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
+import type { ThemeColors } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
+import router from "@ohos:router";
+import LoginComponent from "@bundle:com.example.list_harmony/entry/ets/view/LoginComponent";
+import { AccountData } from "@bundle:com.example.list_harmony/entry/ets/model/AccountData";
+import type common from "@ohos:app.ability.common";
+import Logger from "@bundle:com.example.list_harmony/entry/ets/model/Logger";
+const TAG: string = '[PersonalPage]';
 interface MenuItem {
+    id: number;
     icon: Resource;
     title: Resource;
     showArrow: boolean;
@@ -20,13 +36,20 @@ export default class PersonalPage extends ViewPU {
         }
         this.__userName = new ObservedPropertySimplePU('用户名', this, "userName");
         this.__userAvatar = new ObservedPropertyObjectPU({ "id": 16777312, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, this, "userAvatar");
+        this.__isLoggedIn = this.createStorageLink('isLoggedIn', false, "isLoggedIn");
+        this.__currentUsername = this.createStorageLink('currentUsername', '', "currentUsername");
+        this.__currentThemeType = this.createStorageLink('themeType', ThemeType.LIGHT, "currentThemeType");
+        this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
+        this.accountData = new AccountData();
+        this.context = getContext(this) as common.Context;
         this.menuItems = [
-            { icon: { "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777260, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
-            { icon: { "id": 16777313, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777236, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
-            { icon: { "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777297, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
-            { icon: { "id": 16777305, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777251, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
-            { icon: { "id": 16777219, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777240, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
-            { icon: { "id": 16777223, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777232, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true }
+            { id: 1, icon: { "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777260, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
+            { id: 2, icon: { "id": 16777313, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777236, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
+            { id: 3, icon: { "id": 16777226, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777297, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
+            // { id:4, icon: $r('app.media.ic_compare'), title: $r('app.string.goods_compare'), showArrow: true },
+            { id: 7, icon: { "id": 16777227, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777319, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
+            { id: 5, icon: { "id": 16777219, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777240, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true },
+            { id: 6, icon: { "id": 16777223, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, title: { "id": 16777232, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, showArrow: true }
         ];
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
@@ -38,6 +61,12 @@ export default class PersonalPage extends ViewPU {
         if (params.userAvatar !== undefined) {
             this.userAvatar = params.userAvatar;
         }
+        if (params.accountData !== undefined) {
+            this.accountData = params.accountData;
+        }
+        if (params.context !== undefined) {
+            this.context = params.context;
+        }
         if (params.menuItems !== undefined) {
             this.menuItems = params.menuItems;
         }
@@ -47,10 +76,18 @@ export default class PersonalPage extends ViewPU {
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__userName.purgeDependencyOnElmtId(rmElmtId);
         this.__userAvatar.purgeDependencyOnElmtId(rmElmtId);
+        this.__isLoggedIn.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentUsername.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentThemeType.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentThemeColors.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__userName.aboutToBeDeleted();
         this.__userAvatar.aboutToBeDeleted();
+        this.__isLoggedIn.aboutToBeDeleted();
+        this.__currentUsername.aboutToBeDeleted();
+        this.__currentThemeType.aboutToBeDeleted();
+        this.__currentThemeColors.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -68,20 +105,54 @@ export default class PersonalPage extends ViewPU {
     set userAvatar(newValue: Resource) {
         this.__userAvatar.set(newValue);
     }
+    //使用 @StorageLink 与全局 AppStorage 双向绑定登录状态
+    private __isLoggedIn: ObservedPropertyAbstractPU<boolean>;
+    get isLoggedIn() {
+        return this.__isLoggedIn.get();
+    }
+    set isLoggedIn(newValue: boolean) {
+        this.__isLoggedIn.set(newValue);
+    }
+    private __currentUsername: ObservedPropertyAbstractPU<string>;
+    get currentUsername() {
+        return this.__currentUsername.get();
+    }
+    set currentUsername(newValue: string) {
+        this.__currentUsername.set(newValue);
+    }
+    //与全局 AppStorage 建立双向同步
+    // 当 themeType 改变时，UI 会自动刷新（如果有依赖它的 UI），且我们修改它会同步回全局
+    private __currentThemeType: ObservedPropertyAbstractPU<ThemeType>;
+    get currentThemeType() {
+        return this.__currentThemeType.get();
+    }
+    set currentThemeType(newValue: ThemeType) {
+        this.__currentThemeType.set(newValue);
+    }
+    private __currentThemeColors: ObservedPropertyAbstractPU<ThemeColors>;
+    get currentThemeColors() {
+        return this.__currentThemeColors.get();
+    }
+    set currentThemeColors(newValue: ThemeColors) {
+        this.__currentThemeColors.set(newValue);
+    }
+    private accountData: AccountData;
+    private context: common.Context;
+    //为菜单项添加 id，方便识别 (id: 3 对应主题设置)
     private menuItems: MenuItem[];
     UserInfoSection(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 16 });
-            Row.debugLine("entry/src/main/ets/pages/PersonalPage.ets(45:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/PersonalPage.ets(68:5)", "entry");
             Row.width(LAYOUT_WIDTH_OR_HEIGHT);
             Row.padding(16);
-            Row.backgroundColor('#FFFFFF');
+            Row.backgroundColor(this.currentThemeColors.cardBackgroundColor);
             Row.borderRadius(8);
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 头像
             Image.create(this.userAvatar);
-            Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(47:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(70:7)", "entry");
             // 头像
             Image.width(64);
             // 头像
@@ -94,7 +165,7 @@ export default class PersonalPage extends ViewPU {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             // 用户信息
             Column.create({ space: 8 });
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(54:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(77:7)", "entry");
             // 用户信息
             Column.alignItems(HorizontalAlign.Start);
             // 用户信息
@@ -102,17 +173,17 @@ export default class PersonalPage extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.userName);
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(55:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(78:9)", "entry");
             Text.fontSize(BIGGER_FONT_SIZE);
-            Text.fontColor('#333333');
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.fontWeight(FontWeight.Bold);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777244, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(60:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(83:9)", "entry");
             Text.fontSize(SMALL_FONT_SIZE);
-            Text.fontColor('#999999');
+            Text.fontColor(this.currentThemeColors.secondaryTextColor);
             Text.onClick(() => {
                 // 编辑资料逻辑
             });
@@ -122,7 +193,7 @@ export default class PersonalPage extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create({ "id": 16777225, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(70:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(93:7)", "entry");
             Image.width(20);
             Image.height(20);
         }, Image);
@@ -131,94 +202,94 @@ export default class PersonalPage extends ViewPU {
     OrderStatistics(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
-            Row.debugLine("entry/src/main/ets/pages/PersonalPage.ets(82:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/PersonalPage.ets(105:5)", "entry");
             Row.width(LAYOUT_WIDTH_OR_HEIGHT);
             Row.padding(16);
-            Row.backgroundColor('#FFFFFF');
+            Row.backgroundColor(this.currentThemeColors.cardBackgroundColor);
             Row.borderRadius(8);
             Row.margin({ top: 8 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 8 });
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(83:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(106:7)", "entry");
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('0');
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(84:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(107:9)", "entry");
             Text.fontSize(BIGGER_FONT_SIZE);
-            Text.fontColor('#333333');
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.fontWeight(FontWeight.Bold);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777263, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(89:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(112:9)", "entry");
             Text.fontSize(SMALL_FONT_SIZE);
-            Text.fontColor('#666666');
+            Text.fontColor(this.currentThemeColors.secondaryTextColor);
         }, Text);
         Text.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 8 });
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(95:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(118:7)", "entry");
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('0');
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(96:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(119:9)", "entry");
             Text.fontSize(BIGGER_FONT_SIZE);
-            Text.fontColor('#333333');
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.fontWeight(FontWeight.Bold);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777265, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(101:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(124:9)", "entry");
             Text.fontSize(SMALL_FONT_SIZE);
-            Text.fontColor('#666666');
+            Text.fontColor(this.currentThemeColors.secondaryTextColor);
         }, Text);
         Text.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 8 });
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(107:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(130:7)", "entry");
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('0');
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(108:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(131:9)", "entry");
             Text.fontSize(BIGGER_FONT_SIZE);
-            Text.fontColor('#333333');
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.fontWeight(FontWeight.Bold);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777264, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(113:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(136:9)", "entry");
             Text.fontSize(SMALL_FONT_SIZE);
-            Text.fontColor('#666666');
+            Text.fontColor(this.currentThemeColors.secondaryTextColor);
         }, Text);
         Text.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create({ space: 8 });
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(119:7)", "entry");
+            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(142:7)", "entry");
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('0');
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(120:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(143:9)", "entry");
             Text.fontSize(BIGGER_FONT_SIZE);
-            Text.fontColor('#333333');
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.fontWeight(FontWeight.Bold);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create({ "id": 16777243, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(125:9)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(148:9)", "entry");
             Text.fontSize(SMALL_FONT_SIZE);
-            Text.fontColor('#666666');
+            Text.fontColor(this.currentThemeColors.secondaryTextColor);
         }, Text);
         Text.pop();
         Column.pop();
@@ -227,26 +298,39 @@ export default class PersonalPage extends ViewPU {
     MenuItemBuilder(item: MenuItem, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 12 });
-            Row.debugLine("entry/src/main/ets/pages/PersonalPage.ets(140:5)", "entry");
+            Row.debugLine("entry/src/main/ets/pages/PersonalPage.ets(163:5)", "entry");
             Row.width(LAYOUT_WIDTH_OR_HEIGHT);
             Row.height(56);
             Row.padding({ left: 16, right: 16 });
-            Row.backgroundColor('#FFFFFF');
+            Row.backgroundColor(this.currentThemeColors.cardBackgroundColor);
             Row.onClick(() => {
-                // 菜单项点击逻辑
+                // 菜单项点击逻辑 根据id判断点击逻辑 update1.2
+                if (item.id === 3) {
+                    this.showThemeDialog();
+                }
+                else if (item.id === 7) {
+                    router.pushUrl({
+                        url: 'pages/PublishGoodsPage'
+                    });
+                }
+                else {
+                    // 其他菜单项逻辑
+                    console.info('Clicked menu item:', item.id);
+                }
             });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Image.create(item.icon);
-            Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(141:7)", "entry");
+            Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(164:7)", "entry");
             Image.width(24);
             Image.height(24);
+            Image.fillColor(this.currentThemeColors.primaryTextColor);
         }, Image);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.title);
-            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(145:7)", "entry");
+            Text.debugLine("entry/src/main/ets/pages/PersonalPage.ets(169:7)", "entry");
             Text.fontSize(NORMAL_FONT_SIZE);
-            Text.fontColor('#333333');
+            Text.fontColor(this.currentThemeColors.primaryTextColor);
             Text.layoutWeight(1);
         }, Text);
         Text.pop();
@@ -256,7 +340,7 @@ export default class PersonalPage extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Image.create({ "id": 16777225, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-                        Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(151:9)", "entry");
+                        Image.debugLine("entry/src/main/ets/pages/PersonalPage.ets(175:9)", "entry");
                         Image.width(16);
                         Image.height(16);
                     }, Image);
@@ -270,77 +354,234 @@ export default class PersonalPage extends ViewPU {
         If.pop();
         Row.pop();
     }
+    //显示主题选择弹窗的方法
+    showThemeDialog() {
+        try {
+            promptAction.showActionMenu({
+                title: '选择应用主题',
+                buttons: [
+                    { text: '默认白', color: '#333333' },
+                    { text: '深色模式', color: '#000000' },
+                    { text: '护眼模式', color: '#FF6B35' }
+                ]
+            }).then(data => {
+                let selectedType: ThemeType;
+                // 根据点击的按钮索引决定切换哪个主题
+                switch (data.index) {
+                    case 0:
+                        selectedType = ThemeType.LIGHT;
+                        break;
+                    case 1:
+                        selectedType = ThemeType.DARK;
+                        break;
+                    case 2:
+                        selectedType = ThemeType.EYECARE;
+                        break;
+                    default:
+                        return;
+                }
+                // 核心逻辑：修改状态变量，AppStorage 会自动同步到全局
+                this.currentThemeType = selectedType;
+                this.currentThemeColors = getThemeColors(selectedType);
+                // 可以在这里打印日志验证
+                console.info('Theme changed to:', selectedType);
+            }).catch(() => {
+                Logger.error(TAG, `showActionMenu failed`);
+            });
+        }
+        catch (_) {
+            Logger.error(TAG, `showThemeDialog failed`);
+        }
+    }
+    // 检查登录状态
+    async checkLoginStatus() {
+        try {
+            const STORAGE_KEY = 'account_storage';
+            const loginStatus = await this.accountData.getStorageValue(this.context, 'isLoggedIn', STORAGE_KEY);
+            if (loginStatus === 'true') {
+                const username = await this.accountData.getStorageValue(this.context, 'username', STORAGE_KEY);
+                this.currentUsername = username as string;
+                this.userName = username as string;
+                this.isLoggedIn = true;
+                Logger.info(TAG, `User is logged in: ${this.currentUsername}`);
+            }
+            else {
+                this.isLoggedIn = false;
+                this.currentUsername = '';
+                this.userName = '用户名';
+                Logger.info(TAG, 'User is not logged in');
+            }
+        }
+        catch (err) {
+            Logger.error(TAG, `checkLoginStatus failed: ${JSON.stringify(err)}`);
+            this.isLoggedIn = false;
+            this.currentUsername = '';
+        }
+    }
+    // 处理登出
+    async handleLogout() {
+        try {
+            promptAction.showDialog({
+                title: '确认登出',
+                message: '您确定要登出吗？',
+                buttons: [
+                    { text: '取消', color: '#000000' },
+                    { text: '登出', color: '#FF0000' }
+                ]
+            }).then((data) => {
+                if (data.index === 1) {
+                    // 用户确认登出
+                    const STORAGE_KEY = 'account_storage';
+                    this.accountData.putStorageValue(this.context, 'isLoggedIn', 'false', STORAGE_KEY).then(() => {
+                        this.isLoggedIn = false;
+                        this.currentUsername = '';
+                        this.userName = '用户名';
+                        try {
+                            promptAction.showToast({
+                                message: '已登出',
+                                duration: 2000
+                            });
+                        }
+                        catch (_) {
+                            Logger.error(TAG, `showToast failed`);
+                        }
+                        Logger.info(TAG, 'User logged out');
+                    }).catch(() => {
+                        Logger.error(TAG, `Logout failed`);
+                    });
+                }
+            }).catch(() => {
+                Logger.error(TAG, `showDialog failed`);
+            });
+        }
+        catch (_) {
+            Logger.error(TAG, `handleLogout failed`);
+        }
+    }
+    aboutToAppear() {
+        this.checkLoginStatus();
+    }
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Scroll.create();
-            Scroll.debugLine("entry/src/main/ets/pages/PersonalPage.ets(166:5)", "entry");
-            Scroll.width(LAYOUT_WIDTH_OR_HEIGHT);
-            Scroll.height(LAYOUT_WIDTH_OR_HEIGHT);
-            Scroll.backgroundColor('#F5F5F5');
-        }, Scroll);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(167:7)", "entry");
-            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
-            Column.padding(8);
-        }, Column);
-        // 用户信息区域
-        this.UserInfoSection.bind(this)();
-        // 订单统计
-        this.OrderStatistics.bind(this)();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 功能菜单列表
-            Column.create();
-            Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(175:9)", "entry");
-            // 功能菜单列表
-            Column.width(LAYOUT_WIDTH_OR_HEIGHT);
-            // 功能菜单列表
-            Column.backgroundColor('#FFFFFF');
-            // 功能菜单列表
-            Column.borderRadius(8);
-            // 功能菜单列表
-            Column.margin({ top: 8 });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = _item => {
-                const item = _item;
-                this.MenuItemBuilder.bind(this)(item);
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Divider.create();
-                    Divider.debugLine("entry/src/main/ets/pages/PersonalPage.ets(178:13)", "entry");
-                    Divider.strokeWidth(1);
-                    Divider.color('#F0F0F0');
-                }, Divider);
-            };
-            this.forEachUpdateFunction(elmtId, this.menuItems, forEachItemGenFunction);
-        }, ForEach);
-        ForEach.pop();
-        // 功能菜单列表
-        Column.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 退出登录按钮
-            Button.createWithLabel({ "id": 16777258, "type": 10003, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
-            Button.debugLine("entry/src/main/ets/pages/PersonalPage.ets(189:9)", "entry");
-            // 退出登录按钮
-            Button.fontSize(NORMAL_FONT_SIZE);
-            // 退出登录按钮
-            Button.fontColor('#FF4D4F');
-            // 退出登录按钮
-            Button.backgroundColor('#FFFFFF');
-            // 退出登录按钮
-            Button.width(LAYOUT_WIDTH_OR_HEIGHT);
-            // 退出登录按钮
-            Button.height(48);
-            // 退出登录按钮
-            Button.margin({ top: 16, bottom: 16 });
-            // 退出登录按钮
-            Button.borderRadius(8);
-        }, Button);
-        // 退出登录按钮
-        Button.pop();
-        Column.pop();
-        Scroll.pop();
+            If.create();
+            if (!this.isLoggedIn) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    {
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            if (isInitialRender) {
+                                let componentCall = new 
+                                // 显示登录页面
+                                LoginComponent(this, {
+                                    currentThemeColors: this.currentThemeColors,
+                                    onLoginSuccess: (username: string) => {
+                                        this.userName = username;
+                                    }
+                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/PersonalPage.ets", line: 324, col: 7 });
+                                ViewPU.create(componentCall);
+                                let paramsLambda = () => {
+                                    return {
+                                        currentThemeColors: this.currentThemeColors,
+                                        onLoginSuccess: (username: string) => {
+                                            this.userName = username;
+                                        }
+                                    };
+                                };
+                                componentCall.paramsGenerator_ = paramsLambda;
+                            }
+                            else {
+                                this.updateStateVarsOfChildByElmtId(elmtId, {
+                                    currentThemeColors: this.currentThemeColors
+                                });
+                            }
+                        }, { name: "LoginComponent" });
+                    }
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // 显示个人信息页面
+                        Scroll.create();
+                        Scroll.debugLine("entry/src/main/ets/pages/PersonalPage.ets(332:7)", "entry");
+                        // 显示个人信息页面
+                        Scroll.width(LAYOUT_WIDTH_OR_HEIGHT);
+                        // 显示个人信息页面
+                        Scroll.height(LAYOUT_WIDTH_OR_HEIGHT);
+                        // 显示个人信息页面
+                        Scroll.backgroundColor(this.currentThemeColors.backgroundColor);
+                    }, Scroll);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(333:9)", "entry");
+                        Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+                        Column.padding(8);
+                    }, Column);
+                    // 用户信息区域
+                    this.UserInfoSection.bind(this)();
+                    // 订单统计
+                    this.OrderStatistics.bind(this)();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // 功能菜单列表
+                        Column.create();
+                        Column.debugLine("entry/src/main/ets/pages/PersonalPage.ets(341:11)", "entry");
+                        // 功能菜单列表
+                        Column.width(LAYOUT_WIDTH_OR_HEIGHT);
+                        // 功能菜单列表
+                        Column.backgroundColor(this.currentThemeColors.cardBackgroundColor);
+                        // 功能菜单列表
+                        Column.borderRadius(8);
+                        // 功能菜单列表
+                        Column.margin({ top: 8 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = _item => {
+                            const item = _item;
+                            this.MenuItemBuilder.bind(this)(item);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Divider.create();
+                                Divider.debugLine("entry/src/main/ets/pages/PersonalPage.ets(344:15)", "entry");
+                                Divider.strokeWidth(1);
+                                Divider.color(this.currentThemeColors.dividerColor);
+                            }, Divider);
+                        };
+                        this.forEachUpdateFunction(elmtId, this.menuItems, forEachItemGenFunction);
+                    }, ForEach);
+                    ForEach.pop();
+                    // 功能菜单列表
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // 退出登录按钮
+                        Button.createWithLabel('登出');
+                        Button.debugLine("entry/src/main/ets/pages/PersonalPage.ets(355:11)", "entry");
+                        // 退出登录按钮
+                        Button.fontSize(NORMAL_FONT_SIZE);
+                        // 退出登录按钮
+                        Button.fontColor(this.currentThemeColors.accentColor);
+                        // 退出登录按钮
+                        Button.backgroundColor(this.currentThemeColors.cardBackgroundColor);
+                        // 退出登录按钮
+                        Button.width(LAYOUT_WIDTH_OR_HEIGHT);
+                        // 退出登录按钮
+                        Button.height(48);
+                        // 退出登录按钮
+                        Button.margin({ top: 16, bottom: 16 });
+                        // 退出登录按钮
+                        Button.borderRadius(8);
+                        // 退出登录按钮
+                        Button.onClick(() => {
+                            this.handleLogout();
+                        });
+                    }, Button);
+                    // 退出登录按钮
+                    Button.pop();
+                    Column.pop();
+                    // 显示个人信息页面
+                    Scroll.pop();
+                });
+            }
+        }, If);
+        If.pop();
     }
     rerender() {
         this.updateDirtyElements();

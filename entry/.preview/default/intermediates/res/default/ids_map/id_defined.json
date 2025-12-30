@@ -407,5 +407,17 @@
 			"type":	"media",
 			"name":	"ic_personal_normal",
 			"id":	"0x01000065"
+		}, {
+			"type":	"media",
+			"name":	"ic_compare_unselected",
+			"id":	"0x01000066"
+		}, {
+			"type":	"string",
+			"name":	"publish_goods",
+			"id":	"0x01000067"
+		}, {
+			"type":	"media",
+			"name":	"ic_compare_selected",
+			"id":	"0x01000068"
 		}]
 }

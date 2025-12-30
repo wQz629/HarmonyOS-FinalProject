@@ -4,9 +4,12 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
 interface CategoryTab_Params {
     selectedCategoryIndex?: number;
     selectedSubCategoryIndex?: number;
+    currentThemeColors?: ThemeColors;
     categoryData?: CategoryData[];
 }
 import { LAYOUT_WIDTH_OR_HEIGHT, NORMAL_FONT_SIZE, BIGGER_FONT_SIZE, GOODS_EVALUATE_FONT_SIZE, MAX_LINES_TEXT } from "@bundle:com.example.list_harmony/entry/ets/common/CommonConstants";
+import { DEFAULT_THEME } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
+import type { ThemeColors } from "@bundle:com.example.list_harmony/entry/ets/common/Colors";
 export interface CategoryData {
     id: number;
     name: Resource;
@@ -24,6 +27,7 @@ export default class CategoryTab extends ViewPU {
         }
         this.__selectedCategoryIndex = new SynchedPropertySimpleTwoWayPU(params.selectedCategoryIndex, this, "selectedCategoryIndex");
         this.__selectedSubCategoryIndex = new SynchedPropertySimpleTwoWayPU(params.selectedSubCategoryIndex, this, "selectedSubCategoryIndex");
+        this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
         this.categoryData = [
             {
                 id: 0,
@@ -84,10 +88,12 @@ export default class CategoryTab extends ViewPU {
     purgeVariableDependenciesOnElmtId(rmElmtId) {
         this.__selectedCategoryIndex.purgeDependencyOnElmtId(rmElmtId);
         this.__selectedSubCategoryIndex.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentThemeColors.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__selectedCategoryIndex.aboutToBeDeleted();
         this.__selectedSubCategoryIndex.aboutToBeDeleted();
+        this.__currentThemeColors.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -105,11 +111,18 @@ export default class CategoryTab extends ViewPU {
     set selectedSubCategoryIndex(newValue: number) {
         this.__selectedSubCategoryIndex.set(newValue);
     }
+    private __currentThemeColors: ObservedPropertyAbstractPU<ThemeColors>;
+    get currentThemeColors() {
+        return this.__currentThemeColors.get();
+    }
+    set currentThemeColors(newValue: ThemeColors) {
+        this.__currentThemeColors.set(newValue);
+    }
     private categoryData: CategoryData[];
     TabItem(item: CategoryData, index: number, parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            Column.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(89:5)", "entry");
+            Column.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(91:5)", "entry");
             Column.padding({ left: 12, right: 12 });
             Column.height(56);
             Column.justifyContent(FlexAlign.Center);
@@ -120,9 +133,9 @@ export default class CategoryTab extends ViewPU {
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(item.name);
-            Text.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(90:7)", "entry");
+            Text.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(92:7)", "entry");
             Text.fontSize(this.selectedCategoryIndex === index ? BIGGER_FONT_SIZE : NORMAL_FONT_SIZE);
-            Text.fontColor(this.selectedCategoryIndex === index ? Color.Black : { "id": 16777308, "type": 10001, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" });
+            Text.fontColor(this.selectedCategoryIndex === index ? this.currentThemeColors.primaryTextColor : this.currentThemeColors.secondaryTextColor);
             Text.maxLines(MAX_LINES_TEXT);
             Text.minFontSize(this.selectedCategoryIndex === index ? NORMAL_FONT_SIZE : GOODS_EVALUATE_FONT_SIZE);
             Text.maxFontSize(this.selectedCategoryIndex === index ? BIGGER_FONT_SIZE : NORMAL_FONT_SIZE);
@@ -135,10 +148,10 @@ export default class CategoryTab extends ViewPU {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Divider.create();
-                        Divider.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(99:9)", "entry");
+                        Divider.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(101:9)", "entry");
                         Divider.width(40);
                         Divider.height(3);
-                        Divider.color('#FF4D4F');
+                        Divider.color(this.currentThemeColors.accentColor);
                         Divider.margin({ top: 4 });
                     }, Divider);
                 });
@@ -154,16 +167,16 @@ export default class CategoryTab extends ViewPU {
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Scroll.create();
-            Scroll.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(116:5)", "entry");
+            Scroll.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(118:5)", "entry");
             Scroll.scrollable(ScrollDirection.Horizontal);
             Scroll.scrollBar(BarState.Off);
             Scroll.width(LAYOUT_WIDTH_OR_HEIGHT);
             Scroll.height(56);
-            Scroll.backgroundColor('#FFFFFF');
+            Scroll.backgroundColor(this.currentThemeColors.cardBackgroundColor);
         }, Scroll);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create({ space: 12 });
-            Row.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(117:7)", "entry");
+            Row.debugLine("entry/src/main/ets/view/CategoryTabComponent.ets(119:7)", "entry");
             Row.width(LAYOUT_WIDTH_OR_HEIGHT);
             Row.padding({ left: 8, right: 8 });
         }, Row);
