@@ -31,9 +31,10 @@ export default struct LoginComponent {
   @State password: string = '';
   @State confirmPassword: string = '';
   @State isLoading: boolean = false;
-  @State isLoggedIn: boolean = false;
-  @State currentUsername: string = '';
   @State isRegisterMode: boolean = false;
+  //使用 @StorageLink 与全局 AppStorage 双向绑定登录状态和用户名
+  @StorageLink('isLoggedIn') isLoggedIn: boolean = false;
+  @StorageLink('currentUsername') currentUsername: string = '';
   private accountModel: AccountModel = new AccountModel();
   private accountData: AccountData = new AccountData();
   private context: common.Context = getContext(this) as common.Context;

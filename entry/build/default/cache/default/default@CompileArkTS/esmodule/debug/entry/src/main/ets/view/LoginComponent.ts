@@ -7,9 +7,9 @@ interface LoginComponent_Params {
     password?: string;
     confirmPassword?: string;
     isLoading?: boolean;
+    isRegisterMode?: boolean;
     isLoggedIn?: boolean;
     currentUsername?: string;
-    isRegisterMode?: boolean;
     accountModel?: AccountModel;
     accountData?: AccountData;
     context?: common.Context;
@@ -36,9 +36,9 @@ export default class LoginComponent extends ViewPU {
         this.__password = new ObservedPropertySimplePU('', this, "password");
         this.__confirmPassword = new ObservedPropertySimplePU('', this, "confirmPassword");
         this.__isLoading = new ObservedPropertySimplePU(false, this, "isLoading");
-        this.__isLoggedIn = new ObservedPropertySimplePU(false, this, "isLoggedIn");
-        this.__currentUsername = new ObservedPropertySimplePU('', this, "currentUsername");
         this.__isRegisterMode = new ObservedPropertySimplePU(false, this, "isRegisterMode");
+        this.__isLoggedIn = this.createStorageLink('isLoggedIn', false, "isLoggedIn");
+        this.__currentUsername = this.createStorageLink('currentUsername', '', "currentUsername");
         this.accountModel = new AccountModel();
         this.accountData = new AccountData();
         this.context = getContext(this) as common.Context;
@@ -61,12 +61,6 @@ export default class LoginComponent extends ViewPU {
         }
         if (params.isLoading !== undefined) {
             this.isLoading = params.isLoading;
-        }
-        if (params.isLoggedIn !== undefined) {
-            this.isLoggedIn = params.isLoggedIn;
-        }
-        if (params.currentUsername !== undefined) {
-            this.currentUsername = params.currentUsername;
         }
         if (params.isRegisterMode !== undefined) {
             this.isRegisterMode = params.isRegisterMode;
@@ -93,9 +87,9 @@ export default class LoginComponent extends ViewPU {
         this.__password.purgeDependencyOnElmtId(rmElmtId);
         this.__confirmPassword.purgeDependencyOnElmtId(rmElmtId);
         this.__isLoading.purgeDependencyOnElmtId(rmElmtId);
+        this.__isRegisterMode.purgeDependencyOnElmtId(rmElmtId);
         this.__isLoggedIn.purgeDependencyOnElmtId(rmElmtId);
         this.__currentUsername.purgeDependencyOnElmtId(rmElmtId);
-        this.__isRegisterMode.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
         this.__currentThemeColors.aboutToBeDeleted();
@@ -103,9 +97,9 @@ export default class LoginComponent extends ViewPU {
         this.__password.aboutToBeDeleted();
         this.__confirmPassword.aboutToBeDeleted();
         this.__isLoading.aboutToBeDeleted();
+        this.__isRegisterMode.aboutToBeDeleted();
         this.__isLoggedIn.aboutToBeDeleted();
         this.__currentUsername.aboutToBeDeleted();
-        this.__isRegisterMode.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
     }
@@ -144,26 +138,27 @@ export default class LoginComponent extends ViewPU {
     set isLoading(newValue: boolean) {
         this.__isLoading.set(newValue);
     }
-    private __isLoggedIn: ObservedPropertySimplePU<boolean>;
-    get isLoggedIn() {
-        return this.__isLoggedIn.get();
-    }
-    set isLoggedIn(newValue: boolean) {
-        this.__isLoggedIn.set(newValue);
-    }
-    private __currentUsername: ObservedPropertySimplePU<string>;
-    get currentUsername() {
-        return this.__currentUsername.get();
-    }
-    set currentUsername(newValue: string) {
-        this.__currentUsername.set(newValue);
-    }
     private __isRegisterMode: ObservedPropertySimplePU<boolean>;
     get isRegisterMode() {
         return this.__isRegisterMode.get();
     }
     set isRegisterMode(newValue: boolean) {
         this.__isRegisterMode.set(newValue);
+    }
+    //使用 @StorageLink 与全局 AppStorage 双向绑定登录状态和用户名
+    private __isLoggedIn: ObservedPropertyAbstractPU<boolean>;
+    get isLoggedIn() {
+        return this.__isLoggedIn.get();
+    }
+    set isLoggedIn(newValue: boolean) {
+        this.__isLoggedIn.set(newValue);
+    }
+    private __currentUsername: ObservedPropertyAbstractPU<string>;
+    get currentUsername() {
+        return this.__currentUsername.get();
+    }
+    set currentUsername(newValue: string) {
+        this.__currentUsername.set(newValue);
     }
     private accountModel: AccountModel;
     private accountData: AccountData;

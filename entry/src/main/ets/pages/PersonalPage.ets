@@ -41,8 +41,9 @@ interface MenuItem {
 export default struct PersonalPage {
   @State userName: string = '用户名';
   @State userAvatar: Resource = $r('app.media.ic_avatar');
-  @State isLoggedIn: boolean = false;
-  @State currentUsername: string = '';
+  //使用 @StorageLink 与全局 AppStorage 双向绑定登录状态
+  @StorageLink('isLoggedIn') isLoggedIn: boolean = false;
+  @StorageLink('currentUsername') currentUsername: string = '';
   //与全局 AppStorage 建立双向同步
   // 当 themeType 改变时，UI 会自动刷新（如果有依赖它的 UI），且我们修改它会同步回全局
   @StorageLink('themeType') currentThemeType: ThemeType = ThemeType.LIGHT;
@@ -258,11 +259,14 @@ export default struct PersonalPage {
         Logger.info(TAG, `User is logged in: ${this.currentUsername}`);
       } else {
         this.isLoggedIn = false;
+        this.currentUsername = '';
+        this.userName = '用户名';
         Logger.info(TAG, 'User is not logged in');
       }
     } catch (err) {
       Logger.error(TAG, `checkLoginStatus failed: ${JSON.stringify(err)}`);
       this.isLoggedIn = false;
+      this.currentUsername = '';
     }
   }
 
@@ -320,9 +324,7 @@ export default struct PersonalPage {
       LoginComponent({
         currentThemeColors: this.currentThemeColors,
         onLoginSuccess: (username: string) => {
-          this.currentUsername = username;
           this.userName = username;
-          this.isLoggedIn = true;
         }
       })
     } else {

@@ -6833,3 +6833,632 @@ Require stack:
 [2025-12-30T13:47:04.344] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\libs\default cache by regenerate.
 [2025-12-30T13:47:04.344] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\symbol cache.
 [2025-12-30T13:47:04.345] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:2 ms .
+[2025-12-30T13:47:04.368] [DEBUG] debug-file - Cleanup worker 10.
+[2025-12-30T13:47:04.368] [DEBUG] debug-file - Worker 10 has been cleaned up.
+[2025-12-30T13:47:04.369] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-12-30T13:47:04.369] [DEBUG] debug-file - Current resident worker size: 2.
+[2025-12-30T13:47:04.369] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-12-30T13:47:04.369] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-12-30T13:47:04.378] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-30T13:47:04.379] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-12-30T13:47:04.380] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-30T13:47:04.380] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-30T13:47:04.389] [DEBUG] debug-file - worker[10] exits with exit code 1.
+[2025-12-30T13:53:32.709] [DEBUG] debug-file - session manager: set active socket. socketId=57tDvaHzXeKGWw7wAAAZ
+[2025-12-30T13:53:32.720] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-12-30T13:53:32.730] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined
+}
+[2025-12-30T13:53:32.737] [DEBUG] debug-file - Cache service initialization finished in 7 ms 
+[2025-12-30T13:53:32.738] [DEBUG] debug-file - hvigorfile, resolving E:\VsCode\MIPP\HarmonyOS-FinalProject\hvigorfile.ts
+[2025-12-30T13:53:32.745] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-30T13:53:32.746] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-30T13:53:32.751] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-12-30T13:53:32.751] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-12-30T13:53:32.752] [DEBUG] debug-file - Product 'default' build option initialized
+[2025-12-30T13:53:32.752] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-12-30T13:53:32.752] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2025-12-30T13:53:32.753] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-12-30T13:53:32.755] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-12-30T13:53:32.787] [DEBUG] debug-file - Sdk init in 35 ms 
+[2025-12-30T13:53:32.795] [DEBUG] debug-file - Project task initialization takes 6 ms 
+[2025-12-30T13:53:32.795] [DEBUG] debug-file - hvigorfile, resolve finished E:\VsCode\MIPP\HarmonyOS-FinalProject\hvigorfile.ts
+[2025-12-30T13:53:32.795] [DEBUG] debug-file - hvigorfile, resolving E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\hvigorfile.ts
+[2025-12-30T13:53:32.799] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2025-12-30T13:53:32.799] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2025-12-30T13:53:32.802] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- D:\DevEcoStudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- D:\DevEcoStudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js
+- E:\VsCode\MIPP\HarmonyOS-FinalProject\hvigorfile.ts
+- D:\DevEcoStudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- D:\DevEcoStudio\DevEco Studio\tools\hvigor\hvigor\src\base\boot\index.js
+- D:\DevEcoStudio\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- D:\DevEcoStudio\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2025-12-30T13:53:32.804] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-12-30T13:53:32.804] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-30T13:53:32.806] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-12-30T13:53:32.807] [DEBUG] debug-file - Target 'default' config initialized
+[2025-12-30T13:53:32.808] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2025-12-30T13:53:32.808] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-12-30T13:53:32.808] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2025-12-30T13:53:32.809] [DEBUG] debug-file - Module entry task initialization takes 1 ms 
+[2025-12-30T13:53:32.809] [DEBUG] debug-file - hvigorfile, resolve finished E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\hvigorfile.ts
+[2025-12-30T13:53:32.826] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 17 ms 
+[2025-12-30T13:53:32.826] [DEBUG] debug-file - project has submodules:entry
+[2025-12-30T13:53:32.827] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-12-30T13:53:32.831] [DEBUG] debug-file - load to the disk finished
+[2025-12-30T13:53:32.832] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-30T13:53:32.832] [DEBUG] debug-file - Module HarmonyOS-FinalProject Collected Dependency: 
+[2025-12-30T13:53:32.833] [DEBUG] debug-file - Module HarmonyOS-FinalProject's total dependency: 0
+[2025-12-30T13:53:32.833] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-12-30T13:53:32.834] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-12-30T13:53:32.834] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-12-30T13:53:32.835] [DEBUG] debug-file - Configuration phase cost:99 ms 
+[2025-12-30T13:53:32.835] [DEBUG] debug-file - Configuration task cost before running: 112 ms 
+[2025-12-30T13:53:32.837] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-12-30T13:53:32.838] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.841] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 3 ms .
+[2025-12-30T13:53:32.841] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.28530120849609375
+[2025-12-30T13:53:32.843] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-12-30T13:53:32.844] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-12-30T13:53:32.844] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.845] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.0449066162109375
+[2025-12-30T13:53:32.845] [DEBUG] debug-file - runTaskFromQueue task cost before running: 121 ms 
+[2025-12-30T13:53:32.845] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 1 ms 
+[2025-12-30T13:53:32.846] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-12-30T13:53:32.846] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.847] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.847] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.085601806640625
+[2025-12-30T13:53:32.847] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-12-30T13:53:32.848] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-12-30T13:53:32.849] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.01572418212890625
+[2025-12-30T13:53:32.849] [DEBUG] debug-file - runTaskFromQueue task cost before running: 125 ms 
+[2025-12-30T13:53:32.849] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-12-30T13:53:32.850] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-12-30T13:53:32.850] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.851] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.851] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.11769866943359375
+[2025-12-30T13:53:32.851] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-12-30T13:53:32.851] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-12-30T13:53:32.852] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.852] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.852] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.09343719482421875
+[2025-12-30T13:53:32.852] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-12-30T13:53:32.853] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-12-30T13:53:32.853] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.0159454345703125
+[2025-12-30T13:53:32.853] [DEBUG] debug-file - runTaskFromQueue task cost before running: 129 ms 
+[2025-12-30T13:53:32.853] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-12-30T13:53:32.855] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-12-30T13:53:32.863] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.864] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.224456787109375
+[2025-12-30T13:53:32.864] [DEBUG] debug-file - runTaskFromQueue task cost before running: 141 ms 
+[2025-12-30T13:53:32.865] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 10 ms 
+[2025-12-30T13:53:32.874] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-12-30T13:53:32.875] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'E:\VsCode\MIPP\HarmonyOS-FinalProject\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-12-30T13:53:32.875] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.876] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.064117431640625
+[2025-12-30T13:53:32.876] [DEBUG] debug-file - runTaskFromQueue task cost before running: 152 ms 
+[2025-12-30T13:53:32.876] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 3 ms 
+[2025-12-30T13:53:32.878] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-12-30T13:53:32.878] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.01677703857421875
+[2025-12-30T13:53:32.878] [DEBUG] debug-file - runTaskFromQueue task cost before running: 154 ms 
+[2025-12-30T13:53:32.878] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-12-30T13:53:32.879] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-12-30T13:53:32.880] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.880] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.09937286376953125
+[2025-12-30T13:53:32.880] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-12-30T13:53:32.881] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-12-30T13:53:32.881] [DEBUG] debug-file - File: 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-12-30T13:53:32.882] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.886] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-12-30T13:53:32.886] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 4 ms .
+[2025-12-30T13:53:32.886] [DEBUG] debug-file - entry : default@SyscapTransform cost memory -1.381317138671875
+[2025-12-30T13:53:32.886] [DEBUG] debug-file - runTaskFromQueue task cost before running: 162 ms 
+[2025-12-30T13:53:32.886] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 5 ms 
+[2025-12-30T13:53:32.887] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-12-30T13:53:32.888] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.889] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.889] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.12784576416015625
+[2025-12-30T13:53:32.889] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-12-30T13:53:32.890] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-12-30T13:53:32.892] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 2 ms .
+[2025-12-30T13:53:32.892] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.12024688720703125
+[2025-12-30T13:53:32.893] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-12-30T13:53:32.894] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2025-12-30T13:53:32.895] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.895] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.105621337890625
+[2025-12-30T13:53:32.895] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessShareConfig...  
+[2025-12-30T13:53:32.896] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-12-30T13:53:32.896] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.897] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-12-30T13:53:32.898] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.898] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.09981536865234375
+[2025-12-30T13:53:32.898] [DEBUG] debug-file - runTaskFromQueue task cost before running: 174 ms 
+[2025-12-30T13:53:32.898] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 2 ms 
+[2025-12-30T13:53:32.899] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-12-30T13:53:32.899] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.0231475830078125
+[2025-12-30T13:53:32.899] [DEBUG] debug-file - runTaskFromQueue task cost before running: 175 ms 
+[2025-12-30T13:53:32.899] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2025-12-30T13:53:32.901] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-12-30T13:53:32.902] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-12-30T13:53:32.902] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.903] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.903] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.13291168212890625
+[2025-12-30T13:53:32.904] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-12-30T13:53:32.905] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-12-30T13:53:32.905] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.909] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 3 ms .
+[2025-12-30T13:53:32.909] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory -1.16668701171875
+[2025-12-30T13:53:32.911] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-12-30T13:53:32.913] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-12-30T13:53:32.914] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.914] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.09893035888671875
+[2025-12-30T13:53:32.915] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-12-30T13:53:32.915] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-12-30T13:53:32.916] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-12-30T13:53:32.925] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 9 ms .
+[2025-12-30T13:53:32.925] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.8697280883789062
+[2025-12-30T13:53:32.927] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-12-30T13:53:32.928] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-12-30T13:53:32.928] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.929] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 1 ms .
+[2025-12-30T13:53:32.929] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.07976531982421875
+[2025-12-30T13:53:32.929] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-12-30T13:53:32.931] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-12-30T13:53:32.931] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-12-30T13:53:32.933] [DEBUG] debug-file - Task 'entry:default@CompileArkTS' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.945] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets' has been changed.
+[2025-12-30T13:53:32.946] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 11 ms .
+[2025-12-30T13:53:32.956] [DEBUG] debug-file - build config:
+[2025-12-30T13:53:32.956] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject',
+  compileSdkVersion: 21,
+  compatibleSdkVersion: 17,
+  originCompatibleSdkVersion: '5.0.5(17)',
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***y',
+  etsLoaderVersion: '6.0.1.116',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: 'fdbb5c84a0624e1f34ace096ac4e6c144f7c1b72abbcb8a9cb27e93e80c1a587',
+  externalApiPaths: [ 'D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\hms\\ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 21,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  buildDir: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build',
+  deviceTypes: [ 'phone' ],
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: undefined, definePermissions: undefined },
+  integratedHsp: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [ 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject' ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    lazyImportExclude: '',
+    lazyImportInclude: '',
+    ignoreCrossplatformCheck: false,
+    isHarDeduplicateEnabled: false,
+    enableStrictCheckOHModule: false,
+    useDeclarationFileSignature: false,
+    isPreloadSoEnabled: false
+  },
+  skipOhModulesLint: false,
+  executionMode: 'memory',
+  arkCompileCachePath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  autoLazyFilter: undefined,
+  isHarDeduplicateEnabled: false,
+  intermediateHarDuplicateDirPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\har_duplicate\\default',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  lazyImportExclude: '',
+  lazyImportInclude: '',
+  ignoreCrossplatformCheck: false,
+  enableStrictCheckOHModule: false,
+  useDeclarationFileSignature: false,
+  isPreloadSoEnabled: false,
+  strictMode: undefined,
+  useNormalizedOHMUrl: false,
+  caseSensitiveCheck: false,
+  aceModuleJsonPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '7de9891d97d037907b6885fa3dd0c5d807c5decfcb67a25be3913e5d9b8c1cbd',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:21:6.0.1.116:Release',
+  aceModuleRoot: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry',
+      belongProjectPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject'
+    },
+    'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry',
+      belongProjectPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject'
+    },
+    'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject': {
+      moduleName: 'HarmonyOS-FinalProject',
+      modulePkgPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject',
+      belongProjectPath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject'
+    }
+  },
+  pkgJsonFileHash: 'd617f828ad1f84b09c4bd22b07e8b58a3b809c30e682480c3753e45fa05db265',
+  allModulePaths: [ 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry' ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: 'D:/DevEcoStudio/DevEco Studio/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: 'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\preload\\default\\preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-12-30T13:53:32.957] [DEBUG] debug-file - Compile arkts with external api path: D:\DevEcoStudio\DevEco Studio\sdk\default\hms\ets
+[2025-12-30T13:53:32.958] [DEBUG] debug-file - default@CompileArkTS work[24] is submitted.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - default@CompileArkTS work[24] is pushed to ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[9] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[8] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - default@CompileArkTS work[24] has been dispatched to worker[4].
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - default@CompileArkTS work[24] is dispatched.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - CopyResources startTime: 85717611499000
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - default@CompileArkTS work[25] is submitted.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - default@CompileArkTS work[25] is pushed to ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2025-12-30T13:53:32.959] [DEBUG] debug-file - Create  resident worker with id: 10.
+[2025-12-30T13:53:32.960] [DEBUG] debug-file - default@CompileArkTS work[25] has been dispatched to worker[10].
+[2025-12-30T13:53:32.961] [DEBUG] debug-file - default@CompileArkTS work[25] is dispatched.
+[2025-12-30T13:53:32.961] [DEBUG] debug-file - entry : default@CompileArkTS cost memory -0.0187225341796875
+[2025-12-30T13:53:32.964] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-12-30T13:53:32.965] [DEBUG] debug-file - Task 'entry:default@BuildJS' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.969] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.1432037353515625
+[2025-12-30T13:53:32.969] [DEBUG] debug-file - runTaskFromQueue task cost before running: 246 ms 
+[2025-12-30T13:53:32.970] [INFO] debug-file - Finished :entry:default@BuildJS... after 6 ms 
+[2025-12-30T13:53:32.972] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-12-30T13:53:32.972] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:32.975] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 2 ms .
+[2025-12-30T13:53:32.975] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.09737396240234375
+[2025-12-30T13:53:32.975] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-12-30T13:53:34.381] [DEBUG] debug-file - worker[10] has one work done.
+[2025-12-30T13:53:34.381] [DEBUG] debug-file - CopyResources is end, endTime: 85719033801500
+[2025-12-30T13:53:34.382] [DEBUG] debug-file - default@CompileArkTS work[25] done.
+[2025-12-30T13:53:34.382] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2025-12-30T13:53:34.664] [WARN] debug-file - [33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/entryability/EntryAbility.ets:25:16
+ 'SetOrCreate' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/entryability/EntryAbility.ets:26:16
+ 'SetOrCreate' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/entryability/EntryAbility.ets:28:16
+ 'SetOrCreate' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/entryability/EntryAbility.ets:29:16
+ 'SetOrCreate' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/GoodsListComponent.ets:79:14
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/GoodsListComponent.ets:156:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:40:37
+ 'getContext' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:48:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:63:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:76:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:98:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:119:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:154:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:164:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:180:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:192:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:206:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:219:24
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:295:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/view/LoginComponent.ets:311:22
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PersonalPage.ets:53:37
+ 'getContext' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PersonalPage.ets:189:16
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PersonalPage.ets:202:20
+ 'showActionMenu' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PersonalPage.ets:276:20
+ 'showDialog' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PersonalPage.ets:297:28
+ 'showToast' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/GoodsDetailPage.ets:32:38
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/GoodsDetailPage.ets:33:39
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/GoodsDetailPage.ets:55:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PublishGoodsPage.ets:139:20
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: E:/VsCode/MIPP/HarmonyOS-FinalProject/entry/src/main/ets/pages/PublishGoodsPage.ets:168:12
+ 'back' has been deprecated.
+[39m[39m
+
+[2025-12-30T13:53:34.664] [DEBUG] debug-file - Ark compile task finished.finished time is 85719316085400
+[2025-12-30T13:53:34.664] [DEBUG] debug-file - worker[4] has one work done.
+[2025-12-30T13:53:34.665] [DEBUG] debug-file - default@CompileArkTS work[24] done.
+[2025-12-30T13:53:34.665] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-12-30T13:53:34.666] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 1 s 734 ms 
+[2025-12-30T13:53:34.667] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-12-30T13:53:34.667] [DEBUG] debug-file - File: 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-30T13:53:34.667] [DEBUG] debug-file - Error occurs while handling @Input 'shouldDeduplicateHar': The "data" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received undefined
+[2025-12-30T13:53:34.667] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:34.668] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2025-12-30T13:53:34.668] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.1117401123046875
+[2025-12-30T13:53:34.668] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-12-30T13:53:34.669] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2025-12-30T13:53:34.669] [DEBUG] debug-file - File: 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2025-12-30T13:53:34.669] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2025-12-30T13:53:34.669] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.0625762939453125
+[2025-12-30T13:53:34.669] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 945 ms 
+[2025-12-30T13:53:34.669] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 1 ms 
+[2025-12-30T13:53:34.671] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-12-30T13:53:34.677] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader_out\default\ets' has been changed.
+[2025-12-30T13:53:34.677] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 6 ms .
+[2025-12-30T13:53:34.678] [DEBUG] debug-file - Use tool [D:\DevEcoStudio\DevEco Studio\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'D:\\DevEcoStudio\\DevEco Studio\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'E:\\VsCode\\MIPP\\HarmonyOS-FinalProject\\entry\\build\\default\\intermediates\\loader_out\\default\\ets'
+]
+[2025-12-30T13:53:34.771] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-12-30T13:53:34.773] [DEBUG] debug-file - entry : default@PackageHap cost memory -0.8080215454101562
+[2025-12-30T13:53:34.773] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 49 ms 
+[2025-12-30T13:53:34.773] [INFO] debug-file - Finished :entry:default@PackageHap... after 103 ms 
+[2025-12-30T13:53:34.775] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2025-12-30T13:53:34.778] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.38498687744140625
+[2025-12-30T13:53:34.779] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 55 ms 
+[2025-12-30T13:53:34.779] [INFO] debug-file - Finished :entry:default@PackingCheck... after 4 ms 
+[2025-12-30T13:53:34.780] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-12-30T13:53:34.780] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in E:\VsCode\MIPP\HarmonyOS-FinalProject\build-profile.json5.
+[2025-12-30T13:53:34.781] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file 'E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\entry-default-unsigned.hap' has been changed.
+[2025-12-30T13:53:34.781] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 1 ms .
+[2025-12-30T13:53:34.781] [DEBUG] debug-file - entry : default@SignHap cost memory 0.095611572265625
+[2025-12-30T13:53:34.781] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 58 ms 
+[2025-12-30T13:53:34.782] [INFO] debug-file - Finished :entry:default@SignHap... after 2 ms 
+[2025-12-30T13:53:34.783] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-12-30T13:53:34.784] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.09424591064453125
+[2025-12-30T13:53:34.784] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 60 ms 
+[2025-12-30T13:53:34.784] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 1 ms 
+[2025-12-30T13:53:34.784] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-12-30T13:53:34.784] [DEBUG] debug-file - entry : assembleHap cost memory 0.0138092041015625
+[2025-12-30T13:53:34.784] [DEBUG] debug-file - runTaskFromQueue task cost before running: 2 s 60 ms 
+[2025-12-30T13:53:34.784] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-12-30T13:53:34.795] [INFO] debug-file - BUILD SUCCESSFUL in 2 s 71 ms 
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-12-30T13:53:34.796] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2025-12-30T13:53:34.797] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-12-30T13:53:34.797] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-12-30T13:53:34.797] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-12-30T13:53:34.798] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-12-30T13:53:34.798] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEcoStudio\DevEco Studio\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-12-30T13:53:34.798] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:D:\DevEcoStudio\DevEco Studio\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-12-30T13:53:34.799] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:2 ms .
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessShareConfig is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-12-30T13:53:34.800] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-12-30T13:53:34.801] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-30T13:53:34.801] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-30T13:53:34.801] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-30T13:53:34.801] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-30T13:53:34.802] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\src\main\ets cache from map.
+[2025-12-30T13:53:34.802] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-30T13:53:34.802] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader_out\default\ets cache.
+[2025-12-30T13:53:34.802] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:2 ms .
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - Update task entry:default@BuildJS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - Update task entry:default@BuildJS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - Update task entry:default@BuildJS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - Update task entry:default@BuildJS input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - Update task entry:default@BuildJS output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:2 ms .
+[2025-12-30T13:53:34.803] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-12-30T13:53:34.804] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-12-30T13:53:34.804] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2025-12-30T13:53:34.804] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-12-30T13:53:34.804] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-12-30T13:53:34.804] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader_out\default\ets cache from map.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Update task entry:default@PackageHap output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2025-12-30T13:53:34.806] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:3 ms .
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Update task entry:default@SignHap input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\entry-default-unsigned.hap cache from map.
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Update task entry:default@SignHap output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:E:\VsCode\MIPP\HarmonyOS-FinalProject\entry\build\default\outputs\default\symbol cache.
+[2025-12-30T13:53:34.807] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:1 ms .

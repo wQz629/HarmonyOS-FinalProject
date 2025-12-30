@@ -36,8 +36,8 @@ export default class PersonalPage extends ViewPU {
         }
         this.__userName = new ObservedPropertySimplePU('用户名', this, "userName");
         this.__userAvatar = new ObservedPropertyObjectPU({ "id": 16777300, "type": 20000, params: [], "bundleName": "com.example.list_harmony", "moduleName": "entry" }, this, "userAvatar");
-        this.__isLoggedIn = new ObservedPropertySimplePU(false, this, "isLoggedIn");
-        this.__currentUsername = new ObservedPropertySimplePU('', this, "currentUsername");
+        this.__isLoggedIn = this.createStorageLink('isLoggedIn', false, "isLoggedIn");
+        this.__currentUsername = this.createStorageLink('currentUsername', '', "currentUsername");
         this.__currentThemeType = this.createStorageLink('themeType', ThemeType.LIGHT, "currentThemeType");
         this.__currentThemeColors = this.createStorageLink('themeColors', DEFAULT_THEME, "currentThemeColors");
         this.accountData = new AccountData();
@@ -60,12 +60,6 @@ export default class PersonalPage extends ViewPU {
         }
         if (params.userAvatar !== undefined) {
             this.userAvatar = params.userAvatar;
-        }
-        if (params.isLoggedIn !== undefined) {
-            this.isLoggedIn = params.isLoggedIn;
-        }
-        if (params.currentUsername !== undefined) {
-            this.currentUsername = params.currentUsername;
         }
         if (params.accountData !== undefined) {
             this.accountData = params.accountData;
@@ -111,14 +105,15 @@ export default class PersonalPage extends ViewPU {
     set userAvatar(newValue: Resource) {
         this.__userAvatar.set(newValue);
     }
-    private __isLoggedIn: ObservedPropertySimplePU<boolean>;
+    //使用 @StorageLink 与全局 AppStorage 双向绑定登录状态
+    private __isLoggedIn: ObservedPropertyAbstractPU<boolean>;
     get isLoggedIn() {
         return this.__isLoggedIn.get();
     }
     set isLoggedIn(newValue: boolean) {
         this.__isLoggedIn.set(newValue);
     }
-    private __currentUsername: ObservedPropertySimplePU<string>;
+    private __currentUsername: ObservedPropertyAbstractPU<string>;
     get currentUsername() {
         return this.__currentUsername.get();
     }
@@ -389,12 +384,15 @@ export default class PersonalPage extends ViewPU {
             }
             else {
                 this.isLoggedIn = false;
+                this.currentUsername = '';
+                this.userName = '用户名';
                 Logger.info(TAG, 'User is not logged in');
             }
         }
         catch (err) {
             Logger.error(TAG, `checkLoginStatus failed: ${JSON.stringify(err)}`);
             this.isLoggedIn = false;
+            this.currentUsername = '';
         }
     }
     // 处理登出
@@ -453,19 +451,15 @@ export default class PersonalPage extends ViewPU {
                                 LoginComponent(this, {
                                     currentThemeColors: this.currentThemeColors,
                                     onLoginSuccess: (username: string) => {
-                                        this.currentUsername = username;
                                         this.userName = username;
-                                        this.isLoggedIn = true;
                                     }
-                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/PersonalPage.ets", line: 320, col: 7 });
+                                }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/PersonalPage.ets", line: 324, col: 7 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {
                                         currentThemeColors: this.currentThemeColors,
                                         onLoginSuccess: (username: string) => {
-                                            this.currentUsername = username;
                                             this.userName = username;
-                                            this.isLoggedIn = true;
                                         }
                                     };
                                 };
