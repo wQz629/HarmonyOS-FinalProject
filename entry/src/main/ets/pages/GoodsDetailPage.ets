@@ -30,28 +30,6 @@ import promptAction from '@ohos.promptAction';
 import { BrowsingHistoryItem, CommentItem } from '../viewmodel/InitialData';
 import {CustomToastDialog} from '../view/CustomDialog'
 
-// 在组件外或类中定义一个图片资源池
-const GOODS_IMAGES: Resource[] = [
-  $r('app.media.goodsImg'),
-  $r('app.media.goodsImg_2'),
-  $r('app.media.goodsImg_3'),
-  $r('app.media.goodsImg_4'),
-];
-
-// 在组件外或类中定义一个图片资源池
-const GOODS_NAMES: Resource[] = [
-  $r('app.string.goodsName'),
-  $r('app.string.another_goodsName'),
-];
-
-// 在组件外或类中定义一个图片资源池
-const GOODS_PRICES: Resource[] = [
-  $r('app.string.price_199'),
-  $r('app.string.price_265'),
-  $r('app.string.price_810'),
-  $r('app.string.price_999'),
-];
-
 @Entry
 @Component
 export default struct GoodsDetailPage {
@@ -451,33 +429,31 @@ export default struct GoodsDetailPage {
         .layoutWeight(1)
         .onClick(() => {
           // 加入购物车
-          // 从 AppStorage 获取当前的购物车列表（如果不存在则创建一个空数组）
+          // 1. 获取当前购物车
           let currentCart: CartItem[] = AppStorage.get<CartItem[]>('cartItems') || [];
 
-          // 检查商品是否已经在购物车里
-          const index = currentCart.findIndex(item => (item.name === GOODS_NAMES[(currentCart.length + 1) % 2]));
+          // 2. 检查当前商品（通过 ID）是否已存在
+          const index = currentCart.findIndex(item => item.id === this.goodsId);
 
           if (index > -1) {
-            // 情况 A：商品已存在，数量加 1
-            currentCart[index].quantity += 1;
+            // 已存在：增加数量
+            currentCart[index].quantity += this.selectedQuantity;
           } else {
-            // 情况 B：商品不存在，构造一个新的 CartItem 并添加
+            // 不存在：使用当前详情页的真实图片和数据创建新项
             let newItem: CartItem = {
-              id: currentCart.length + 1,
-              name: GOODS_NAMES[(currentCart.length + 1) % 2], // 确保这里的字段名和接口定义一致
-              price: GOODS_PRICES[(currentCart.length + 1) % 2],
-              quantity: 1,
-              image: GOODS_IMAGES[(currentCart.length + 1) % 2],
-              selected: true // 新加入的默认选中
+              id: this.goodsId,
+              name: this.goodsName,       // 真实名称
+              price: this.goodsPrice,     // 真实价格字符串
+              image: this.goodsImg,       // 真实图片路径/资源
+              quantity: this.selectedQuantity,
+              selected: true
             };
             currentCart.push(newItem);
           }
 
-          // 将更新后的数组写回 AppStorage，触发全局同步
-          // 使用 [...currentCart] 确保内存地址改变，触发 UI 刷新
+          // 3. 更新全局存储（触发 UI 刷新）
           AppStorage.setOrCreate('cartItems', [...currentCart]);
 
-          // 提示用户添加成功
           promptAction.showToast({
             message: '已加入购物车',
             duration: 2000

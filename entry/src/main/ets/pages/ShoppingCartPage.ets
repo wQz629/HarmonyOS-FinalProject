@@ -30,12 +30,13 @@ import { common } from '@kit.AbilityKit';
 
 const TAG: string = '[ShoppingCartPage]';
 
+// 【修改点 1】: 扩展接口，兼容 string 和 Resource
 export interface CartItem {
   id: number;
-  name: Resource;
-  price: Resource;
+  name: string | Resource;
+  price: string | Resource;
   quantity: number;
-  image: Resource;
+  image: string | Resource;
   selected: boolean;
 }
 
@@ -109,33 +110,32 @@ export default struct ShoppingCartPage {
     this.calculateTotalPrice();
   }
 
-  // 确保每次计算都是基于最新状态
+  // 【修改点 2】: 价格计算逻辑兼容字符串
   calculateTotalPrice() {
     let total = 0;
-    // 获取资源管理器
     const resManager = getContext(this).resourceManager;
 
     this.cartItems.forEach(item => {
       if (item.selected && item.price) {
         try {
-          // 1. 将 Resource 对象转换为 string
-          // getStringSync 是同步方法，可以直接在循环里用
-          let priceStr: string = resManager.getStringSync(item.price);
+          let priceStr: string = '';
+          // 判断是 Resource 还是 string
+          if (typeof item.price === 'object') {
+            priceStr = resManager.getStringSync(item.price as Resource);
+          } else {
+            priceStr = item.price as string;
+          }
 
-          // 2. 清洗字符串，只保留数字和小数点（逻辑同前）
+          // 清洗字符串，提取数字
           const priceNum = parseFloat(priceStr.replace(/[^\d.]/g, ''));
-
-          // 3. 累加总价
           if (!isNaN(priceNum)) {
             total += priceNum * item.quantity;
           }
         } catch (error) {
-          console.error("资源解析失败，请检查 Resource 是否有效", error);
+          console.error("价格解析失败", error);
         }
       }
     });
-
-    // 更新总价状态
     this.totalPrice = total;
   }
 
@@ -204,18 +204,18 @@ export default struct ShoppingCartPage {
   async processHuaweiPay(): Promise<boolean> {
     try {
       Logger.info(TAG, '调用华为IAP支付');
-      
+
       // 注意：这里需要实际的商品ID和开发者配置
       // 以下是示例代码，实际使用需要：
       // 1. 在华为开发者联盟配置商品
       // 2. 安装 @hms/iap 模块
       // 3. 替换为真实的productId
-      
+
       promptAction.showToast({
         message: '正在调起华为支付...',
         duration: 2000
       });
-      
+
       // 模拟华为IAP调用（实际应用中替换为真实IAP调用）
       // const iap = require('@hms/iap');
       // const result = await iap.createPurchaseIntent({
@@ -226,7 +226,7 @@ export default struct ShoppingCartPage {
       //     amount: this.totalPrice
       //   })
       // });
-      
+
       // 由于无法直接调用华为IAP（需要配置商品等），这里提供完整的错误处理示例
       await new Promise<void>((resolve, reject) => {
         setTimeout(() => {
@@ -239,14 +239,14 @@ export default struct ShoppingCartPage {
           }
         }, 3000);
       });
-      
+
       Logger.info(TAG, '华为IAP支付成功');
       return true;
-      
+
     } catch (error) {
       const err = error as BusinessError;
       Logger.error(TAG, `华为IAP支付失败: ${err.message}`);
-      
+
       // 根据错误码提供友好提示
       if (err.message?.includes('取消')) {
         promptAction.showToast({
@@ -267,23 +267,23 @@ export default struct ShoppingCartPage {
   async processThirdPartyPay(paymentMethod: string): Promise<boolean> {
     try {
       Logger.info(TAG, `模拟${paymentMethod}支付`);
-      
+
       const methodName = paymentMethod === 'alipay' ? '支付宝' : '微信';
       promptAction.showToast({
         message: `正在调起${methodName}支付...`,
         duration: 2000
       });
-      
+
       // 模拟支付请求
       await new Promise<void>((resolve) => {
         setTimeout(() => {
           resolve();
         }, 2000);
       });
-      
+
       Logger.info(TAG, `${methodName}支付成功`);
       return true;
-      
+
     } catch (error) {
       Logger.error(TAG, `第三方支付失败: ${error}`);
       return false;
@@ -301,7 +301,7 @@ export default struct ShoppingCartPage {
 
     try {
       let paymentSuccess = false;
-      
+
       // 根据支付方式调用不同的支付逻辑
       if (this.selectedPaymentMethod === 'unionpay') {
         // 银联支付 -> 使用华为IAP
@@ -310,26 +310,26 @@ export default struct ShoppingCartPage {
         // 支付宝/微信 -> 模拟支付
         paymentSuccess = await this.processThirdPartyPay(this.selectedPaymentMethod);
       }
-      
+
       this.isPaying = false;
-      
+
       if (paymentSuccess) {
         // 支付成功
         this.showPaymentDialog = false;
-        
+
         promptAction.showToast({
           message: '支付成功！',
           duration: 2000
         });
-        
+
         Logger.info(TAG, '支付成功');
-        
+
         // 清除已购买的商品
         this.cartItems = this.cartItems.filter(item => !item.selected);
         this.isAllSelected = false;
         this.calculateTotalPrice();
       }
-      
+
     } catch (error) {
       this.isPaying = false;
       Logger.error(TAG, `支付失败: ${error}`);
@@ -586,7 +586,7 @@ export default struct ShoppingCartPage {
             this.cancelPayment();
           }
         })
-      
+
       // 支付弹窗
       Column({ space: 20 }) {
         // 标题
@@ -594,9 +594,9 @@ export default struct ShoppingCartPage {
           .fontSize(BIGGER_FONT_SIZE)
           .fontColor(this.currentThemeColors.primaryTextColor)
           .fontWeight(FontWeight.Bold)
-        
+
         Divider().strokeWidth(1).color(this.currentThemeColors.dividerColor)
-        
+
         // 支付金额
         Row({ space: 8 }) {
           Text('支付金额：')
@@ -610,7 +610,7 @@ export default struct ShoppingCartPage {
         .width('100%')
         .justifyContent(FlexAlign.Center)
         .margin({ top: 10, bottom: 10 })
-        
+
         // 支付方式选择
         Column({ space: 12 }) {
           // 支付宝
@@ -635,7 +635,7 @@ export default struct ShoppingCartPage {
           .onClick(() => {
             this.selectedPaymentMethod = 'alipay';
           })
-          
+
           // 微信支付
           Row({ space: 12 }) {
             Radio({ value: 'wechat', group: 'paymentGroup' })
@@ -658,7 +658,7 @@ export default struct ShoppingCartPage {
           .onClick(() => {
             this.selectedPaymentMethod = 'wechat';
           })
-          
+
           // 银联支付（华为IAP）
           Row({ space: 12 }) {
             Radio({ value: 'unionpay', group: 'paymentGroup' })
@@ -689,9 +689,9 @@ export default struct ShoppingCartPage {
           })
         }
         .width('100%')
-        
+
         Divider().strokeWidth(1).color(this.currentThemeColors.dividerColor)
-        
+
         // 按钮组
         Row({ space: 12 }) {
           Button('取消')
@@ -705,7 +705,7 @@ export default struct ShoppingCartPage {
             .onClick(() => {
               this.cancelPayment();
             })
-          
+
           Button(this.isPaying ? '支付中...' : '确认支付')
             .fontSize(NORMAL_FONT_SIZE)
             .fontColor('#FFFFFF')
