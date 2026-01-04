@@ -1,18 +1,3 @@
-/*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License,Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import SearchBar from '../view/SearchBarComponent';
 import GoodsList from '../view/GoodsListComponent';
 import {
@@ -32,6 +17,16 @@ export default struct SearchPage {
   @State hotSearchList: string[] = ['华为手机', '苹果手机', '小米手机', '蓝牙耳机', '机械键盘'];
   @State suggestions: string[] = [];
   @State searchResults: number = 0;
+
+  // --- 新增状态：专门用于处理“手机”搜索 ---
+  @State isPhoneSpecialCase: boolean = false;
+  @State phoneImages: Resource[] = [
+    $r('app.media.phone_1'), $r('app.media.phone_2'), $r('app.media.phone_3'), $r('app.media.phone_4'), $r('app.media.phone_5'),
+    $r('app.media.phone_6'), $r('app.media.phone_7'), $r('app.media.phone_8'), $r('app.media.phone_9'), $r('app.media.phone_10'),
+    $r('app.media.phone_11'), $r('app.media.phone_12'), $r('app.media.phone_13'), $r('app.media.phone_14'), $r('app.media.phone_15'),
+    $r('app.media.phone_16'), $r('app.media.phone_17'), $r('app.media.phone_18'), $r('app.media.phone_19'), $r('app.media.phone_20'),
+    $r('app.media.phone_21'), $r('app.media.phone_22'), $r('app.media.phone_23'), $r('app.media.phone_24'), $r('app.media.phone_25')
+  ];
 
   @StorageLink('themeColors') currentThemeColors: ThemeColors = DEFAULT_THEME;
 
@@ -64,11 +59,18 @@ export default struct SearchPage {
 
     this.searchText = query;
 
-    // 模拟真实过滤统计
-    const matched = this.suggestionLibrary.filter(item =>
-    item.toLowerCase().includes(query.toLowerCase())
-    );
-    this.searchResults = matched.length;
+    // --- 新增逻辑：判断是否为特定词汇“手机” ---
+    if (query === '手机') {
+      this.isPhoneSpecialCase = true;
+      this.searchResults = 25; // 固定显示25个结果
+    } else {
+      this.isPhoneSpecialCase = false;
+      // 原始模拟统计逻辑
+      const matched = this.suggestionLibrary.filter(item =>
+      item.toLowerCase().includes(query.toLowerCase())
+      );
+      this.searchResults = matched.length;
+    }
 
     // 历史记录逻辑
     if (!this.searchHistory.includes(query)) {
@@ -86,6 +88,7 @@ export default struct SearchPage {
     this.showSuggestions = false;
     this.suggestions = [];
     this.searchResults = 0;
+    this.isPhoneSpecialCase = false; // 重置特殊状态
   }
 
   deleteHistoryItem(index: number) {
@@ -163,7 +166,6 @@ export default struct SearchPage {
                   .fontSize(NORMAL_FONT_SIZE).fontColor(this.currentThemeColors.primaryTextColor)
                   .margin({ left: 12 }).layoutWeight(1)
 
-                // 按钮区域：通过 hitTestBehavior 拦截点击事件，防止触发外层 Row 的 onClick
                 Row() {
                   Image($r('app.media.ic_search_cancel'))
                     .width(20).height(20)
@@ -171,7 +173,7 @@ export default struct SearchPage {
                     .opacity(0.5)
                 }
                 .padding(8)
-                .hitTestBehavior(HitTestMode.Block) // 拦截命中测试
+                .hitTestBehavior(HitTestMode.Block)
                 .onClick(() => {
                   this.deleteHistoryItem(index);
                 })
@@ -183,7 +185,7 @@ export default struct SearchPage {
                 this.handleSearch(item);
               })
             }
-          }, (item: string, index: number) => item + index) // 修正点：显式声明 index 参数
+          }, (item: string, index: number) => item + index)
         }
         .divider({ strokeWidth: 1, color: this.currentThemeColors.dividerColor })
       }
@@ -216,6 +218,36 @@ export default struct SearchPage {
     .backgroundColor(this.currentThemeColors.cardBackgroundColor).margin({ top: 8 })
   }
 
+  // --- 新增：专门展示手机图片的网格组件 ---
+  @Builder
+  PhoneSpecialGrid() {
+    Grid() {
+      ForEach(this.phoneImages, (img: Resource, index: number) => {
+        GridItem() {
+          Column() {
+            Image(img)
+              .width('90%')
+              .aspectRatio(1)
+              .objectFit(ImageFit.Contain)
+              .borderRadius(8)
+              .backgroundColor('#F5F5F5')
+            Text(`手机款型 ${index + 1}`)
+              .fontSize(12)
+              .margin({ top: 4 })
+              .fontColor(this.currentThemeColors.primaryTextColor)
+          }
+          .padding(8)
+        }
+      }, (img: Resource) => JSON.stringify(img))
+    }
+    .columnsTemplate('1fr 1fr') // 两列展示
+    .rowsGap(8)
+    .columnsGap(8)
+    .width(LAYOUT_WIDTH_OR_HEIGHT)
+    .layoutWeight(1)
+    .padding({ left: 8, right: 8 })
+  }
+
   @Builder
   SearchResultBuilder() {
     Column() {
@@ -232,7 +264,12 @@ export default struct SearchPage {
       .justifyContent(FlexAlign.Center)
       .backgroundColor(this.currentThemeColors.backgroundColor)
 
-      GoodsList()
+      // --- 修改逻辑：如果是手机特殊案例展示网格，否则展示原始 GoodsList ---
+      if (this.isPhoneSpecialCase) {
+        this.PhoneSpecialGrid()
+      } else {
+        GoodsList()
+      }
     }
     .width(LAYOUT_WIDTH_OR_HEIGHT).layoutWeight(1)
   }

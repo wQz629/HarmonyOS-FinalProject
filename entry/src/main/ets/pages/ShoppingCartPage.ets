@@ -30,7 +30,7 @@ import { common } from '@kit.AbilityKit';
 
 const TAG: string = '[ShoppingCartPage]';
 
-// 【修改点 1】: 扩展接口，兼容 string 和 Resource
+// 扩展接口，兼容 string 和 Resource
 export interface CartItem {
   id: number;
   name: string | Resource;
@@ -110,7 +110,7 @@ export default struct ShoppingCartPage {
     this.calculateTotalPrice();
   }
 
-  // 【修改点 2】: 价格计算逻辑兼容字符串
+  // 价格计算逻辑兼容字符串
   calculateTotalPrice() {
     let total = 0;
     const resManager = getContext(this).resourceManager;
